@@ -1,0 +1,10 @@
+W:\Projects\Repos\Warsmiths_code\ServerCode\Warsmiths.Common\bin\Release\Warsmiths.Common.dll
+W:\Projects\Repos\Warsmiths_code\ServerCode\Warsmiths.Common\bin\Release\Warsmiths.Common.pdb
+W:\Projects\Repos\Warsmiths_code\ServerCode\Warsmiths.Common\obj\Release\Warsmiths.Common.dll
+W:\Projects\Repos\Warsmiths_code\ServerCode\Warsmiths.Common\obj\Release\Warsmiths.Common.pdb
+W:\Projects\Repos\Warsmiths_code\ServerCode\Warsmiths.Common\obj\Release\Warsmiths.Common.csprojResolveAssemblyReference.cache
+D:\Work\Warsmiths\ServerCode\Warsmiths.Common\bin\Release\Warsmiths.Common.dll
+D:\Work\Warsmiths\ServerCode\Warsmiths.Common\bin\Release\Warsmiths.Common.pdb
+D:\Work\Warsmiths\ServerCode\Warsmiths.Common\obj\Release\Warsmiths.Common.csprojResolveAssemblyReference.cache
+D:\Work\Warsmiths\ServerCode\Warsmiths.Common\obj\Release\Warsmiths.Common.dll
+D:\Work\Warsmiths\ServerCode\Warsmiths.Common\obj\Release\Warsmiths.Common.pdb

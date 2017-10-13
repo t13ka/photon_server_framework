@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96BE4612-C41F-499D-ADCC-B113B10B2040}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Warsmiths.Common</RootNamespace>
+    <AssemblyName>Warsmiths.Common</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\NewClient\Assets\Plugins\ServerLibs\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugDeploy|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugDeploy\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\CustomDisplayAttribute.cs" />
+    <Compile Include="CraftEventCode.cs" />
+    <Compile Include="Domain\Characteristics\CharacteristicItem.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\CombatProfile.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Hidden\HiddenGroup.cs" />
+    <Compile Include="Domain\Craft\ActionsController.cs" />
+    <Compile Include="Domain\Craft\ElementQuantity.cs" />
+    <Compile Include="Domain\Craft\Grid\BaseCell.cs" />
+    <Compile Include="Domain\Craft\Grid\Element.cs" />
+    <Compile Include="Domain\Craft\Quest\BaseQuestStage.cs" />
+    <Compile Include="Domain\Craft\Quest\QuestOptions\EvilCharacter.cs" />
+    <Compile Include="Domain\Craft\Quest\QuestOptions\QuestOption.cs" />
+    <Compile Include="Domain\Craft\Quest\RecieptBackground.cs" />
+    <Compile Include="Domain\Craft\SharedClasses\CraftQuestResoult.cs" />
+    <Compile Include="Domain\Craft\SharedClasses\CraftResoult.cs" />
+    <Compile Include="Domain\Craft\Spells\CraftSpell.cs" />
+    <Compile Include="Domain\Craft\Spells\SavedClasses\CraftSpellSaved.cs" />
+    <Compile Include="Domain\Craft\Spells\Shreder.cs" />
+    <Compile Include="Domain\Craft\Spells\ThreeLineCube.cs" />
+    <Compile Include="Domain\Craft\Spells\ThreeLineCubeBlock.cs" />
+    <Compile Include="Domain\Craft\Spells\ThreeLineGlassBlock.cs" />
+    <Compile Include="Domain\Enums\CraftSpellTypes.cs" />
+    <Compile Include="Domain\Enums\CraftState.cs" />
+    <Compile Include="Domain\Enums\CurrencyTypeE.cs" />
+    <Compile Include="Domain\Enums\ItemType.cs" />
+    <Compile Include="Domain\Enums\LvlRewardFeaturesTypes.cs" />
+    <Compile Include="Domain\Enums\QuestOptionTypes.cs" />
+    <Compile Include="Domain\Enums\QuestStageTypes.cs" />
+    <Compile Include="Domain\Enums\TaskStatusTypesE.cs" />
+    <Compile Include="Domain\Enums\TaskTypesE.cs" />
+    <Compile Include="Domain\Enums\TriggerTypes.cs" />
+    <Compile Include="Domain\Equipment\BaseCraftPart.cs" />
+    <Compile Include="Domain\Equipment\BaseItem.cs" />
+    <Compile Include="Domain\Equipment\BaseCraftMic.cs" />
+    <Compile Include="Domain\Equipment\BaseNonEquipment.cs" />
+    <Compile Include="Domain\Equipment\Purchase\BaseCraftHero.cs" />
+    <Compile Include="Domain\Equipment\Purchase\BasePurchaseItem.cs" />
+    <Compile Include="Domain\LevelingSystem.cs" />
+    <Compile Include="Domain\Lot.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Attributes\Atribute.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Attributes\Atribute2.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Attributes\Atribute4.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Primary\BodyPrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Characteristic.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\CharacteristicsGroup.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\CommonCharacterProfile.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Groups\DefenceGroup.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Attack\MagicAttackPrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Defense\MagicDefensePrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Groups\MasteryGroup.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Attack\MeleeAttackPrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Defense\MeleeDefensePrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Primary\MindPrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Groups\OffenceGroup.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Attack\RangedAttackPrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Defense\RangedDefensePrimary.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Primary\SkillPrimary.cs" />
+    <Compile Include="Domain\Craft\Common.cs" />
+    <Compile Include="Domain\Craft\Grid\BaseChip.cs" />
+    <Compile Include="Domain\Craft\Grid\BaseGrid.cs" />
+    <Compile Include="Domain\Craft\Quest\BaseQuest.cs" />
+    <Compile Include="Domain\Craft\Grid\BaseController.cs" />
+    <Compile Include="Domain\Craft\Grid\GridController.cs" />
+    <Compile Include="Domain\Craft\Grid\ElementController.cs" />
+    <Compile Include="Domain\Craft\Quest\Mark.cs" />
+    <Compile Include="Domain\Craft\Grid\ChipController.cs" />
+    <Compile Include="Domain\Craft\ReceptKey.cs" />
+    <Compile Include="Domain\DomainConfiguration.cs" />
+    <Compile Include="Domain\Elements\DropElementItemResult.cs" />
+    <Compile Include="Domain\Elements\ElementOrderItemResult.cs" />
+    <Compile Include="Domain\Elements\ElementPriceItemResult.cs" />
+    <Compile Include="Domain\Tasks\Task.cs" />
+    <Compile Include="Domain\Tasks\TaskCraftQuestReciept.cs" />
+    <Compile Include="Domain\VictoryPrizes\VictoryPrizes.cs" />
+    <Compile Include="CraftCode.cs" />
+    <Compile Include="ListContainer\TaksListContainer.cs" />
+    <Compile Include="Results\AddClassResult.cs" />
+    <Compile Include="Results\EnchatInfoResult.cs" />
+    <Compile Include="Domain\Enums\AbilityTypeE.cs" />
+    <Compile Include="Domain\Enums\ArmorPartTypes.cs" />
+    <Compile Include="Domain\Enums\ArmorTypes.cs" />
+    <Compile Include="Domain\Enums\AuctionSortTypes.cs" />
+    <Compile Include="Domain\Enums\CharacteristicE.cs" />
+    <Compile Include="Domain\Enums\GridCharacterTypes.cs" />
+    <Compile Include="Domain\Enums\GridStatusTypes.cs" />
+    <Compile Include="Domain\Enums\ClassTypes.cs" />
+    <Compile Include="Domain\Enums\CraftQuestMarkTypes.cs" />
+    <Compile Include="Domain\Enums\CraftQuestStatus.cs" />
+    <Compile Include="Domain\Enums\CraftQuestTypes.cs" />
+    <Compile Include="Domain\Enums\ElementCategoryTypes.cs" />
+    <Compile Include="Domain\Enums\ElementStateTypes.cs" />
+    <Compile Include="Domain\Enums\ElementTypes.cs" />
+    <Compile Include="Domain\Enums\EnergyTypes.cs" />
+    <Compile Include="Domain\Enums\EquipmentPlaceTypes.cs" />
+    <Compile Include="Domain\Enums\PropertyTypes.cs" />
+    <Compile Include="Domain\Enums\PlayerGameClassE.cs" />
+    <Compile Include="Domain\Enums\WeaponSizeTypes.cs" />
+    <Compile Include="Domain\Enums\HeroTypes.cs" />
+    <Compile Include="Domain\Enums\ItemGeneration\ItemGenerationLuckTypes.cs" />
+    <Compile Include="Domain\Enums\ItemGeneration\ItemGenerationMasteryTypes.cs" />
+    <Compile Include="Domain\Enums\ItemGeneration\ItemGenerationMutualAidTypes.cs" />
+    <Compile Include="Domain\Enums\LotStatesTypes.cs" />
+    <Compile Include="Domain\Enums\ModulesTypesOfImpacts.cs" />
+    <Compile Include="Domain\Enums\NotificationActionTypes.cs" />
+    <Compile Include="Domain\Enums\NotificationTypes.cs" />
+    <Compile Include="Domain\Enums\PerkTypes.cs" />
+    <Compile Include="Domain\Enums\RaceTypes.cs" />
+    <Compile Include="Domain\Enums\RaretyTypes.cs" />
+    <Compile Include="Domain\Enums\ReceptKeyTypes.cs" />
+    <Compile Include="Domain\Enums\RecieptStatus.cs" />
+    <Compile Include="Domain\Enums\ReceptTypes.cs" />
+    <Compile Include="Domain\Enums\ShopItemTypes.cs" />
+    <Compile Include="Domain\Enums\ShopPositionCapsulesTypes.cs" />
+    <Compile Include="Domain\Enums\ShopPositionCrystalsTypes.cs" />
+    <Compile Include="Domain\Enums\ShopPositionEnergyTypes.cs" />
+    <Compile Include="Domain\Enums\ShopPositionMoneyTypes.cs" />
+    <Compile Include="Domain\Enums\ShopPositionOutpostsTypes.cs" />
+    <Compile Include="Domain\Enums\ShopPositionYellowCrystalsTypes.cs" />
+    <Compile Include="Domain\Enums\SpecialAttackTypes.cs" />
+    <Compile Include="Domain\Enums\StartBonusTypes.cs" />
+    <Compile Include="Domain\Enums\StatTypes.cs" />
+    <Compile Include="Domain\Enums\StructureTypes.cs" />
+    <Compile Include="Domain\Enums\WeaponTypes.cs" />
+    <Compile Include="Domain\Equipment\Armors\ArmorPart.cs" />
+    <Compile Include="Domain\Equipment\BaseArmor.cs" />
+    <Compile Include="Domain\Character.cs" />
+    <Compile Include="Domain\Characteristics\Characteristics.cs" />
+    <Compile Include="Domain\InventoryItem.cs" />
+    <Compile Include="Domain\Equipment\BaseModule.cs" />
+    <Compile Include="Domain\Equipment\BaseWeapon.cs" />
+    <Compile Include="Domain\PlayerInventory.cs" />
+    <Compile Include="Domain\BasePerk.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Others\PlayerAbilityCollection.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Others\PlayerClassAbility.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Others\PlayerClassCollection.cs" />
+    <Compile Include="Domain\CommonCharacterProfile\Others\PlayerGameClass.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\CriticalHitPercent.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\CriticalHitStrength.cs" />
+    <Compile Include="Domain\Skills\Secondary\DPS\DamagePotentialRange.cs" />
+    <Compile Include="Domain\CharacterEquipment.cs" />
+    <Compile Include="Domain\Clan.cs" />
+    <Compile Include="Domain\Enums\ColorTypes.cs" />
+    <Compile Include="Domain\Enums\GenderTypes.cs" />
+    <Compile Include="Domain\Enums\RankTypes.cs" />
+    <Compile Include="Domain\Enums\SkillOrderTypes.cs" />
+    <Compile Include="Domain\Enums\SkillSetTypes.cs" />
+    <Compile Include="Domain\Enums\EquipmentTypes.cs" />
+    <Compile Include="Domain\BaseElement.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\Reinforcement.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\Weakness.cs" />
+    <Compile Include="ErrorCode.cs" />
+    <Compile Include="ListContainer\CharactersListContainer.cs" />
+    <Compile Include="ListContainer\ElementOrderListContainer.cs" />
+    <Compile Include="ListContainer\ElementsPricesContainer.cs" />
+    <Compile Include="ListContainer\EquipmentListContainer.cs" />
+    <Compile Include="ListContainer\LotsListContainer.cs" />
+    <Compile Include="ListContainer\SimpleListContainer.cs" />
+    <Compile Include="RelationObjectResult.cs" />
+    <Compile Include="Results\CheckAvailPutOnResult.cs" />
+    <Compile Include="Results\DestroyEquipmentResult.cs" />
+    <Compile Include="Results\EnchantInfoResult.cs" />
+    <Compile Include="Results\ModuleInsertRemoveOperationResult.cs" />
+    <Compile Include="Results\WearingResult.cs" />
+    <Compile Include="ServerHosts.cs" />
+    <Compile Include="Utils\CommonClasses.cs" />
+    <Compile Include="Utils\ElementsUtils.cs" />
+    <Compile Include="Domain\IEntity.cs" />
+    <Compile Include="Domain\League.cs" />
+    <Compile Include="Domain\Player.cs" />
+    <Compile Include="Domain\BaseReciept.cs" />
+    <Compile Include="Domain\Skills\Primary\AAccuracy.cs" />
+    <Compile Include="Domain\Skills\Primary\AAttack.cs" />
+    <Compile Include="Domain\Skills\Primary\DDefense.cs" />
+    <Compile Include="Domain\Skills\Primary\DResistance.cs" />
+    <Compile Include="Domain\Skills\Primary\DInsensitivity.cs" />
+    <Compile Include="Domain\Skills\Primary\MMastery.cs" />
+    <Compile Include="Domain\Skills\Primary\MindSkill.cs" />
+    <Compile Include="Domain\Skills\Primary\MMovement.cs" />
+    <Compile Include="Domain\Skills\Primary\APenetration.cs" />
+    <Compile Include="Domain\Skills\Secondary\AbilityBreak\AbilityBreak.cs" />
+    <Compile Include="Domain\Skills\Secondary\Resistence\AbilityResistance.cs" />
+    <Compile Include="Domain\Skills\Secondary\AbilityBreak\SpiritBreak.cs" />
+    <Compile Include="Domain\Skills\Secondary\Resistence\SpiritResistance.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\Adaptability.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\Capabilities.cs" />
+    <Compile Include="Domain\Skills\Secondary\DPS\DamagePotentialEnergy.cs" />
+    <Compile Include="Domain\Skills\Secondary\DPS\DamagePotentialMelee.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\TotalDurability.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\ModulesEfficiency.cs" />
+    <Compile Include="Domain\Skills\Secondary\AbilityBreak\MovementBreak.cs" />
+    <Compile Include="Domain\Skills\Secondary\Resistence\MovementResistance.cs" />
+    <Compile Include="Domain\Skills\Secondary\Others\Willpower.cs" />
+    <Compile Include="Domain\BaseSkill.cs" />
+    <Compile Include="Domain\Equipment\BaseEquipment.cs" />
+    <Compile Include="EventCode.cs" />
+    <Compile Include="OperationCode.cs" />
+    <Compile Include="ParameterCode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\EnumsExtensions.cs" />
+    <Compile Include="Utils\HandyFunctional.cs" />
+    <Compile Include="Utils\MathfUtils.cs" />
+    <Compile Include="Utils\NetworkUtils.cs" />
+    <Compile Include="Utils\TextUtils.cs" />
+    <Compile Include="Vector3Net.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Craft\Quest\QuestGoals\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

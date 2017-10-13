@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Warsmiths.Server.GameServer" GeneratedClassInternalName="GameServerSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MasterIPAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="GamingTcpPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4531</Value>
+    </Setting>
+    <Setting Name="GamingUdpPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5056</Value>
+    </Setting>
+    <Setting Name="ConnectReytryInterval" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="OutgoingMasterServerPeerPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4520</Value>
+    </Setting>
+    <Setting Name="LatencyMonitorAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RelayPortTcp" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RelayPortWebSocket" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WorkloadConfigFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Workload.config</Value>
+    </Setting>
+    <Setting Name="PublicIPAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LatencyMonitorAddressUdp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RelayPortUdp" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="EnableLatencyMonitor" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GamingWebSocketPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">9091</Value>
+    </Setting>
+    <Setting Name="AppStatsPublishInterval" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="EmptyRoomLiveTime" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ForwardPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:1337/json/syncreply/JsonRequest</Value>
+    </Setting>
+    <Setting Name="SeqHttpForwarding" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
