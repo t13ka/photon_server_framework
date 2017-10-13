@@ -2,7 +2,6 @@
 
 using Warsmiths.Common.Domain;
 using Warsmiths.Common.Domain.Craft.Quest;
-using Warsmiths.Common.Domain.Tasks;
 
 namespace Warsmiths.DatabaseService
 {
@@ -29,11 +28,9 @@ namespace Warsmiths.DatabaseService
             {
                 BsonClassMap.LookupClassMap(baseEquipment.GetType());
             }
-            
+
             BsonClassMap.LookupClassMap(typeof(BaseReciept));
             BsonClassMap.LookupClassMap(typeof(BaseQuest));
-            BsonClassMap.LookupClassMap(typeof(Task));
-            BsonClassMap.LookupClassMap(typeof(TaskCraftQuestReciept));
 
             foreach (var b in domainConfig.Items)
             {

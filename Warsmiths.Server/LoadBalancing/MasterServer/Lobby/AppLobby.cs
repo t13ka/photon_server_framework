@@ -13,12 +13,13 @@ using Warsmiths.Server.MasterServer.ChannelLobby;
 using Warsmiths.Server.MasterServer.GameServer;
 using Warsmiths.Server.Operations;
 using Warsmiths.Server.Operations.Request;
-using Warsmiths.Server.Operations.Request.GamaManagement;
 using Warsmiths.Server.Operations.Response;
 using Warsmiths.Server.ServerToServer.Events;
 
 namespace Warsmiths.Server.MasterServer.Lobby
 {
+    using Warsmiths.Server.Operations.Request.GameManagement;
+
     public class AppLobby
     {
         #region Properties

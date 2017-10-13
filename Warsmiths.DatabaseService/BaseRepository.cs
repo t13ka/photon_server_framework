@@ -7,7 +7,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 
 using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Equipment;
 using Warsmiths.Server.Framework.DataBaseService;
 
 namespace Warsmiths.DatabaseService
@@ -35,20 +34,6 @@ namespace Warsmiths.DatabaseService
         /// <param name="entity"></param>
         public virtual void Update(T entity)
         {
-            // var filter = Builders<Player>.Filter.Eq("_id", entity._id);
-            // var update = Builders<Player>.Update
-            // .Set(x => x.Inventory, entity.PlayerInventory)
-            // .Set(x => x.Age, entity.Age)
-            // .Set(x => x.Characters, entity.Characters)
-            // .Set(x => x.Banned, entity.Banned)
-            // .Set(x => x.Crystals, entity.Crystals)
-            // .Set(x => x.CurrentClan, entity.CurrentClan)
-            // .Set(x => x.CurrentLeague, entity.CurrentLeague)
-            // .Set(x => x.Email, entity.Email)
-            // .Set(x => x.Gold, entity.Gold)
-            // .Set(x => x.Online, entity.Online)
-            // .Set(x => x.GenderType, entity.GenderType);
-
             // DataBaseHandler.Collection.UpdateOne(filter, update);
             _collection.ReplaceOne(t => t._id == entity._id, entity);
         }

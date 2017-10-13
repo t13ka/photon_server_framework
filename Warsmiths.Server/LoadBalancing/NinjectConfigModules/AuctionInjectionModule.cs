@@ -1,8 +1,7 @@
-﻿using ExitGames.Logging;
-using Ninject.Modules;
+﻿using Ninject.Modules;
+
 using Warsmiths.Common.Domain;
 using Warsmiths.DatabaseService.Repositories;
-using Warsmiths.DatabaseService.Repositories.Mockup;
 using Warsmiths.Server.Framework.DataBaseService;
 
 namespace Warsmiths.Server.NinjectConfigModules
@@ -18,14 +17,7 @@ namespace Warsmiths.Server.NinjectConfigModules
 
         public override void Load()
         {
-            if (!_debug)
-            {
-                Bind(typeof(IRepository<Lot>)).To(typeof(LotRepository));
-            }
-            else
-            {
-                Bind(typeof(IRepository<Lot>)).To(typeof(FakePlayerRepository));
-            }
+            Bind(typeof(IRepository<Lot>)).To(typeof(LotRepository));
         }
     }
 }

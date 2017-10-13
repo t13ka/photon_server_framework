@@ -2,9 +2,11 @@
 {
     public class Vector3Net
     {
-        public float X ;
-        public float Y ;
-        public float Z ;
+        public float X;
+
+        public float Y;
+
+        public float Z;
 
         public Vector3Net()
         {

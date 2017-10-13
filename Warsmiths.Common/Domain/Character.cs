@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Warsmiths.Common.Domain.CommonCharacterProfile.Others;
 using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Tasks;
 using Warsmiths.Common.Results;
 // ReSharper disable ForCanBeConvertedToForeach
 // ReSharper disable LoopCanBeConvertedToQuery

@@ -74,11 +74,6 @@ namespace Warsmiths.Server.Handlers.Auth
                     request.Email,
                     equipmentSet);
 
-                var newTaskList = MasterApplication.TaskList.DeepClone();
-                newTaskList[0].Status = TaskStatusTypesE.Finished;
-                newTaskList[1].Status = TaskStatusTypesE.InProgress;
-                newPlayer.FirstTaskList.AddRange(newTaskList);
-
                 _playerRepository.Create(newPlayer);
 
                 response =

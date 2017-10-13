@@ -122,11 +122,8 @@
     <Compile Include="Domain\Elements\DropElementItemResult.cs" />
     <Compile Include="Domain\Elements\ElementOrderItemResult.cs" />
     <Compile Include="Domain\Elements\ElementPriceItemResult.cs" />
-    <Compile Include="Domain\Tasks\Task.cs" />
-    <Compile Include="Domain\Tasks\TaskCraftQuestReciept.cs" />
     <Compile Include="Domain\VictoryPrizes\VictoryPrizes.cs" />
     <Compile Include="CraftCode.cs" />
-    <Compile Include="ListContainer\TaksListContainer.cs" />
     <Compile Include="Results\AddClassResult.cs" />
     <Compile Include="Results\EnchatInfoResult.cs" />
     <Compile Include="Domain\Enums\AbilityTypeE.cs" />

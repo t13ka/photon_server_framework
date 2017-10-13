@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
 using ExitGames.Client.Photon;
-using ExitGames.Logging;
-using Newtonsoft.Json;
+
 using Warsmiths.Client.Loadbalancing;
 using Warsmiths.Client.Loadbalancing.Codes;
 using Warsmiths.Common.Domain;
@@ -12,13 +11,10 @@ using Warsmiths.Common.Domain.Craft.Quest;
 using Warsmiths.Common.Domain.Craft.SharedClasses;
 using Warsmiths.Common.Domain.Enums;
 using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.Common.Domain.Tasks;
 using Warsmiths.Common.Domain.VictoryPrizes;
 using Warsmiths.Common.ListContainer;
 using Warsmiths.Common.Results;
 using Player = Warsmiths.Client.Loadbalancing.Player;
-
-// ReSharper disable InconsistentNaming
 
 namespace Warsmiths.Client
 {
@@ -101,8 +97,6 @@ namespace Warsmiths.Client
         public Action<BaseReciept> OnGetNextQuest = (reciept) => { };
         public Action<BaseReciept[]> OnGetRecieptsResult = (reciept) => { };
         public Action<CraftResoult> OnEndCraft = (resoult) => { };
-        public Action<Task> OnTaskCompleted = (resoult) => { };
-        public Action<Task> OnTaslStarted = (resoult) => { };
         public Action<BaseReciept> OnStartCraft = (reciept) => { };
         public Action OnQuestReceptCompeled = () => { };
         public Action<BaseQuestStage> OnGetQuestStage = (queststage) => { };
@@ -766,19 +760,7 @@ namespace Warsmiths.Client
                         OnGetRecieptFailed(code);
                     }
                     break;
-                case GameOpCode.CompleteTask:
-
-                    if (code == GameErrorCode.Ok)
-                    {
-                        var dataBytes = (byte[])operationResponse.Parameters[(byte)GameParameters.TaskComplete];
-                        var resoult = dataBytes.FromBson<Task>();
-                        OnTaskCompleted(resoult);
-                    }
-                    else
-                    {
-                        OnGetRecieptFailed(code);
-                    }
-                    break;
+               
                 case GameOpCode.EndReciept:
 
                     if (code == GameErrorCode.Ok)

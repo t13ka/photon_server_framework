@@ -8,12 +8,14 @@ using Warsmiths.Server.Framework.Caching;
 using Warsmiths.Server.Framework.Messages;
 using Warsmiths.Server.Framework.Operations;
 using Warsmiths.Server.Operations.Request.Auth;
-using Warsmiths.Server.Operations.Request.GamaManagement;
+
 using OperationCode = Warsmiths.Server.Framework.Operations.OperationCode;
 using ParameterCode = Warsmiths.Server.Operations.ParameterCode;
 
 namespace Warsmiths.Server.GameServer
 {
+    using Warsmiths.Server.Operations.Request.GameManagement;
+
     public class GameClientPeer : PlayerPeer
     {
         #region Constructors and Destructors

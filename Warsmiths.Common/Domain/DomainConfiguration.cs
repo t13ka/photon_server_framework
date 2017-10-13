@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Warsmiths.Common.Domain.Enums;
 using Warsmiths.Common.Domain.Equipment;
 using Warsmiths.Common.Domain.Equipment.Purchase;
-using Warsmiths.Common.Domain.Tasks;
 using Warsmiths.Common.Utils;
 
 // ReSharper disable LoopCanBeConvertedToQuery

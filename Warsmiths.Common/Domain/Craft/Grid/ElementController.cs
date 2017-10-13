@@ -1,28 +1,48 @@
 ﻿using System;
+
 using Warsmiths.Common.Domain.Enums;
 
 namespace Warsmiths.Common.Domain.Craft.Grid
 {
     public class ElementController : BaseController
     {
-        [NonSerialized] public Action<CraftSpellTypes> OnSpellEffected;
+        [NonSerialized]
+        public Action<CraftSpellTypes> OnSpellEffected;
 
-        [NonSerialized] public Action ReplaceElement;
-        [NonSerialized] public Action <byte> ChangePowerDel;
-        [NonSerialized] public Action <StatTypes, int> ChangeStatsDel;
-        [NonSerialized] public Action <ElementStateTypes> ChangeStateDel;
-        [NonSerialized] public Action SealElementDel;
-        [NonSerialized] public Action OnDestroyElement;
-        [NonSerialized] public Action InitElementDel;
-        [NonSerialized] public Action<ElementColorTypes> ChangecolorDel;
+        [NonSerialized]
+        public Action ReplaceElement;
+
+        [NonSerialized]
+        public Action<byte> ChangePowerDel;
+
+        [NonSerialized]
+        public Action<StatTypes, int> ChangeStatsDel;
+
+        [NonSerialized]
+        public Action<ElementStateTypes> ChangeStateDel;
+
+        [NonSerialized]
+        public Action SealElementDel;
+
+        [NonSerialized]
+        public Action OnDestroyElement;
+
+        [NonSerialized]
+        public Action InitElementDel;
+
+        [NonSerialized]
+        public Action<ElementColorTypes> ChangecolorDel;
 
         public Element Elem;
-        [NonSerialized] public GridController Grid;
+
+        [NonSerialized]
+        public GridController Grid;
 
         public void SpellEffected(CraftSpellTypes spellType)
         {
             OnSpellEffected?.Invoke(spellType);
         }
+
         public void ChangeState(ElementStateTypes state)
         {
             ChangeStateDel?.Invoke(state);
@@ -31,7 +51,6 @@ namespace Warsmiths.Common.Domain.Craft.Grid
 
         public void ChangeColor(ElementColorTypes col)
         {
-
             Common.ChangeElementColor(this, col);
             ChangecolorDel?.Invoke(col);
         }
@@ -40,7 +59,6 @@ namespace Warsmiths.Common.Domain.Craft.Grid
         {
             ChangePowerDel?.Invoke(pow);
             Common.ChangeElementPower(this, pow, new DomainConfiguration()); // TODO CHANGE TO REAL DOMAIN
-
         }
 
         public void ChangeStats(StatTypes stat, int amout)
@@ -54,7 +72,6 @@ namespace Warsmiths.Common.Domain.Craft.Grid
             ReplaceElement?.Invoke();
         }
 
-
         public void SealElement()
         {
             SealElementDel?.Invoke();
@@ -62,7 +79,6 @@ namespace Warsmiths.Common.Domain.Craft.Grid
 
         public void InitElement()
         {
-
         }
     }
 }

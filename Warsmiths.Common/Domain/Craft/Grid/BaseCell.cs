@@ -2,6 +2,8 @@
 {
     public class BaseCell
     {
-        public byte X, Y;
+        public byte X;
+
+        public byte Y;
     }
 }

@@ -14,13 +14,14 @@ using Warsmiths.Server.Framework.Operations;
 using Warsmiths.Server.MasterServer.Lobby;
 using Warsmiths.Server.Operations;
 using Warsmiths.Server.Operations.Request;
-using Warsmiths.Server.Operations.Request.GamaManagement;
 using Warsmiths.Server.Operations.Response;
 using Warsmiths.Server.ServerToServer.Events;
 using OperationCode = Warsmiths.Server.Framework.Operations.OperationCode;
 
 namespace Warsmiths.Server.GameServer
 {
+    using Warsmiths.Server.Operations.Request.GameManagement;
+
     public class Game : RoomGame
     {
         public static readonly ILogger log = LogManager.GetCurrentClassLogger();
