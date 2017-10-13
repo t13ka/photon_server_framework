@@ -220,7 +220,10 @@ namespace Warsmiths.Client
             MasterServerAddress = address;
         }
 
-        protected internal override Player CreatePlayer(string actorName, int actorNumber, bool isLocal,
+        protected internal override Player CreatePlayer(
+            string actorName,
+            int actorNumber,
+            bool isLocal,
             Hashtable actorProperties)
         {
             var player = new Player(actorName, actorNumber, isLocal, actorProperties);
