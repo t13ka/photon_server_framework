@@ -265,7 +265,6 @@ namespace Warsmiths.Server.VictoryPrizes
                 // add bonus to legend item
                 if (weapon.Rarety == RaretyTypes.Legend)
                 {
-                    // TODO: как то добавить в куда-то модуль
                     /*var epicModule = (BaseModule)GetRandomEq<BaseModule>(chanceGroup);
                     epicModule.RandomizeImpactProperty(luck);
                     epicModule.Value = 10;

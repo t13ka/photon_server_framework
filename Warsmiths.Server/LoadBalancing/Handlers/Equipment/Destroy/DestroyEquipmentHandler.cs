@@ -1,6 +1,9 @@
 ﻿using ExitGames.Logging;
+
 using MongoDB.Bson;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
 using Warsmiths.Common.Domain.Equipment;
@@ -21,18 +24,19 @@ namespace Warsmiths.Server.Handlers.Equipment.Destroy
 
         /// <summary>
         /// </summary>
-        private readonly EconomicRuntimeService _economic =
-            ServiceManager.Get<EconomicRuntimeService>();
+        private readonly EconomicRuntimeService _economic = ServiceManager.Get<EconomicRuntimeService>();
 
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
 
         public override OperationCode ControlCode => OperationCode.DestroyEquipment;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new DestroyEquipmentRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -47,29 +51,31 @@ namespace Warsmiths.Server.Handlers.Equipment.Destroy
             if (currentPlayer.Inventory.TryGetValue(request.EquipmentId, out entity) == false)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"equipment with id '{request.EquipmentId}' not found!"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   $"equipment with id '{request.EquipmentId}' not found!"
+                           };
             }
 
-            var equipment = (BaseEquipment) entity;
+            var equipment = (BaseEquipment)entity;
             var destroyResult = _economic.DestroyEquipment(equipment);
 
             currentPlayer.TryRemoveFromInventory(request.EquipmentId);
 
-            var responseObject = new DestroyEquipmentResponse
-            {
-                DestroyedEquipmentData = destroyResult.ToBson()
-            };
+            var responseObject = new DestroyEquipmentResponse { DestroyedEquipmentData = destroyResult.ToBson() };
 
             currentPlayer.TryPackToInventory(destroyResult.Element);
 
-            response = new OperationResponse(operationRequest.OperationCode, responseObject)
-            {
-                ReturnCode = (short) ErrorCode.Ok,
-                DebugMessage = "take inventory data in event"
-            };
+            response =
+                new OperationResponse(operationRequest.OperationCode, responseObject)
+                    {
+                        ReturnCode =
+                            (short)ErrorCode.Ok,
+                        DebugMessage =
+                            "take inventory data in event"
+                    };
 
             _playerRepository.Update(currentPlayer);
 

@@ -1,6 +1,9 @@
 ﻿using ExitGames.Logging;
+
 using MongoDB.Bson.Serialization;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.ListContainer;
 using Warsmiths.DatabaseService.Repositories;
@@ -18,11 +21,13 @@ namespace Warsmiths.Server.Handlers.Equipment
 
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new SaveReservedFieldsForCharacterRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -37,19 +42,22 @@ namespace Warsmiths.Server.Handlers.Equipment
             if (character == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = "Character not selected!"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   "Character not selected!"
+                           };
             }
 
             _playerRepository.Update(currentPlayer);
 
-            response = new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short) ErrorCode.Ok,
-                DebugMessage = "Profile saved"
-            };
+            response =
+                new OperationResponse(operationRequest.OperationCode)
+                    {
+                        ReturnCode = (short)ErrorCode.Ok,
+                        DebugMessage = "Profile saved"
+                    };
 
             return response;
         }

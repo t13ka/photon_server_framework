@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
 using Warsmiths.Common.Domain.Equipment;
@@ -20,12 +22,13 @@ namespace Warsmiths.Server.Handlers.Equipment
 
         public override OperationCode ControlCode => OperationCode.EnchantEquipment;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new EnchantEquipmentRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -41,28 +44,38 @@ namespace Warsmiths.Server.Handlers.Equipment
             {
                 _log.Warn("Enchat Fail: character not selected");
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = "current character not selected!"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   "current character not selected!"
+                           };
             }
 
             IEntity entity;
             if (currentPlayer.Inventory.TryGetValue(request.EquipmentId, out entity) == false)
             {
                 _log.Warn("Enchat PreFail: Eq not found in inventory. Try find in eqip");
-                if (character.Equipment.RightWeapon != null && character.Equipment.RightWeapon._id == request.EquipmentId) entity = character.Equipment.RightWeapon;
-                    else if (character.Equipment.LeftWeapon != null && character.Equipment.LeftWeapon._id == request.EquipmentId) entity = character.Equipment.LeftWeapon;
+                if (character.Equipment.RightWeapon != null
+                    && character.Equipment.RightWeapon._id == request.EquipmentId)
+                    entity = character.Equipment.RightWeapon;
+                else if (character.Equipment.LeftWeapon != null
+                         && character.Equipment.LeftWeapon._id == request.EquipmentId)
+                    entity = character.Equipment.LeftWeapon;
 
                 if (entity == null)
                 {
                     _log.Warn("Enchat Fail: Eq not found in eqip.. Epic fail");
-                    return new OperationResponse(operationRequest.OperationCode,
-                        new InventoryResponse {EntityId = request.EquipmentId})
-                    {
-                        ReturnCode = (short) ErrorCode.OperationFailed,
-                        DebugMessage = $"equipment with id '{request.EquipmentId}' not found!"
-                    };
+                    return new OperationResponse(
+                               operationRequest.OperationCode,
+                               new InventoryResponse { EntityId = request.EquipmentId })
+                               {
+                                   ReturnCode =
+                                       (short)ErrorCode
+                                           .OperationFailed,
+                                   DebugMessage =
+                                       $"equipment with id '{request.EquipmentId}' not found!"
+                               };
                 }
             }
 
@@ -70,10 +83,9 @@ namespace Warsmiths.Server.Handlers.Equipment
 
             IEntity spentEnity;
 
-
             if (currentPlayer.Inventory.TryGetValue(request.ElementId, out spentEnity) && equipment != null)
             {
-                var spentElement = (BaseElement) spentEnity;
+                var spentElement = (BaseElement)spentEnity;
 
                 var left = spentElement.Quantity - request.EnchantValue;
 
@@ -87,49 +99,63 @@ namespace Warsmiths.Server.Handlers.Equipment
                         currentPlayer.TryRemoveFromInventory(spentElement._id);
                     }
 
-                    var enchatInfo = equipment.CalcucaleAndGetEnchantInfo(character, spentElement, request.EnchantValue);
+                    var enchatInfo =
+                        equipment.CalcucaleAndGetEnchantInfo(character, spentElement, request.EnchantValue);
 
                     if (equipment.TryEnchant(enchatInfo.ChanceToBroke))
                     {
                         equipment.Sharpening = enchatInfo.NewEnchatPercent;
 
-                        response = new OperationResponse(operationRequest.OperationCode,
-                            new InventoryResponse {EntityId = equipment._id})
-                        {
-                            ReturnCode = (short) ErrorCode.Ok,
-                            DebugMessage = $"equipment with id '{request.EquipmentId}' has been enchanted successfully"
-                        };
+                        response =
+                            new OperationResponse(
+                                operationRequest.OperationCode,
+                                new InventoryResponse { EntityId = equipment._id })
+                                {
+                                    ReturnCode =
+                                        (short)ErrorCode.Ok,
+                                    DebugMessage =
+                                        $"equipment with id '{request.EquipmentId}' has been enchanted successfully"
+                                };
                     }
                     else
                     {
-                        response = new OperationResponse(operationRequest.OperationCode,
-                            new InventoryResponse { EntityId = equipment._id })
-                        {
-                            ReturnCode = (short)ErrorCode.OperationFailed,
-                            DebugMessage =
-                                $"equipment with id '{request.EquipmentId}' enchanted fail."
-                        };
+                        response =
+                            new OperationResponse(
+                                operationRequest.OperationCode,
+                                new InventoryResponse { EntityId = equipment._id })
+                                {
+                                    ReturnCode =
+                                        (short)ErrorCode
+                                            .OperationFailed,
+                                    DebugMessage =
+                                        $"equipment with id '{request.EquipmentId}' enchanted fail."
+                                };
                     }
 
                     _playerRepository.Update(currentPlayer);
                 }
                 else
                 {
-                    response = new OperationResponse(operationRequest.OperationCode)
-                    {
-                        ReturnCode = (short) ErrorCode.OperationFailed,
-                        DebugMessage = "not enough elements"
-                    };
+                    response =
+                        new OperationResponse(operationRequest.OperationCode)
+                            {
+                                ReturnCode =
+                                    (short)ErrorCode.OperationFailed,
+                                DebugMessage = "not enough elements"
+                            };
                 }
             }
             else
             {
-                _log.Warn("Enchat Fail: element not found in invenotory: "+request.ElementId);
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = $"element with id {request.ElementId} is not found in inventory"
-                };
+                _log.Warn("Enchat Fail: element not found in invenotory: " + request.ElementId);
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage =
+                                $"element with id {request.ElementId} is not found in inventory"
+                        };
             }
 
             peer.SendUpdatePlayerInventoryEvent();

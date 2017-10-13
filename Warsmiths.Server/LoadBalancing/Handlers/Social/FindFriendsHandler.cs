@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
@@ -13,11 +15,13 @@ namespace Warsmiths.Server.Handlers.Social
 
         public override OperationCode ControlCode => OperationCode.FiendFriends;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
+
             // validate the operation request
             OperationResponse response;
             var operation = new FindFriendsRequest(peer.Protocol, operationRequest);
@@ -30,11 +34,13 @@ namespace Warsmiths.Server.Handlers.Social
             var playerCache = peer.Application.PlayerOnlineCache;
             if (playerCache == null)
             {
-                return new OperationResponse((byte) OperationCode.FiendFriends)
-                {
-                    ReturnCode = (short)ErrorCode.OperationDenied,
-                    DebugMessage = "Friend list not available"
-                };
+                return new OperationResponse((byte)OperationCode.FiendFriends)
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationDenied,
+                               DebugMessage =
+                                   "Friend list not available"
+                           };
             }
 
             playerCache.FiendFriends(peer, operation, sendParameters);

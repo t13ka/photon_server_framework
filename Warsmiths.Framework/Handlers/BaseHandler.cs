@@ -1,4 +1,5 @@
 ﻿using Photon.SocketServer;
+
 using Warsmiths.Common;
 
 namespace Warsmiths.Server.Framework.Handlers
@@ -7,6 +8,9 @@ namespace Warsmiths.Server.Framework.Handlers
     {
         public abstract OperationCode ControlCode { get; }
 
-        public abstract OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase);
+        public abstract OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase);
     }
 }

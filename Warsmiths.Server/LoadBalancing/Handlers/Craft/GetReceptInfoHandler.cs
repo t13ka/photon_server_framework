@@ -1,9 +1,9 @@
-﻿using System;
-using ExitGames.Logging;
+﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Client;
 using Warsmiths.Common;
-using Warsmiths.Common.Domain;
 using Warsmiths.Common.Domain.Craft.Quest;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Framework.Handlers;
@@ -21,7 +21,10 @@ namespace Warsmiths.Server.Handlers.Craft
 
         public override OperationCode ControlCode => OperationCode.GetRecieptInfo;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -37,20 +40,27 @@ namespace Warsmiths.Server.Handlers.Craft
             if (reciept == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"can't find by id"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage = $"can't find by id"
+                           };
             }
-            var qrec = reciept as BaseQuest;
-            if(qrec != null) { qrec.StageList = null; }
 
-            response = new OperationResponse(operationRequest.OperationCode,
-                new GetRecieptResponse { RecieptData = reciept.ToBson() })
+            var qrec = reciept as BaseQuest;
+            if (qrec != null)
             {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = $"ok"
-            };
+                qrec.StageList = null;
+            }
+
+            response = new OperationResponse(
+                           operationRequest.OperationCode,
+                           new GetRecieptResponse { RecieptData = reciept.ToBson() })
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.Ok,
+                               DebugMessage = $"ok"
+                           };
 
             return response;
         }

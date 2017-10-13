@@ -1,6 +1,9 @@
 ﻿using System;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
 using Warsmiths.DatabaseService.Repositories;
@@ -11,16 +14,18 @@ using Warsmiths.Server.Operations.Request.Craft;
 
 namespace Warsmiths.Server.Handlers.Craft
 {
+    using Player = Warsmiths.Common.Domain.Player;
+
     public class SetCraftExperienceHandler : BaseHandler
     {
-        public static void LevlUp(Warsmiths.Common.Domain.Player player, Character character, bool zerolevel = false)
+        public static void LevlUp(Player player, Character character, bool zerolevel = false)
         {
-           if(!zerolevel) character.CraftLevel++;
-            character.CraftExperience = 0; 
+            if (!zerolevel) character.CraftLevel++;
+            character.CraftExperience = 0;
 
             foreach (var a in DomainConfiguration.CraftLevelRewards[character.CraftLevel].LevelFeatures)
             {
-                if(!player.LevelFeatures.Contains(a)) player.LevelFeatures.Add(a);
+                if (!player.LevelFeatures.Contains(a)) player.LevelFeatures.Add(a);
             }
 
             foreach (var b in DomainConfiguration.CraftLevelRewards[character.CraftLevel].Reciepts)
@@ -35,15 +40,19 @@ namespace Warsmiths.Server.Handlers.Craft
                 }
             }
 
-            LogManager.GetLogger("").Debug("Lvl Up " + character.CraftLevel);
+            LogManager.GetLogger(string.Empty).Debug("Lvl Up " + character.CraftLevel);
         }
+
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
 
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();
 
         public override OperationCode ControlCode => OperationCode.SetCraftExperience;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -60,10 +69,11 @@ namespace Warsmiths.Server.Handlers.Craft
             if (character == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = "character not selected"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage = "character not selected"
+                           };
             }
 
             character.CraftExperience += request.CraftExperience;
@@ -72,26 +82,26 @@ namespace Warsmiths.Server.Handlers.Craft
             _log.Debug("Current Exp " + character.CraftExperience);
             _log.Debug("Need Exp " + DomainConfiguration.CharacterCraftLevelsExperience[character.CraftLevel]);
 
-
-            while (DomainConfiguration.CharacterCraftLevelsExperience[character.CraftLevel] < 
-                character.CraftExperience && character.CraftLevel < DomainConfiguration.CharacterCraftLevelsExperience.Length)
+            while (DomainConfiguration.CharacterCraftLevelsExperience[character.CraftLevel] < character.CraftExperience
+                   && character.CraftLevel < DomainConfiguration.CharacterCraftLevelsExperience.Length)
             {
-
                 LevlUp(currentPlayer, character);
                 _log.Debug("Lvl up " + character.CraftLevel);
             }
 
             character.Update();
-            _playerRepository.Update(currentPlayer); 
+            _playerRepository.Update(currentPlayer);
 
-             peer.SendUpdatePlayerProfileEvent();
-        
+            peer.SendUpdatePlayerProfileEvent();
 
-            response = new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = "setted. character.CraftExperience now = " + character.CraftExperience
-            };
+            response =
+                new OperationResponse(operationRequest.OperationCode)
+                    {
+                        ReturnCode = (short)ErrorCode.Ok,
+                        DebugMessage =
+                            "setted. character.CraftExperience now = "
+                            + character.CraftExperience
+                    };
 
             return response;
         }

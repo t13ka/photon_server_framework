@@ -3,6 +3,7 @@
     public interface IMessage
     {
         byte Action { get; }
+
         object Message { get; }
     }
 }

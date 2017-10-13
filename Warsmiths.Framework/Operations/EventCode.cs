@@ -2,9 +2,12 @@
 {
     internal enum EventCode : byte
     {
-        NoCodeSet = 0, 
-        Join = 255, 
-        Leave = 254, 
+        NoCodeSet = 0,
+
+        Join = 255,
+
+        Leave = 254,
+
         PropertiesChanged = 253
     }
 }

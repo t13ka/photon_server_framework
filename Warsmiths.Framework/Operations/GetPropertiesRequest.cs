@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
 
@@ -22,16 +23,16 @@ namespace Warsmiths.Server.Framework.Operations
         #region Properties
 
         [DataMember(Code = (byte)ParameterKey.Actors, IsOptional = true)]
-        public int[] ActorNumbers ;
+        public int[] ActorNumbers;
 
         [DataMember(Code = (byte)ParameterKey.ActorProperties, IsOptional = true)]
-        public IList ActorPropertyKeys ;
+        public IList ActorPropertyKeys;
 
         [DataMember(Code = (byte)ParameterKey.GameProperties, IsOptional = true)]
-        public IList GamePropertyKeys ;
+        public IList GamePropertyKeys;
 
         [DataMember(Code = (byte)ParameterKey.Properties, IsOptional = true)]
-        public byte PropertyType ;
+        public byte PropertyType;
 
         #endregion
     }

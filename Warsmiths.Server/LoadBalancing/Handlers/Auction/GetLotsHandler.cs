@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.ListContainer;
 using Warsmiths.Server.Events;
@@ -20,11 +23,12 @@ namespace Warsmiths.Server.Handlers.Auction
 
         /// <summary>
         /// </summary>
-        private readonly AuctionRuntimeService _auction =
-            ServiceManager.Get<AuctionRuntimeService>();
+        private readonly AuctionRuntimeService _auction = ServiceManager.Get<AuctionRuntimeService>();
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var request = new GetLotsRequest(peerBase.Protocol, operationRequest);
@@ -32,27 +36,31 @@ namespace Warsmiths.Server.Handlers.Auction
             {
                 return response;
             }
-            var peer = (MasterClientPeer) peerBase;
+
+            var peer = (MasterClientPeer)peerBase;
 
             if (_auction.Count() > 0)
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = "auction data now in particular event",
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode = (short)ErrorCode.Ok,
+                            DebugMessage =
+                                "auction data now in particular event",
+                        };
 
-                //var lotsExceptPlayer = _auction.GetAll().Where(t => t.OwnerId != peer.CurrentPlayer._id).ToList();
-
-                peer.SendUpdateAuctionEvent(new LotsListContainer {Lots = _auction.GetAll().ToList() });
+                // var lotsExceptPlayer = _auction.GetAll().Where(t => t.OwnerId != peer.CurrentPlayer._id).ToList();
+                peer.SendUpdateAuctionEvent(new LotsListContainer { Lots = _auction.GetAll().ToList() });
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "no lots"
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage = "no lots"
+                        };
             }
 
             return response;

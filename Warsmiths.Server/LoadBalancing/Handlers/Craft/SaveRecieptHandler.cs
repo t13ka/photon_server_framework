@@ -1,6 +1,9 @@
 ﻿using System;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Client;
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
@@ -21,7 +24,10 @@ namespace Warsmiths.Server.Handlers.Craft
 
         public override OperationCode ControlCode => OperationCode.SaveReciept;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -38,10 +44,12 @@ namespace Warsmiths.Server.Handlers.Craft
             if (reciept == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"can't desiarilize reciept"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   $"can't desiarilize reciept"
+                           };
             }
 
             // new id
@@ -49,24 +57,26 @@ namespace Warsmiths.Server.Handlers.Craft
             {
                 reciept._id = Guid.NewGuid().ToString();
             }
-           // if (!currentPlayer.SavedReciepts.Contains(reciept._id))
             {
-              //  currentPlayer.SavedReciepts.Add(reciept._id);
+                // if (!currentPlayer.SavedReciepts.Contains(reciept._id))
+                // currentPlayer.SavedReciepts.Add(reciept._id);
             }
 
             peer.SendUpdatePlayerProfileEvent();
 
             var pr = new PlayerRepository();
             pr.Update(currentPlayer);
-            
+
             _recieptRepository.Create(reciept);
 
-            response = new OperationResponse(operationRequest.OperationCode,
-                new CreateRecieptResponse { RecieptData = reciept.ToBson() })
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = "saved"
-            };
+            response = new OperationResponse(
+                           operationRequest.OperationCode,
+                           new CreateRecieptResponse { RecieptData = reciept.ToBson() })
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.Ok,
+                               DebugMessage = "saved"
+                           };
 
             return response;
         }

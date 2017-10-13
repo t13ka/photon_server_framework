@@ -1,5 +1,7 @@
 using System;
+
 using Photon.SocketServer.Rpc;
+
 using Warsmiths.Server.Framework.Operations;
 
 namespace Warsmiths.Server.Framework.Events
@@ -14,7 +16,7 @@ namespace Warsmiths.Server.Framework.Events
             Data = data;
         }
 
-        [DataMember(Code = (byte) ParameterKey.Data, IsOptional = true)]
-        public object Data ;
+        [DataMember(Code = (byte)ParameterKey.Data, IsOptional = true)]
+        public object Data;
     }
 }

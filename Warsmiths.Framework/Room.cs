@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using ExitGames.Concurrency.Fibers;
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Server.Framework.Caching;
 using Warsmiths.Server.Framework.Common;
 using Warsmiths.Server.Framework.Events;
@@ -34,8 +37,11 @@ namespace Warsmiths.Server.Framework
         #region Constants and Fields
 
         protected static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
         private IDisposable _removeTimer;
+
         private readonly RoomCacheBase _roomCache;
+
         private int _emptyRoomLiveTime;
 
         #endregion
@@ -75,12 +81,18 @@ namespace Warsmiths.Server.Framework
 
         public virtual int EmptyRoomLiveTime
         {
-            get { return _emptyRoomLiveTime; }
+            get
+            {
+                return _emptyRoomLiveTime;
+            }
 
-            protected set { _emptyRoomLiveTime = value; }
+            protected set
+            {
+                _emptyRoomLiveTime = value;
+            }
         }
 
-        protected IDisposable RemoveTimer ;
+        protected IDisposable RemoveTimer;
 
         public PropertyBag<object> Properties { get; }
 
@@ -93,8 +105,12 @@ namespace Warsmiths.Server.Framework
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("Room name: {0}, Actors: {1}, Properties: {2}", Name, Actors.Count,
-                Properties == null ? 0 : Properties.Count).AppendLine();
+            sb.AppendFormat(
+                    "Room name: {0}, Actors: {1}, Properties: {2}",
+                    Name,
+                    Actors.Count,
+                    Properties == null ? 0 : Properties.Count)
+                .AppendLine();
 
             foreach (var actor in Actors)
             {
@@ -151,11 +167,11 @@ namespace Warsmiths.Server.Framework
             }
         }
 
-        protected virtual void ExecuteOperation(PlayerPeer peer, OperationRequest operation,
+        protected virtual void ExecuteOperation(
+            PlayerPeer peer,
+            OperationRequest operation,
             SendParameters sendParameters)
         {
-            Log.Debug("OPP!!!!!!!!!!!!!");
-            //_service.HandleRequest(peer, operation);
         }
 
         protected virtual void ProcessMessage(IMessage message)
@@ -191,7 +207,7 @@ namespace Warsmiths.Server.Framework
 
             if (Log.IsDebugEnabled)
             {
-                Log.DebugFormat("Scheduling room romoval: roomName={0}, liveTime={1:N0}", Name, roomLiveTime);
+                Log.DebugFormat("Scheduling room removal: roomName={0}, liveTime={1:N0}", Name, roomLiveTime);
             }
 
             RemoveTimer = ExecutionFiber.Schedule(TryRemoveRoomFromCache, roomLiveTime);

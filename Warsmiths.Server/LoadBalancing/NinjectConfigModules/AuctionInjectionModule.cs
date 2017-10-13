@@ -20,9 +20,7 @@ namespace Warsmiths.Server.NinjectConfigModules
         {
             if (!_debug)
             {
-                LogManager.GetCurrentClassLogger().Debug("aaaa");
                 Bind(typeof(IRepository<Lot>)).To(typeof(LotRepository));
-                LogManager.GetCurrentClassLogger().Debug("bbb");
             }
             else
             {

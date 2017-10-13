@@ -1,11 +1,16 @@
 ﻿using ExitGames.Logging;
+
 using log4net.Core;
+
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
+
 using PhotonHostRuntimeInterfaces;
+
 using Warsmiths.Server.Framework.Caching;
 using Warsmiths.Server.Framework.Messages;
 using Warsmiths.Server.Framework.Operations;
+
 using ILogger = ExitGames.Logging.ILogger;
 
 namespace Warsmiths.Server.Framework
@@ -29,7 +34,7 @@ namespace Warsmiths.Server.Framework
 
         #region Properties
 
-        public RoomReference RoomReference ;
+        public RoomReference RoomReference;
 
         #endregion
 
@@ -45,11 +50,12 @@ namespace Warsmiths.Server.Framework
             var errorMessage = operation.GetErrorMessage();
             SendOperationResponse(
                 new OperationResponse
-                {
-                    OperationCode = operation.OperationRequest.OperationCode,
-                    ReturnCode = -1,
-                    DebugMessage = errorMessage
-                }, sendParameters);
+                    {
+                        OperationCode = operation.OperationRequest.OperationCode,
+                        ReturnCode = -1,
+                        DebugMessage = errorMessage
+                    },
+                sendParameters);
             return false;
         }
 
@@ -66,7 +72,10 @@ namespace Warsmiths.Server.Framework
         {
             if (Log.IsDebugEnabled)
             {
-                Log.DebugFormat("OnDisconnect: conId={0}, reason={1}, reasonDetail={2}", ConnectionId, reasonCode,
+                Log.DebugFormat(
+                    "OnDisconnect: conId={0}, reason={1}, reasonDetail={2}",
+                    ConnectionId,
+                    reasonCode,
                     reasonDetail);
             }
 
@@ -75,20 +84,22 @@ namespace Warsmiths.Server.Framework
                 return;
             }
 
-            var message = new RoomMessage((byte) GameMessageCodes.RemovePeerFromGame, this);
+            var message = new RoomMessage((byte)GameMessageCodes.RemovePeerFromGame, this);
             RoomReference.Room.EnqueueMessage(message);
             RoomReference.Dispose();
             RoomReference = null;
         }
 
-        protected async override void OnOperationRequest(OperationRequest operationRequest, SendParameters sendParameters)
+        protected override void OnOperationRequest(
+            OperationRequest operationRequest,
+            SendParameters sendParameters)
         {
             if (Log.IsDebugEnabled)
             {
                 Log.DebugFormat("OnOperationRequest. Code={0}", operationRequest.OperationCode);
             }
-            
-            switch ((OperationCode) operationRequest.OperationCode)
+
+            switch ((OperationCode)operationRequest.OperationCode)
             {
                 case OperationCode.Ping:
                     HandlePingOperation(operationRequest, sendParameters);
@@ -113,11 +124,12 @@ namespace Warsmiths.Server.Framework
             var message = $"Unknown operation code {operationRequest.OperationCode}";
             SendOperationResponse(
                 new OperationResponse
-                {
-                    OperationCode = operationRequest.OperationCode,
-                    ReturnCode = -1,
-                    DebugMessage = message
-                }, sendParameters);
+                    {
+                        OperationCode = operationRequest.OperationCode,
+                        ReturnCode = -1,
+                        DebugMessage = message
+                    },
+                sendParameters);
         }
 
         protected virtual void RemovePeerFromCurrentRoom()
@@ -126,7 +138,7 @@ namespace Warsmiths.Server.Framework
             if (RoomReference != null)
             {
                 // remove peer from his current game.
-                var message = new RoomMessage((byte) GameMessageCodes.RemovePeerFromGame, this);
+                var message = new RoomMessage((byte)GameMessageCodes.RemovePeerFromGame, this);
                 RoomReference.Room.EnqueueMessage(message);
 
                 // release room reference
@@ -206,7 +218,9 @@ namespace Warsmiths.Server.Framework
 
         protected virtual void HandlePingOperation(OperationRequest operationRequest, SendParameters sendParameters)
         {
-            SendOperationResponse(new OperationResponse {OperationCode = operationRequest.OperationCode}, sendParameters);
+            SendOperationResponse(
+                new OperationResponse { OperationCode = operationRequest.OperationCode },
+                sendParameters);
         }
 
         #endregion

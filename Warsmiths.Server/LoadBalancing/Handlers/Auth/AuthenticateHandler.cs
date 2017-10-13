@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
@@ -14,11 +16,12 @@ namespace Warsmiths.Server.Handlers.Auth
 
         public override OperationCode ControlCode => OperationCode.Authenticate;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters
-            , PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
             OperationResponse response;
 
             var request = new AuthenticateRequest(peer.Protocol, operationRequest);
@@ -27,11 +30,10 @@ namespace Warsmiths.Server.Handlers.Auth
                 return response;
             }
 
-            // TODO: включить если потребуется другая авторизация
-            //UserId = request.UserId;
+            // UserId = request.UserId;
 
             // publish operation response
-            var responseObject = new AuthenticateResponse {QueuePosition = 0};
+            var responseObject = new AuthenticateResponse { QueuePosition = 0 };
             return new OperationResponse(operationRequest.OperationCode, responseObject);
         }
     }

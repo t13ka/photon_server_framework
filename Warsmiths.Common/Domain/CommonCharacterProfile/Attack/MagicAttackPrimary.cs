@@ -264,7 +264,6 @@ namespace Warsmiths.Common.Domain.CommonCharacterProfile.Attack
             CriticalMod.Value2 = use2 ? critMod.LeftHandValue : 0;
             CriticalMod.UseSecondValue = use2;
 
-            // TODO: уточнить что это и зачем
             Charger.Value = c.Equipment.GetCharger(c.CommonProfile, wType).RightHandValue; 
 
             var specAttack = c.Equipment.GetSpecialAttack(wType);

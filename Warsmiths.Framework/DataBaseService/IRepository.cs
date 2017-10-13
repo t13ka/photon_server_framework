@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+
 using Warsmiths.Common.Domain;
 
 namespace Warsmiths.Server.Framework.DataBaseService
@@ -9,7 +10,8 @@ namespace Warsmiths.Server.Framework.DataBaseService
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRepository<T> where T : IEntity
+    public interface IRepository<T>
+        where T : IEntity
     {
         /// <summary>
         /// Create instance

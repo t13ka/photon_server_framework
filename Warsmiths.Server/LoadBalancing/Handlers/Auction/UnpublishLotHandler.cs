@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using ExitGames.Logging;
+﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.Common.Utils;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Events;
 using Warsmiths.Server.Framework.Handlers;
@@ -20,16 +19,16 @@ namespace Warsmiths.Server.Handlers.Auction
 
         /// <summary>
         /// </summary>
-        private readonly AuctionRuntimeService _auction =
-            ServiceManager.Get<AuctionRuntimeService>();
+        private readonly AuctionRuntimeService _auction = ServiceManager.Get<AuctionRuntimeService>();
 
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
 
         public override OperationCode ControlCode => OperationCode.UnpublishLot;
 
-
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
 
@@ -38,27 +37,33 @@ namespace Warsmiths.Server.Handlers.Auction
             {
                 return response;
             }
-            var peer = (MasterClientPeer) peerBase;
+
+            var peer = (MasterClientPeer)peerBase;
 
             var lot = _auction.GetLotByEquipmentId(request.LotId);
             if (lot == null)
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "the lot not found"
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage = "the lot not found"
+                        };
             }
             else
             {
                 var currentPlayer = peer.GetCurrentPlayer();
                 if (lot.OwnerId != currentPlayer._id)
                 {
-                    response = new OperationResponse(operationRequest.OperationCode)
-                    {
-                        ReturnCode = (short) ErrorCode.OperationFailed,
-                        DebugMessage = "current player are not owner for this lot"
-                    };
+                    response =
+                        new OperationResponse(operationRequest.OperationCode)
+                            {
+                                ReturnCode =
+                                    (short)ErrorCode.OperationFailed,
+                                DebugMessage =
+                                    "current player are not owner for this lot"
+                            };
                 }
                 else
                 {
@@ -68,11 +73,12 @@ namespace Warsmiths.Server.Handlers.Auction
 
                     _playerRepository.Update(currentPlayer);
 
-                    response = new OperationResponse(operationRequest.OperationCode)
-                    {
-                        ReturnCode = (short) ErrorCode.Ok,
-                        DebugMessage = "lot unpublished"
-                    };
+                    response =
+                        new OperationResponse(operationRequest.OperationCode)
+                            {
+                                ReturnCode = (short)ErrorCode.Ok,
+                                DebugMessage = "lot unpublished"
+                            };
 
                     peer.SendUpdatePlayerInventoryEvent();
 

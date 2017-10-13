@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Utils;
 using Warsmiths.Server.Events;
@@ -19,15 +22,15 @@ namespace Warsmiths.Server.Handlers.Economic
 
         public override OperationCode ControlCode => OperationCode.OrderElement;
 
-        private readonly EconomicRuntimeService _economics =
-            ServiceManager.Get<EconomicRuntimeService>();
+        private readonly EconomicRuntimeService _economics = ServiceManager.Get<EconomicRuntimeService>();
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new OrderElementRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -35,22 +38,28 @@ namespace Warsmiths.Server.Handlers.Economic
                 return response;
             }
 
-            var element = MasterApplication.DomainConfiguration.Elements.FirstOrDefault(t => t._id == request.ElementId);
+            var element =
+                MasterApplication.DomainConfiguration.Elements.FirstOrDefault(t => t._id == request.ElementId);
             if (element == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = $"Element with id {request.ElementId} not exists"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   $"Element with id {request.ElementId} not exists"
+                           };
             }
+
             if (request.Quantity <= 0)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "Quantity for order should be more than zero"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   "Quantity for order should be more than zero"
+                           };
             }
 
             var orderStatement = new OrderElementStatement(peer.CurrentPlayerId, request.ElementId, request.Quantity);
@@ -59,23 +68,28 @@ namespace Warsmiths.Server.Handlers.Economic
 
             if (result.Success)
             {
-                response = new OperationResponse(operationRequest.OperationCode,
-                    new InventoryResponse {EntityId = request.ElementId})
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = result.DebugMessage
-                };
+                response = new OperationResponse(
+                               operationRequest.OperationCode,
+                               new InventoryResponse { EntityId = request.ElementId })
+                               {
+                                   ReturnCode =
+                                       (short)ErrorCode.Ok,
+                                   DebugMessage = result
+                                       .DebugMessage
+                               };
 
                 peer.SendUpdatePlayerProfileEvent();
                 peer.SendUpdateElementsOrderEvent();
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = result.DebugMessage
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage = result.DebugMessage
+                        };
             }
 
             return response;

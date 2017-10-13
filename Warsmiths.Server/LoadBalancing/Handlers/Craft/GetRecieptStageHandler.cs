@@ -1,9 +1,9 @@
-﻿using System;
-using ExitGames.Logging;
+﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Client;
 using Warsmiths.Common;
-using Warsmiths.Common.Domain;
 using Warsmiths.Common.Domain.Craft.Quest;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Framework.Handlers;
@@ -21,7 +21,10 @@ namespace Warsmiths.Server.Handlers.Craft
 
         public override OperationCode ControlCode => OperationCode.GetRecieptStage;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -34,33 +37,44 @@ namespace Warsmiths.Server.Handlers.Craft
 
             var reciept = _recieptRepository.GetById(request.RecieptId) as BaseQuest;
 
-            if(reciept == null)
+            if (reciept == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"its not quest"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage = $"its not quest"
+                           };
             }
-            else 
+            else
             {
-           
                 if (reciept.StageList.Count >= request.Stage)
                 {
                     return new OperationResponse(operationRequest.OperationCode)
-                    {
-                        ReturnCode = (short)ErrorCode.OperationFailed,
-                        DebugMessage = $"stage is wrong"
-                    };
+                               {
+                                   ReturnCode =
+                                       (short)ErrorCode
+                                           .OperationFailed,
+                                   DebugMessage = $"stage is wrong"
+                               };
                 }
             }
 
-            response = new OperationResponse(operationRequest.OperationCode,
-                new GetRecieptResponse { RecieptData = reciept.StageList[request.Stage].ToBson() })
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = $"ok"
-            };
+            response = new OperationResponse(
+                           operationRequest.OperationCode,
+                           new GetRecieptResponse { RecieptData = reciept.StageList[request.Stage].ToBson() })
+                           {
+                               ReturnCode
+                                   =
+                                   (
+                                       short
+                                   )
+                                   ErrorCode
+                                       .Ok,
+                               DebugMessage
+                                   =
+                                   $"ok"
+                           };
 
             return response;
         }

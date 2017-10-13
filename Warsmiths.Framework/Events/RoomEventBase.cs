@@ -1,5 +1,7 @@
 using System;
+
 using Photon.SocketServer.Rpc;
+
 using Warsmiths.Server.Framework.Operations;
 
 namespace Warsmiths.Server.Framework.Events
@@ -12,9 +14,9 @@ namespace Warsmiths.Server.Framework.Events
             ActorNr = actorNr;
         }
 
-        [DataMember(Code = (byte) ParameterKey.ActorNr)]
-        public int ActorNr ;
+        [DataMember(Code = (byte)ParameterKey.ActorNr)]
+        public int ActorNr;
 
-        public byte Code ;
+        public byte Code;
     }
 }

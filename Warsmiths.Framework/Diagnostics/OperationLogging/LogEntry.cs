@@ -16,11 +16,11 @@ namespace Warsmiths.Server.Framework.Diagnostics.OperationLogging
         {
         }
 
-        public DateTime UtcCreated ;
+        public DateTime UtcCreated;
 
-        public string Action ;
+        public string Action;
 
-        public string Message ;
+        public string Message;
 
         public override string ToString()
         {

@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
@@ -14,11 +16,12 @@ namespace Warsmiths.Server.Handlers.GameManagement
 
         public override OperationCode ControlCode => OperationCode.JoinLobby;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
             var joinLobbyRequest = new JoinLobbyRequest(peer.Protocol, operationRequest);
 
             OperationResponse response;
@@ -35,16 +38,17 @@ namespace Warsmiths.Server.Handlers.GameManagement
             }
 
             AppLobby lobby;
-            if (
-                !peer.Application.LobbyFactory.GetOrCreateAppLobby(joinLobbyRequest.LobbyName,
-                    (AppLobbyType) joinLobbyRequest.LobbyType, out lobby))
+            if (!peer.Application.LobbyFactory.GetOrCreateAppLobby(
+                    joinLobbyRequest.LobbyName,
+                    (AppLobbyType)joinLobbyRequest.LobbyType,
+                    out lobby))
             {
                 return new OperationResponse
-                {
-                    OperationCode = operationRequest.OperationCode,
-                    ReturnCode = (short) ErrorCode.OperationDenied,
-                    DebugMessage = "Cannot create lobby"
-                };
+                           {
+                               OperationCode = operationRequest.OperationCode,
+                               ReturnCode = (short)ErrorCode.OperationDenied,
+                               DebugMessage = "Cannot create lobby"
+                           };
             }
 
             peer.AppLobby = lobby;

@@ -1,6 +1,9 @@
 ﻿using ExitGames.Logging;
+
 using MongoDB.Bson.Serialization;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain.Equipment;
 using Warsmiths.DatabaseService.Repositories;
@@ -22,12 +25,14 @@ namespace Warsmiths.Server.Handlers.Inventory
 
         public override OperationCode ControlCode => OperationCode.AddToInventory;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
 
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new AddToInventoryRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -43,23 +48,29 @@ namespace Warsmiths.Server.Handlers.Inventory
             {
                 _playerRepository.Update(currentPlayer);
 
-                response = new OperationResponse(operationRequest.OperationCode,
-                    new InventoryResponse {EntityId = equipment._id })
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = "take inventory data in event"
-                };
+                response = new OperationResponse(
+                               operationRequest.OperationCode,
+                               new InventoryResponse { EntityId = equipment._id })
+                               {
+                                   ReturnCode = (short)ErrorCode.Ok,
+                                   DebugMessage =
+                                       "take inventory data in event"
+                               };
 
                 peer.SendUpdatePlayerInventoryEvent();
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode,
-                    new InventoryResponse {EntityId = equipment._id })
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "this equipment is already in inventory"
-                };
+                response =
+                    new OperationResponse(
+                        operationRequest.OperationCode,
+                        new InventoryResponse { EntityId = equipment._id })
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage =
+                                "this equipment is already in inventory"
+                        };
             }
 
             return response;

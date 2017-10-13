@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Photon.SocketServer;
+
 using Warsmiths.Server.Framework.Caching;
 using Warsmiths.Server.Framework.Diagnostics.OperationLogging;
 using Warsmiths.Server.Framework.Events;
@@ -24,15 +26,20 @@ namespace Warsmiths.Server.Framework
 
         #endregion
 
-        protected bool DeleteCacheOnLeave ;
-        protected bool SuppressRoomEvents ;
+        protected bool DeleteCacheOnLeave;
+
+        protected bool SuppressRoomEvents;
 
         #region Constants and Fields
 
         protected readonly LogQueue LogQueue;
+
         protected readonly EventCacheDictionary ActorEventCache = new EventCacheDictionary();
+
         protected readonly RoomEventCache EventCache = new RoomEventCache();
+
         protected readonly Dictionary<byte, ActorGroup> ActorGroups = new Dictionary<byte, ActorGroup>();
+
         private int _actorNumberCounter;
 
         #endregion
@@ -48,7 +55,9 @@ namespace Warsmiths.Server.Framework
             return sb.ToString();
         }
 
-        protected override void ExecuteOperation(PlayerPeer peer, OperationRequest operationRequest,
+        protected override void ExecuteOperation(
+            PlayerPeer peer,
+            OperationRequest operationRequest,
             SendParameters sendParameters)
         {
             try
@@ -114,8 +123,7 @@ namespace Warsmiths.Server.Framework
                     case OperationCode.RaiseEvent:
                         {
                             var raiseEventOperation = new RaiseEventRequest(peer.Protocol, operationRequest);
-                            if (peer.ValidateOperation(raiseEventOperation, sendParameters) == false)
-                                return;
+                            if (peer.ValidateOperation(raiseEventOperation, sendParameters) == false) return;
 
                             raiseEventOperation.OnStart();
                             HandleRaiseEventOperation(peer, raiseEventOperation, sendParameters);
@@ -126,8 +134,7 @@ namespace Warsmiths.Server.Framework
                     case OperationCode.GetProperties:
                         {
                             var getPropertiesOperation = new GetPropertiesRequest(peer.Protocol, operationRequest);
-                            if (peer.ValidateOperation(getPropertiesOperation, sendParameters) == false)
-                                return;
+                            if (peer.ValidateOperation(getPropertiesOperation, sendParameters) == false) return;
 
                             getPropertiesOperation.OnStart();
                             HandleGetPropertiesOperation(peer, getPropertiesOperation, sendParameters);
@@ -138,8 +145,7 @@ namespace Warsmiths.Server.Framework
                     case OperationCode.SetProperties:
                         {
                             var setPropertiesOperation = new SetPropertiesRequest(peer.Protocol, operationRequest);
-                            if (peer.ValidateOperation(setPropertiesOperation, sendParameters) == false)
-                                return;
+                            if (peer.ValidateOperation(setPropertiesOperation, sendParameters) == false) return;
 
                             setPropertiesOperation.OnStart();
                             HandleSetPropertiesOperation(peer, setPropertiesOperation, sendParameters);
@@ -150,10 +156,7 @@ namespace Warsmiths.Server.Framework
                     case OperationCode.Ping:
                         {
                             peer.SendOperationResponse(
-                                new OperationResponse
-                                {
-                                    OperationCode = operationRequest.OperationCode
-                                },
+                                new OperationResponse { OperationCode = operationRequest.OperationCode },
                                 sendParameters);
                             break;
                         }
@@ -161,24 +164,25 @@ namespace Warsmiths.Server.Framework
                     case OperationCode.ChangeGroups:
                         {
                             var changeGroupsOperation = new ChangeGroups(peer.Protocol, operationRequest);
-                            if (peer.ValidateOperation(changeGroupsOperation, sendParameters) == false)
-                                return;
+                            if (peer.ValidateOperation(changeGroupsOperation, sendParameters) == false) return;
 
                             changeGroupsOperation.OnStart();
                             HandleChangeGroupsOperation(peer, changeGroupsOperation, sendParameters);
                             changeGroupsOperation.OnComplete();
                             break;
                         }
+
                     default:
                         {
                             var message = $"Unknown operation code {(OperationCode)operationRequest.OperationCode}";
                             peer.SendOperationResponse(
                                 new OperationResponse
-                                {
-                                    OperationCode = operationRequest.OperationCode,
-                                    ReturnCode = -1,
-                                    DebugMessage = message
-                                }, sendParameters);
+                                    {
+                                        OperationCode = operationRequest.OperationCode,
+                                        ReturnCode = -1,
+                                        DebugMessage = message
+                                    },
+                                sendParameters);
 
                             if (Log.IsWarnEnabled)
                             {
@@ -225,9 +229,12 @@ namespace Warsmiths.Server.Framework
                         RemovePeerFromGame(peer, null);
                         if (LogQueue.Log.IsDebugEnabled)
                         {
-                            LogQueue.Add(new LogEntry
-                                ("ProcessMessage: " + (GameMessageCodes)message.Action, "Peer=" + peer.ConnectionId));
+                            LogQueue.Add(
+                                new LogEntry(
+                                    "ProcessMessage: " + (GameMessageCodes)message.Action,
+                                    "Peer=" + peer.ConnectionId));
                         }
+
                         break;
                 }
             }
@@ -331,14 +338,12 @@ namespace Warsmiths.Server.Framework
         {
             // check if the peer already exists in this game
             actor = Actors.GetActorByPeer(peer);
-            if (actor != null)
-                return false;
+            if (actor != null) return false;
 
             if (actorNr != 0)
             {
                 actor = Actors.GetActorByNumber(actorNr);
-                if (actor != null)
-                    return false;
+                if (actor != null) return false;
             }
 
             // create new actor instance 
@@ -352,6 +357,7 @@ namespace Warsmiths.Server.Framework
                 _actorNumberCounter++;
                 actor.ActorNr = _actorNumberCounter;
             }
+
             Actors.Add(actor);
 
             if (Log.IsDebugEnabled)
@@ -369,8 +375,7 @@ namespace Warsmiths.Server.Framework
 
             switch (raiseEventRequest.Cache)
             {
-                case (byte)CacheOperation.DoNotCache:
-                    return true;
+                case (byte)CacheOperation.DoNotCache: return true;
 
                 case (byte)CacheOperation.AddToRoomCache:
                     customEvent = new CustomEvent(actor.ActorNr, raiseEventRequest.EvCode, raiseEventRequest.Data);
@@ -391,10 +396,11 @@ namespace Warsmiths.Server.Framework
             }
             else
             {
-                msg = string.Format("Cache operation '{0}' requires a Hashtable as event data.", raiseEventRequest.Cache);
+                msg = string.Format(
+                    "Cache operation '{0}' requires a Hashtable as event data.",
+                    raiseEventRequest.Cache);
                 return false;
             }
-
 
             switch (raiseEventRequest.Cache)
             {
@@ -420,7 +426,9 @@ namespace Warsmiths.Server.Framework
 
         #region Handlers
 
-        protected virtual void HandleGetPropertiesOperation(PlayerPeer peer, GetPropertiesRequest getPropertiesRequest,
+        protected virtual void HandleGetPropertiesOperation(
+            PlayerPeer peer,
+            GetPropertiesRequest getPropertiesRequest,
             SendParameters sendParameters)
         {
             var response = new GetPropertiesResponse();
@@ -451,7 +459,8 @@ namespace Warsmiths.Server.Framework
                         var actor = Actors.GetActorByNumber(actorNumber);
                         if (actor != null)
                         {
-                            var actorProperties = actor.Properties.GetProperties(getPropertiesRequest.ActorPropertyKeys);
+                            var actorProperties =
+                                actor.Properties.GetProperties(getPropertiesRequest.ActorPropertyKeys);
                             response.ActorProperties.Add(actorNumber, actorProperties);
                         }
                     }
@@ -459,10 +468,13 @@ namespace Warsmiths.Server.Framework
             }
 
             peer.SendOperationResponse(
-                new OperationResponse(getPropertiesRequest.OperationRequest.OperationCode, response), sendParameters);
+                new OperationResponse(getPropertiesRequest.OperationRequest.OperationCode, response),
+                sendParameters);
         }
 
-        protected virtual Actor HandleJoinOperation(PlayerPeer peer, JoinRequest joinRequest,
+        protected virtual Actor HandleJoinOperation(
+            PlayerPeer peer,
+            JoinRequest joinRequest,
             SendParameters sendParameters)
         {
             if (IsDisposed)
@@ -487,11 +499,11 @@ namespace Warsmiths.Server.Framework
             {
                 peer.SendOperationResponse(
                     new OperationResponse
-                    {
-                        OperationCode = joinRequest.OperationRequest.OperationCode,
-                        ReturnCode = -1,
-                        DebugMessage = "Peer already joined the specified game."
-                    },
+                        {
+                            OperationCode = joinRequest.OperationRequest.OperationCode,
+                            ReturnCode = -1,
+                            DebugMessage = "Peer already joined the specified game."
+                        },
                     sendParameters);
                 return null;
             }
@@ -543,7 +555,8 @@ namespace Warsmiths.Server.Framework
                 }
             }
 
-            peer.SendOperationResponse(new OperationResponse(joinRequest.OperationRequest.OperationCode, joinResponse),
+            peer.SendOperationResponse(
+                new OperationResponse(joinRequest.OperationRequest.OperationCode, joinResponse),
                 sendParameters);
 
             // publish join event
@@ -554,17 +567,22 @@ namespace Warsmiths.Server.Framework
             return actor;
         }
 
-        protected virtual void HandleLeaveOperation(PlayerPeer peer, LeaveRequest leaveRequest,
+        protected virtual void HandleLeaveOperation(
+            PlayerPeer peer,
+            LeaveRequest leaveRequest,
             SendParameters sendParameters)
         {
             RemovePeerFromGame(peer, leaveRequest);
 
             // is always reliable, so it gets a response
             peer.SendOperationResponse(
-                new OperationResponse { OperationCode = leaveRequest.OperationRequest.OperationCode }, sendParameters);
+                new OperationResponse { OperationCode = leaveRequest.OperationRequest.OperationCode },
+                sendParameters);
         }
 
-        protected virtual void HandleRaiseEventOperation(PlayerPeer peer, RaiseEventRequest raiseEventRequest,
+        protected virtual void HandleRaiseEventOperation(
+            PlayerPeer peer,
+            RaiseEventRequest raiseEventRequest,
             SendParameters sendParameters)
         {
             // get the actor who send the operation request
@@ -579,7 +597,8 @@ namespace Warsmiths.Server.Framework
             if (raiseEventRequest.Cache == (byte)CacheOperation.RemoveFromRoomCache)
             {
                 EventCache.RemoveEvents(raiseEventRequest);
-                var response = new OperationResponse(raiseEventRequest.OperationRequest.OperationCode) { ReturnCode = 0 };
+                var response =
+                    new OperationResponse(raiseEventRequest.OperationRequest.OperationCode) { ReturnCode = 0 };
                 peer.SendOperationResponse(response, sendParameters);
                 return;
             }
@@ -588,7 +607,8 @@ namespace Warsmiths.Server.Framework
             {
                 var currentActorNumbers = Actors.GetActorNumbers();
                 EventCache.RemoveEventsForActorsNotInList(currentActorNumbers);
-                var response = new OperationResponse(raiseEventRequest.OperationRequest.OperationCode) { ReturnCode = 0 };
+                var response =
+                    new OperationResponse(raiseEventRequest.OperationRequest.OperationCode) { ReturnCode = 0 };
                 peer.SendOperationResponse(response, sendParameters);
                 return;
             }
@@ -636,11 +656,12 @@ namespace Warsmiths.Server.Framework
                     default:
                         peer.SendOperationResponse(
                             new OperationResponse
-                            {
-                                OperationCode = raiseEventRequest.OperationRequest.OperationCode,
-                                ReturnCode = -1,
-                                DebugMessage = "Invalid ReceiverGroup " + raiseEventRequest.ReceiverGroup
-                            },
+                                {
+                                    OperationCode = raiseEventRequest.OperationRequest.OperationCode,
+                                    ReturnCode = -1,
+                                    DebugMessage =
+                                        "Invalid ReceiverGroup " + raiseEventRequest.ReceiverGroup
+                                },
                             sendParameters);
                         return;
                 }
@@ -653,11 +674,11 @@ namespace Warsmiths.Server.Framework
                 {
                     peer.SendOperationResponse(
                         new OperationResponse
-                        {
-                            OperationCode = raiseEventRequest.OperationRequest.OperationCode,
-                            ReturnCode = -1,
-                            DebugMessage = msg
-                        },
+                            {
+                                OperationCode = raiseEventRequest.OperationRequest.OperationCode,
+                                ReturnCode = -1,
+                                DebugMessage = msg
+                            },
                         sendParameters);
                     return;
                 }
@@ -666,7 +687,9 @@ namespace Warsmiths.Server.Framework
             PublishEvent(customEvent, recipients, sendParameters);
         }
 
-        protected virtual void HandleSetPropertiesOperation(PlayerPeer peer, SetPropertiesRequest setPropertiesRequest,
+        protected virtual void HandleSetPropertiesOperation(
+            PlayerPeer peer,
+            SetPropertiesRequest setPropertiesRequest,
             SendParameters sendParameters)
         {
             // check if peer has joined this room instance
@@ -674,11 +697,12 @@ namespace Warsmiths.Server.Framework
             if (sender == null)
             {
                 var response = new OperationResponse
-                {
-                    OperationCode = setPropertiesRequest.OperationRequest.OperationCode,
-                    ReturnCode = -1,
-                    DebugMessage = "Room not joined"
-                };
+                                   {
+                                       OperationCode =
+                                           setPropertiesRequest.OperationRequest.OperationCode,
+                                       ReturnCode = -1,
+                                       DebugMessage = "Room not joined"
+                                   };
 
                 peer.SendOperationResponse(response, sendParameters);
                 return;
@@ -691,12 +715,13 @@ namespace Warsmiths.Server.Framework
                 {
                     peer.SendOperationResponse(
                         new OperationResponse
-                        {
-                            OperationCode = setPropertiesRequest.OperationRequest.OperationCode,
-                            ReturnCode = -1,
-                            DebugMessage =
-                                string.Format("Actor with number {0} not found.", setPropertiesRequest.ActorNumber)
-                        },
+                            {
+                                OperationCode = setPropertiesRequest.OperationRequest.OperationCode,
+                                ReturnCode = -1,
+                                DebugMessage = string.Format(
+                                    "Actor with number {0} not found.",
+                                    setPropertiesRequest.ActorNumber)
+                            },
                         sendParameters);
                     return;
                 }
@@ -718,17 +743,20 @@ namespace Warsmiths.Server.Framework
             {
                 var actor = Actors.GetActorByPeer(peer);
                 var recipients = Actors.GetExcludedList(actor);
-                var propertiesChangedEvent = new PropertiesChangedEvent(actor.ActorNr)
-                {
-                    TargetActorNumber = setPropertiesRequest.ActorNumber,
-                    Properties = setPropertiesRequest.Properties
-                };
+                var propertiesChangedEvent =
+                    new PropertiesChangedEvent(actor.ActorNr)
+                        {
+                            TargetActorNumber = setPropertiesRequest.ActorNumber,
+                            Properties = setPropertiesRequest.Properties
+                        };
 
                 PublishEvent(propertiesChangedEvent, recipients, sendParameters);
             }
         }
 
-        protected virtual void HandleChangeGroupsOperation(PlayerPeer peer, ChangeGroups changeGroupsRequest,
+        protected virtual void HandleChangeGroupsOperation(
+            PlayerPeer peer,
+            ChangeGroups changeGroupsRequest,
             SendParameters sendParameters)
         {
             // get the actor who send the operation request
@@ -752,6 +780,7 @@ namespace Warsmiths.Server.Framework
                             group = new ActorGroup(groupId);
                             ActorGroups.Add(groupId, group);
                         }
+
                         actor.AddGroup(group);
                     }
                 }

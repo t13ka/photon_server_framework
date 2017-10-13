@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using ExitGames.Concurrency.Fibers;
 using ExitGames.Logging;
+
 using MongoDB.Bson;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
 using Warsmiths.Common.ListContainer;
@@ -73,7 +77,6 @@ namespace Warsmiths.Server.Services.Auction
             _subscribers.Remove(subscriber);
         }
 
-
         /// <summary>
         /// </summary>
         /// <param name="lot"></param>
@@ -120,12 +123,12 @@ namespace Warsmiths.Server.Services.Auction
 
         public void SendUpdateAuctionDataToSubscribers()
         {
-            var lotsContainer = new LotsListContainer {Lots = GetAll().ToList()};
+            var lotsContainer = new LotsListContainer { Lots = GetAll().ToList() };
             var data = lotsContainer.ToBson();
 
             // Update auction event
-            var eventAuction = new UpdateAuctionEvent {AuctionData = data};
-            var eventAuctionData = new EventData((byte) EventCode.UpdateAuction, eventAuction);
+            var eventAuction = new UpdateAuctionEvent { AuctionData = data };
+            var eventAuctionData = new EventData((byte)EventCode.UpdateAuction, eventAuction);
             eventAuctionData.SendTo(_subscribers, new SendParameters());
         }
 

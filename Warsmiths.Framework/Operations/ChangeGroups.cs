@@ -11,9 +11,9 @@ namespace Warsmiths.Server.Framework.Operations
         }
 
         [DataMember(Code = (byte)ParameterKey.GroupsForRemove, IsOptional = true)]
-        public byte[] Remove ;
+        public byte[] Remove;
 
         [DataMember(Code = (byte)ParameterKey.GroupsForAdd, IsOptional = true)]
-        public byte[] Add ;
+        public byte[] Add;
     }
 }

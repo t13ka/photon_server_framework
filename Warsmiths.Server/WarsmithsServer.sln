@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{29871B7D-08A0-40B1-92F1-474865FB4484}"
 EndProject
@@ -26,8 +26,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{430DCB93-FADB-43BF-97EF-F7E8BE6A1CA2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientUnity3d", "ClientUnity3d", "{9F034806-EF1F-4BBA-9F79-69D306DB2577}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdminTools", "AdminTools", "{02E313BC-8D41-4C44-9752-B84762F47B08}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D75A002F-C6B0-4D72-A492-B3958A772D33}"
 EndProject
@@ -75,5 +73,8 @@ Global
 		{D7785DA6-652A-4541-AD68-BB8029B9F759} = {430DCB93-FADB-43BF-97EF-F7E8BE6A1CA2}
 		{E1F918F4-F581-4280-9D91-3CF77B24C290} = {29871B7D-08A0-40B1-92F1-474865FB4484}
 		{B30C074C-71FE-488A-8D17-498C8F1D92ED} = {9F034806-EF1F-4BBA-9F79-69D306DB2577}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93E3DA9B-2D0C-48A1-A377-BBABF0820A22}
 	EndGlobalSection
 EndGlobal

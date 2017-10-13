@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Client;
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
@@ -18,30 +21,38 @@ using Warsmiths.Server.GameServer.Tasks.Common;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Operations.Request.Craft;
 using Warsmiths.Server.Operations.Response.Craft;
+
 using CraftQuestController = Warsmiths.Server.GameServer.Craft.Field.CraftQuestController;
 
 namespace Warsmiths.Server.Handlers.Craft
 {
     public class EndRecieptHandler : BaseHandler
     {
-
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();
 
-       // private readonly RecieptRepository _recieptRepository = new RecieptRepository();
+        // private readonly RecieptRepository _recieptRepository = new RecieptRepository();
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
+
         private readonly RecieptRepository _recieptRepository = new RecieptRepository();
 
         public override OperationCode ControlCode => OperationCode.EndReciept;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             var peer = (MasterClientPeer)peerBase;
             var currentPlayer = peer.GetCurrentPlayer();
             if (!MasterApplication.CraftFields.ContainsKey(currentPlayer.Login))
             {
-                return new OperationResponse { ReturnCode = (short)ErrorCode.OperationInvalid, DebugMessage = "No active quest" };
+                return new OperationResponse
+                           {
+                               ReturnCode = (short)ErrorCode.OperationInvalid,
+                               DebugMessage = "No active quest"
+                           };
             }
- 
+
             var request = new EndRecieptRequest(peer.Protocol, operationRequest);
 
             var currentCharacter = currentPlayer.GetCurrentCharacter();
@@ -75,11 +86,12 @@ namespace Warsmiths.Server.Handlers.Craft
                 {
                     _log.Debug("Error");
                     return new OperationResponse
-                    {
-                        ReturnCode = (short)ErrorCode.OperationInvalid,
-                        DebugMessage = "Somethink went wrong"
-                    };
+                               {
+                                   ReturnCode = (short)ErrorCode.OperationInvalid,
+                                   DebugMessage = "Somethink went wrong"
+                               };
                 }
+
                 _log.Debug(currentCharacter.CompletedQuests + " Quest Compelete " + ":" + endQuest.Name);
                 if (!currentCharacter.CompletedQuests.Contains(qName)) currentCharacter.CompletedQuests.Add(qName);
                 var nextQuest = RecieptsCommon.GetNextQuest(currentPlayer, qName);
@@ -102,11 +114,10 @@ namespace Warsmiths.Server.Handlers.Craft
                     resoult.WarningMessage = "Not enought exp for next quest";
                 }
 
-                 _recieptRepository.Replace(qrecField.Reciept);
+                _recieptRepository.Replace(qrecField.Reciept);
                 _recieptRepository.Update(qrecField.Reciept);
-
-            
-            } else if (endQuest != null)
+            }
+            else if (endQuest != null)
             {
                 resoult = MasterApplication.CraftFields[currentPlayer.Login].End();
                 _log.Debug("Custom Reciept Ended");
@@ -114,27 +125,32 @@ namespace Warsmiths.Server.Handlers.Craft
             else
             {
                 _log.Debug("Quest is already ended");
-                return new OperationResponse { ReturnCode = (short)ErrorCode.OperationInvalid, DebugMessage = "No quest exist" };
+                return new OperationResponse
+                           {
+                               ReturnCode = (short)ErrorCode.OperationInvalid,
+                               DebugMessage = "No quest exist"
+                           };
             }
 
             _log.Debug("Check task");
             var task = TaskOperations.CheckTask(currentPlayer, currentCharacter);
-            if (task != null && task.Status ==  TaskStatusTypesE.Finished)
+            if (task != null && task.Status == TaskStatusTypesE.Finished)
             {
                 _log.Debug("TaskCompeteed");
             }
 
-
-             currentCharacter.Update();
+            currentCharacter.Update();
             _playerRepository.Update(currentPlayer);
             peer.SendUpdatePlayerProfileEvent();
 
-            var response = new OperationResponse(operationRequest.OperationCode,
-                new EndRecieptResponse { Resoult = resoult.ToBson()})
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = "ok"
-            };
+            var response = new OperationResponse(
+                               operationRequest.OperationCode,
+                               new EndRecieptResponse { Resoult = resoult.ToBson() })
+                               {
+                                   ReturnCode =
+                                       (short)ErrorCode.Ok,
+                                   DebugMessage = "ok"
+                               };
 
             return response;
         }

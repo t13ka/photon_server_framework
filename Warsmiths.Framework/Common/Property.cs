@@ -17,7 +17,10 @@ namespace Warsmiths.Server.Framework.Common
 
         public object Value
         {
-            get { return _value; }
+            get
+            {
+                return _value;
+            }
 
             set
             {

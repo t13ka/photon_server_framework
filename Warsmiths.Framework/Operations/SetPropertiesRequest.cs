@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
 
@@ -16,12 +17,12 @@ namespace Warsmiths.Server.Framework.Operations
         }
 
         [DataMember(Code = (byte)ParameterKey.ActorNr, IsOptional = true)]
-        public int ActorNumber ;
+        public int ActorNumber;
 
         [DataMember(Code = (byte)ParameterKey.Broadcast, IsOptional = true)]
-        public bool Broadcast ;
+        public bool Broadcast;
 
         [DataMember(Code = (byte)ParameterKey.Properties)]
-        public Hashtable Properties ;
+        public Hashtable Properties;
     }
 }

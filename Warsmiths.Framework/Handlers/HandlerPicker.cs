@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 
 namespace Warsmiths.Server.Framework.Handlers
@@ -21,7 +24,6 @@ namespace Warsmiths.Server.Framework.Handlers
 
         private static readonly Dictionary<OperationCode, Type> Operations = new Dictionary<OperationCode, Type>();
 
-
         /// <summary>
         /// </summary>
         public HandlerPicker()
@@ -32,14 +34,13 @@ namespace Warsmiths.Server.Framework.Handlers
             {
                 var type = t;
 
-                if (type.IsAbstract)
-                    continue;
+                if (type.IsAbstract) continue;
 
                 var instance = Activator.CreateInstance(type);
 
                 if (instance != null)
                 {
-                    var handlerInstance = (BaseHandler) instance;
+                    var handlerInstance = (BaseHandler)instance;
 
                     Handlers.Add(handlerInstance.ControlCode, handlerInstance);
                 }
@@ -53,7 +54,7 @@ namespace Warsmiths.Server.Framework.Handlers
             foreach (var handler in Handlers)
             {
                 var hname = handler.Value.GetType().Name;
-                var cleanName = hname.Replace("Handler", "").Replace("handler", "");
+                var cleanName = hname.Replace("Handler", string.Empty).Replace("handler", string.Empty);
                 var operationType =
                     onlyOperationRequests.FirstOrDefault(t => t.BaseType != null && t.Name.Contains(cleanName));
                 if (operationType != null)
@@ -67,21 +68,22 @@ namespace Warsmiths.Server.Framework.Handlers
         {
             BaseHandler h;
             object obj;
-            if (!request.Parameters.TryGetValue((byte) ParameterCode.ControlCode, out obj))
+            if (!request.Parameters.TryGetValue((byte)ParameterCode.ControlCode, out obj))
             {
-                var control = (OperationCode) request.OperationCode;
+                var control = (OperationCode)request.OperationCode;
                 if (Handlers.TryGetValue(control, out h))
                 {
                 }
             }
             else
             {
-                var control = (OperationCode) obj;
+                var control = (OperationCode)obj;
                 if (Handlers.TryGetValue(control, out h))
                 {
-                    request.Parameters.Remove((byte) ParameterCode.ControlCode);
+                    request.Parameters.Remove((byte)ParameterCode.ControlCode);
                 }
             }
+
             return h;
         }
     }

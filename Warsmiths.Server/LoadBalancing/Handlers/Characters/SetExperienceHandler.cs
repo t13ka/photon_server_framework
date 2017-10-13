@@ -1,6 +1,9 @@
 ﻿using System;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
 using Warsmiths.DatabaseService.Repositories;
@@ -10,15 +13,15 @@ using Warsmiths.Server.Operations.Request.Characters;
 
 namespace Warsmiths.Server.Handlers.Characters
 {
+    using Player = Warsmiths.Common.Domain.Player;
+
     public class SetExperienceHandler : BaseHandler
     {
-        public static void LevlUp(Warsmiths.Common.Domain.Player player, Character character, bool zerolevel = false)
+        public static void LevlUp(Player player, Character character, bool zerolevel = false)
         {
-
             foreach (var a in DomainConfiguration.HeroLevelRewards[character.CraftLevel].LevelFeatures)
             {
-                if (!player.LevelFeatures.Contains(a))
-                    player.LevelFeatures.Add(a);
+                if (!player.LevelFeatures.Contains(a)) player.LevelFeatures.Add(a);
             }
 
             foreach (var b in DomainConfiguration.HeroLevelRewards[character.CraftLevel].Reciepts)
@@ -33,7 +36,7 @@ namespace Warsmiths.Server.Handlers.Characters
                 }
             }
 
-            LogManager.GetLogger("").Debug("Lvl Up " + character.Level);
+            LogManager.GetLogger(string.Empty).Debug("Lvl Up " + character.Level);
         }
 
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
@@ -42,7 +45,10 @@ namespace Warsmiths.Server.Handlers.Characters
 
         public override OperationCode ControlCode => OperationCode.SetExperience;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -59,25 +65,28 @@ namespace Warsmiths.Server.Handlers.Characters
             if (character == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"character not selected"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   $"character not selected"
+                           };
             }
 
             character.SetExperience(request.Experience);
-            LevlUp(currentPlayer,character);
+            LevlUp(currentPlayer, character);
             character.Update();
 
             _playerRepository.Update(currentPlayer);
 
-            
-
-            response = new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = "setted. character.Experience now = " + character.CraftExperience
-            };
+            response =
+                new OperationResponse(operationRequest.OperationCode)
+                    {
+                        ReturnCode = (short)ErrorCode.Ok,
+                        DebugMessage =
+                            "setted. character.Experience now = "
+                            + character.CraftExperience
+                    };
 
             return response;
         }

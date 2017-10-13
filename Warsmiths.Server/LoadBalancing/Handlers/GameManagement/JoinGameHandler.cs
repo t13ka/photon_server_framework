@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
@@ -14,10 +16,12 @@ namespace Warsmiths.Server.Handlers.GameManagement
 
         public override OperationCode ControlCode => OperationCode.JoinGame;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
             PeerBase peerBase)
         {
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
             var joinGameRequest = new JoinGameRequest(peer.Protocol, operationRequest);
 
             OperationResponse response;
@@ -36,23 +40,25 @@ namespace Warsmiths.Server.Handlers.GameManagement
             if (joinGameRequest.CreateIfNotExists == false)
             {
                 return new OperationResponse
-                {
-                    OperationCode = operationRequest.OperationCode,
-                    ReturnCode = (int)ErrorCode.GameIdNotExists,
-                    DebugMessage = "Game does not exist"
-                };
+                           {
+                               OperationCode = operationRequest.OperationCode,
+                               ReturnCode = (int)ErrorCode.GameIdNotExists,
+                               DebugMessage = "Game does not exist"
+                           };
             }
 
             AppLobby lobby;
-            if (!peer.Application.LobbyFactory.GetOrCreateAppLobby(joinGameRequest.LobbyName,
-                    (AppLobbyType)joinGameRequest.LobbyType, out lobby))
+            if (!peer.Application.LobbyFactory.GetOrCreateAppLobby(
+                    joinGameRequest.LobbyName,
+                    (AppLobbyType)joinGameRequest.LobbyType,
+                    out lobby))
             {
                 return new OperationResponse
-                {
-                    OperationCode = operationRequest.OperationCode,
-                    ReturnCode = (int)ErrorCode.OperationDenied,
-                    DebugMessage = "Lobby does not exist"
-                };
+                           {
+                               OperationCode = operationRequest.OperationCode,
+                               ReturnCode = (int)ErrorCode.OperationDenied,
+                               DebugMessage = "Lobby does not exist"
+                           };
             }
 
             lobby.EnqueueOperation(peer, operationRequest, sendParameters);

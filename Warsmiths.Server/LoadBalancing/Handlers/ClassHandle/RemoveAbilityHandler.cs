@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Framework.Handlers;
@@ -16,7 +18,9 @@ namespace Warsmiths.Server.Handlers.ClassHandle
 
         public override OperationCode ControlCode => OperationCode.RemoveAbility;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
@@ -34,10 +38,12 @@ namespace Warsmiths.Server.Handlers.ClassHandle
             if (character == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"character not selected"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   $"character not selected"
+                           };
             }
 
             if (character.RemoveAbility(request.AblilityName))
@@ -45,20 +51,22 @@ namespace Warsmiths.Server.Handlers.ClassHandle
                 character.Update();
 
                 _playerRepository.Update(currentPlayer);
-                
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.Ok,
-                    DebugMessage = "ability removed"
-                };
+
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode = (short)ErrorCode.Ok,
+                            DebugMessage = "ability removed"
+                        };
             }
             else
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"can't remove ability"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage = $"can't remove ability"
+                           };
             }
 
             return response;

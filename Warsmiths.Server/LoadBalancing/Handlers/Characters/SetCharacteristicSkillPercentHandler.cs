@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain.Enums;
 using Warsmiths.DatabaseService.Repositories;
@@ -16,10 +18,12 @@ namespace Warsmiths.Server.Handlers.Characters
 
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();
 
-        public override OperationCode ControlCode=> OperationCode.SetSkillPercentValue;
+        public override OperationCode ControlCode => OperationCode.SetSkillPercentValue;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, 
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -36,28 +40,31 @@ namespace Warsmiths.Server.Handlers.Characters
             if (character == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = $"character not selected"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   $"character not selected"
+                           };
             }
 
-            var characteristic = (CharacteristicE) request.CharacteristicType;
+            var characteristic = (CharacteristicE)request.CharacteristicType;
 
             character.SetCharacteristicSkillPercern(characteristic, request.SkillPercent);
             character.Update();
 
             _playerRepository.Update(currentPlayer);
 
-            
-
             peer.SendUpdateCommonCharacterProfileEvent();
 
-            response = new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = $"setted. characteristic {characteristic} = " + request.SkillPercent
-            };
+            response =
+                new OperationResponse(operationRequest.OperationCode)
+                    {
+                        ReturnCode = (short)ErrorCode.Ok,
+                        DebugMessage =
+                            $"setted. characteristic {characteristic} = "
+                            + request.SkillPercent
+                    };
 
             return response;
         }

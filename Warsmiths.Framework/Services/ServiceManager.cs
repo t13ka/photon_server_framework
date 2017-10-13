@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using ExitGames.Logging;
 
 namespace Warsmiths.Server.Framework.Services
@@ -30,7 +31,7 @@ namespace Warsmiths.Server.Framework.Services
 
         public static T Get<T>()
         {
-            var pickedType = typeof (T);
+            var pickedType = typeof(T);
             IRuntimeService service;
             if (Services.TryGetValue(pickedType, out service))
             {

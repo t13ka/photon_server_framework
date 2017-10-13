@@ -1,5 +1,5 @@
-﻿using ExitGames.Logging;
-using Photon.SocketServer;
+﻿using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Server.Events;
 using Warsmiths.Server.Framework.Handlers;
@@ -11,20 +11,22 @@ namespace Warsmiths.Server.Handlers.Economic
     {
         public override OperationCode ControlCode => OperationCode.GetElementsOrders;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
-            var response = new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = "ok"
-            };
+            var response =
+                new OperationResponse(operationRequest.OperationCode)
+                    {
+                        ReturnCode = (short)ErrorCode.Ok,
+                        DebugMessage = "ok"
+                    };
 
             peer.SendUpdateElementsOrderEvent();
-            
+
             return response;
         }
     }

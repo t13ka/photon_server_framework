@@ -34,7 +34,10 @@ namespace Warsmiths.Server.Framework.Common
 
         public int Count
         {
-            get { return _dictionary.Count; }
+            get
+            {
+                return _dictionary.Count;
+            }
         }
 
         public event EventHandler<PropertyChangedEventArgs<TKey>> PropertyChanged;
@@ -181,7 +184,7 @@ namespace Warsmiths.Server.Framework.Common
 
         private void OnPropertyPropertyChanged(object sender, EventArgs e)
         {
-            var property = (Property<TKey>) sender;
+            var property = (Property<TKey>)sender;
             RaisePropertyChanged(property.Key, property.Value);
         }
 

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ExitGames.Logging;
-using Newtonsoft.Json;
+﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Client;
 using Warsmiths.Common;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Craft;
 using Warsmiths.Common.Domain.Craft.Quest;
-using Warsmiths.DatabaseService.Repositories;
-using Warsmiths.Server.Events;
 using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Operations.Request.Craft;
@@ -20,18 +14,19 @@ namespace Warsmiths.Server.Handlers.Craft
 {
     public class QuestCompletedHander : BaseHandler
     {
-        public class  QuestResoult
+        public class QuestResoult
         {
             public int Stars;
         }
-        private readonly ILogger _log = LogManager.GetCurrentClassLogger();
 
-        private readonly PlayerRepository _playerRepository = new PlayerRepository();
-        private readonly RecieptRepository _recieptRepository = new RecieptRepository();
+        private readonly ILogger _log = LogManager.GetCurrentClassLogger();
 
         public override OperationCode ControlCode => OperationCode.CraftQuestComplete;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -162,12 +157,15 @@ namespace Warsmiths.Server.Handlers.Craft
              //   return response;
             }
             */
-            response = new OperationResponse(operationRequest.OperationCode,
-                new QuestCompleteResponse { RecieptName = new BaseQuest().ToBson()  })
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = "ok"
-            };
+            response = new OperationResponse(
+                           operationRequest.OperationCode,
+                           new QuestCompleteResponse { RecieptName = new BaseQuest().ToBson() })
+                           {
+                               ReturnCode =
+                                   (short)
+                                   ErrorCode.Ok,
+                               DebugMessage = "ok"
+                           };
 
             return response;
         }

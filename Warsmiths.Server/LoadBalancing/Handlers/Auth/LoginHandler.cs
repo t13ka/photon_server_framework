@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
+
 using ExitGames.Logging;
-using MongoDB.Bson.Serialization;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Craft.Quest;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Events;
 using Warsmiths.Server.Framework.Handlers;
@@ -14,6 +14,8 @@ using Warsmiths.Server.Operations.Request.Auth;
 
 namespace Warsmiths.Server.Handlers.Auth
 {
+    using Player = Warsmiths.Common.Domain.Player;
+
     public class LoginHandler : BaseHandler
     {
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();
@@ -24,12 +26,13 @@ namespace Warsmiths.Server.Handlers.Auth
 
         public override OperationCode ControlCode => OperationCode.Login;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters
-            , PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new LoginRequest(peer.Protocol, operationRequest);
 
@@ -41,14 +44,15 @@ namespace Warsmiths.Server.Handlers.Auth
             if (peer.CurrentPlayerId != null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "Already logged"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage = "Already logged"
+                           };
             }
 
             string debugMessage;
-            Warsmiths.Common.Domain.Player player = null;
+            Player player = null;
 
             bool result;
 
@@ -77,6 +81,7 @@ namespace Warsmiths.Server.Handlers.Auth
                         debugMessage = "wrong login/password";
                         result = false;
                     }
+
                     break;
 
                 default:
@@ -114,11 +119,12 @@ namespace Warsmiths.Server.Handlers.Auth
 
                 _playerRepository.Update(player);
 
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = debugMessage
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode = (short)ErrorCode.Ok,
+                            DebugMessage = debugMessage
+                        };
 
                 // send domain config
                 peer.SendDomainConfigurationEvent();
@@ -130,11 +136,13 @@ namespace Warsmiths.Server.Handlers.Auth
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = debugMessage
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage = debugMessage
+                        };
             }
 
             return response;

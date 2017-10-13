@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
 using Warsmiths.DatabaseService.Repositories;
@@ -19,14 +21,14 @@ namespace Warsmiths.Server.Handlers.Auction
 
         /// <summary>
         /// </summary>
-        private readonly AuctionRuntimeService _auction =
-            ServiceManager.Get<AuctionRuntimeService>();
+        private readonly AuctionRuntimeService _auction = ServiceManager.Get<AuctionRuntimeService>();
 
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
 
         public override OperationCode ControlCode => OperationCode.PublishLot;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
@@ -41,35 +43,45 @@ namespace Warsmiths.Server.Handlers.Auction
             if (request.Money <= 0)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = "Price should be more than zero!"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage =
+                                   "Price should be more than zero!"
+                           };
             }
 
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
             var currentPlayer = peer.GetCurrentPlayer();
             var checkLot = _auction.GetLotByEquipmentId(request.EquipmentId);
             if (checkLot != null && checkLot.OwnerId == currentPlayer._id)
             {
-                return new OperationResponse(operationRequest.OperationCode,
-                    new AuctionResponse { LotId = request.EquipmentId })
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = "the lot is already published!"
-                };
+                return new OperationResponse(
+                           operationRequest.OperationCode,
+                           new AuctionResponse { LotId = request.EquipmentId })
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode
+                                       .OperationFailed,
+                               DebugMessage =
+                                   "the lot is already published!"
+                           };
             }
 
             IEntity item;
 
             if (currentPlayer.Inventory.TryGetValue(request.EquipmentId, out item) == false)
             {
-                response = new OperationResponse(operationRequest.OperationCode,
-                    new AuctionResponse {LotId = request.EquipmentId})
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "Player does not have this equipment in inventory"
-                };
+                response =
+                    new OperationResponse(
+                        operationRequest.OperationCode,
+                        new AuctionResponse { LotId = request.EquipmentId })
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage =
+                                "Player does not have this equipment in inventory"
+                        };
             }
             else
             {
@@ -82,12 +94,15 @@ namespace Warsmiths.Server.Handlers.Auction
 
                 _playerRepository.Update(currentPlayer);
 
-                response = new OperationResponse(operationRequest.OperationCode,
-                    new AuctionResponse {LotId = request.EquipmentId})
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = "the lot has been successfully published"
-                };
+                response =
+                    new OperationResponse(
+                        operationRequest.OperationCode,
+                        new AuctionResponse { LotId = request.EquipmentId })
+                        {
+                            ReturnCode = (short)ErrorCode.Ok,
+                            DebugMessage =
+                                "the lot has been successfully published"
+                        };
 
                 // send to all
                 peer.SendUpdatePlayerInventoryEvent();

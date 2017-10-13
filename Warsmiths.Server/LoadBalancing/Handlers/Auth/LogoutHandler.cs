@@ -1,6 +1,9 @@
 ﻿using System;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Framework.Handlers;
@@ -17,11 +20,13 @@ namespace Warsmiths.Server.Handlers.Auth
 
         public override OperationCode ControlCode => OperationCode.Logout;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new LogoutRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -33,19 +38,22 @@ namespace Warsmiths.Server.Handlers.Auth
 
             if (TryLogOut(peer, out debugMessage))
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = debugMessage
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode = (short)ErrorCode.Ok,
+                            DebugMessage = debugMessage
+                        };
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = debugMessage
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage = debugMessage
+                        };
             }
 
             return response;

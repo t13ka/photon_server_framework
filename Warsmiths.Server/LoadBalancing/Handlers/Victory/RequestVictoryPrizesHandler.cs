@@ -1,5 +1,7 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
 using Warsmiths.Common.Domain.Enums.ItemGeneration;
@@ -17,8 +19,10 @@ namespace Warsmiths.Server.Handlers.Victory
 
         public override OperationCode ControlCode => OperationCode.RequestVictoryPrizes;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
 
@@ -30,12 +34,9 @@ namespace Warsmiths.Server.Handlers.Victory
                 return response;
             }
 
-            response = new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-            };
+            response = new OperationResponse(operationRequest.OperationCode) { ReturnCode = (short)ErrorCode.Ok, };
 
-            //TODO: Remove Random
+            // TODO: Remove Random
             var masteryValue = DomainConfiguration.Random.NextDouble();
             var luckValue = DomainConfiguration.Random.Next(1, 5);
             var mutualValue = DomainConfiguration.Random.Next(0, 10);
@@ -52,11 +53,11 @@ namespace Warsmiths.Server.Handlers.Victory
             {
                 mastery = ItemGenerationMasteryTypes.Rare;
             }
-            else  
+            else
             {
                 mastery = masteryValue < 0.5 ? ItemGenerationMasteryTypes.Epic : ItemGenerationMasteryTypes.Legend;
             }
-            
+
             // aid
             if (mutualValue < 2)
             {
@@ -66,7 +67,7 @@ namespace Warsmiths.Server.Handlers.Victory
             {
                 mutualAid = ItemGenerationMutualAidTypes.Rare;
             }
-            else 
+            else
             {
                 mutualAid = mutualValue < 6 ? ItemGenerationMutualAidTypes.Epic : ItemGenerationMutualAidTypes.Legend;
             }

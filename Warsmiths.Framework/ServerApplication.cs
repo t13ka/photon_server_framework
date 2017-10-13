@@ -1,19 +1,22 @@
 using System.IO;
+
 using ExitGames.Logging;
 using ExitGames.Logging.Log4Net;
+
 using log4net;
 using log4net.Config;
+
 using Photon.SocketServer;
 using Photon.SocketServer.Diagnostics;
+
 using Warsmiths.Server.Framework.Diagnostics;
+
 using LogManager = ExitGames.Logging.LogManager;
 
 namespace Warsmiths.Server.Framework
 {
     public class ServerApplication : ApplicationBase
     {
-        
-
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         protected override PeerBase CreatePeer(InitRequest initRequest)
@@ -42,7 +45,7 @@ namespace Warsmiths.Server.Framework
         protected void Initialize()
         {
             // counters for the photon dashboard
-            CounterPublisher.DefaultInstance.AddStaticCounterClass(typeof (Counter), "Lite");
+            CounterPublisher.DefaultInstance.AddStaticCounterClass(typeof(Counter), "Lite");
 
             Protocol.AllowRawCustomValues = true;
         }

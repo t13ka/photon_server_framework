@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain.Elements;
 using Warsmiths.Common.ListContainer;
@@ -20,14 +23,15 @@ namespace Warsmiths.Server.Handlers.Economic
 
         public override OperationCode ControlCode => OperationCode.GetElementPrices;
 
-        private readonly EconomicRuntimeService _economics =
-            ServiceManager.Get<EconomicRuntimeService>();
+        private readonly EconomicRuntimeService _economics = ServiceManager.Get<EconomicRuntimeService>();
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new GeElementPricesRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -36,22 +40,30 @@ namespace Warsmiths.Server.Handlers.Economic
             }
 
             var container = new ElementsPricesContainer
-            {
-                ElementPriceItemResults = _economics.GlobalElementStatements.Select(t => new ElementPriceItemResult
-                {
-                    BuyPrice = t.BuyPrice,
-                    SellPrice = t.OrderPrice,
-                    ElementId = t.Element._id
-                }).ToList()
-            };
+                                {
+                                    ElementPriceItemResults = _economics.GlobalElementStatements
+                                        .Select(
+                                            t => new ElementPriceItemResult
+                                                     {
+                                                         BuyPrice =
+                                                             t.BuyPrice,
+                                                         SellPrice =
+                                                             t
+                                                                 .OrderPrice,
+                                                         ElementId =
+                                                             t.Element
+                                                                 ._id
+                                                     })
+                                        .ToList()
+                                };
 
             peer.SendElementPricesEvent(container);
 
             return new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short) ErrorCode.Ok,
-                DebugMessage = "element prices were sent"
-            };
+                       {
+                           ReturnCode = (short)ErrorCode.Ok,
+                           DebugMessage = "element prices were sent"
+                       };
         }
     }
 }

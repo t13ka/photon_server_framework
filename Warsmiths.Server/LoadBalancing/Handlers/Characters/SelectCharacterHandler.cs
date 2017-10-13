@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Framework.Handlers;
@@ -13,16 +16,18 @@ namespace Warsmiths.Server.Handlers.Characters
     public class SelectCharacterHandler : BaseHandler
     {
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();
+
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
 
         public override OperationCode ControlCode => OperationCode.SelectCharacter;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new SelectCharacterRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -36,10 +41,11 @@ namespace Warsmiths.Server.Handlers.Characters
             if (ch == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = "Character not found!"
-                };
+                           {
+                               ReturnCode =
+                                   (short)ErrorCode.OperationFailed,
+                               DebugMessage = "Character not found!"
+                           };
             }
 
             var prevCharacterInfo = string.Empty;
@@ -53,12 +59,16 @@ namespace Warsmiths.Server.Handlers.Characters
             currentPlayer.ChangeSelectedCharacterTo(characterToSelect.Name);
             _playerRepository.Update(currentPlayer);
 
-            response = new OperationResponse(operationRequest.OperationCode,
+            response =
+                new OperationResponse(
+                    operationRequest.OperationCode,
                     new CharacterSelectResponse { CharacterName = request.Name })
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-                DebugMessage = prevCharacterInfo + $" Current character {ch.Name}."
-            };
+                    {
+                        ReturnCode = (short)ErrorCode.Ok,
+                        DebugMessage =
+                            prevCharacterInfo
+                            + $" Current character {ch.Name}."
+                    };
 
             return response;
         }

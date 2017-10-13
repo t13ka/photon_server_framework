@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+
 using ExitGames.Logging;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
+
 using Photon.SocketServer;
+
 using Warsmiths.Client;
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
@@ -29,9 +30,10 @@ namespace Warsmiths.Server.Handlers.Characters
 
         public override OperationCode ControlCode => OperationCode.CreateCharacter;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters
-            , PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
 
@@ -41,14 +43,17 @@ namespace Warsmiths.Server.Handlers.Characters
                 return response;
             }
 
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
-            var newCharacter = CharacterFactory.CreateDefaultCharacter(request.Name, (ClassTypes) request.ClassTypes,
-                (HeroTypes) request.Hero, (RaceTypes) request.Race);
+            var newCharacter = CharacterFactory.CreateDefaultCharacter(
+                request.Name,
+                (ClassTypes)request.ClassTypes,
+                (HeroTypes)request.Hero,
+                (RaceTypes)request.Race);
 
             var currentPlayer = peer.GetCurrentPlayer();
-            // five first item
 
+            // five first item
             var character = currentPlayer.GetCharacterByName(request.Name);
 
             if (character == null)
@@ -57,7 +62,7 @@ namespace Warsmiths.Server.Handlers.Characters
                 newCharacter.Selected = true;
 
                 currentPlayer.Characters.Add(newCharacter);
-                _log.Debug(currentPlayer._id +":player id ");
+                _log.Debug(currentPlayer._id + ":player id ");
 
                 newCharacter.TasksList = new List<IEntity>(MasterApplication.TaskList.DeepClone());
                 ((Warsmiths.Common.Domain.Tasks.Task)newCharacter.TasksList[0]).Status = TaskStatusTypesE.Finished;
@@ -65,25 +70,30 @@ namespace Warsmiths.Server.Handlers.Characters
                 TaskOperations.CheckTask(currentPlayer, newCharacter, TaskTypesE.CreateCharacter);
                 SetCraftExperienceHandler.LevlUp(currentPlayer, newCharacter, true);
 
-
                 _playerRepository.Update(currentPlayer);
 
-                response = new OperationResponse(operationRequest.OperationCode,
-                    new CharacterCreatedResponse {CharacterName = request.Name})
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = $"сharacted with name '{request.Name}' created"
-                };
+                response =
+                    new OperationResponse(
+                        operationRequest.OperationCode,
+                        new CharacterCreatedResponse { CharacterName = request.Name })
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.Ok,
+                            DebugMessage =
+                                $"сharacted with name '{request.Name}' created"
+                        };
 
                 peer.SendUpdateCharactersList();
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "Character already created"
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage = "Character already created"
+                        };
             }
 
             return response;

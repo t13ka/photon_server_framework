@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Events;
@@ -21,12 +24,13 @@ namespace Warsmiths.Server.Handlers.Characters
 
         public override OperationCode ControlCode => OperationCode.RemoveCharacter;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
             SendParameters sendParameters,
             PeerBase peerBase)
         {
             OperationResponse response;
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var request = new RemoveCharacterRequest(peer.Protocol, operationRequest);
             if (!OperationHelper.ValidateOperation(request, _log, out response))
@@ -42,23 +46,30 @@ namespace Warsmiths.Server.Handlers.Characters
             {
                 _log.Warn($"character with name '{request.Name}' not found.");
 
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = $"character with name '{request.Name}' not found."
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage =
+                                $"character with name '{request.Name}' not found."
+                        };
             }
             else
             {
                 currentPlayer.RemoveCharacter(character);
                 _log.Info($"character with name '{request.Name}' removed.");
 
-                response = new OperationResponse(operationRequest.OperationCode,
-                    new CharacterRemovedResponse {CharacterName = request.Name})
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = $"character with name '{request.Name}' removed"
-                };
+                response =
+                    new OperationResponse(
+                        operationRequest.OperationCode,
+                        new CharacterRemovedResponse { CharacterName = request.Name })
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.Ok,
+                            DebugMessage =
+                                $"character with name '{request.Name}' removed"
+                        };
 
                 _playerRepository.Update(currentPlayer);
 

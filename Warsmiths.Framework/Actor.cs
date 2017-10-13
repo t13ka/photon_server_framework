@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+
 using Photon.SocketServer;
+
 using Warsmiths.Server.Framework.Common;
 
 namespace Warsmiths.Server.Framework
@@ -19,9 +21,9 @@ namespace Warsmiths.Server.Framework
             Peer = peer;
         }
 
-        public int ActorNr ;
+        public int ActorNr;
 
-        public PeerBase Peer ;
+        public PeerBase Peer;
 
         public PropertyBag<object> Properties { get; private set; }
 
@@ -42,6 +44,7 @@ namespace Warsmiths.Server.Framework
             {
                 return;
             }
+
             if (groupIds.Length == 0)
             {
                 RemoveAllGroups();
@@ -62,7 +65,7 @@ namespace Warsmiths.Server.Framework
                 return;
             }
 
-            _groups[actorGroupIndex].RemoveActorByPeer((PlayerPeer) Peer);
+            _groups[actorGroupIndex].RemoveActorByPeer((PlayerPeer)Peer);
             _groups.RemoveAt(actorGroupIndex);
         }
 
@@ -70,7 +73,7 @@ namespace Warsmiths.Server.Framework
         {
             foreach (var group in _groups)
             {
-                group.RemoveActorByPeer((PlayerPeer) Peer);
+                group.RemoveActorByPeer((PlayerPeer)Peer);
             }
 
             _groups.Clear();

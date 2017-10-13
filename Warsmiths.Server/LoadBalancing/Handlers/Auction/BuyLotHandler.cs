@@ -1,6 +1,9 @@
 ﻿using System;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain.Equipment;
 using Warsmiths.DatabaseService.Repositories;
@@ -27,8 +30,10 @@ namespace Warsmiths.Server.Handlers.Auction
         /// </summary>
         private readonly AuctionRuntimeService _auction = ServiceManager.Get<AuctionRuntimeService>();
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var request = new BuyLotRequest(peerBase.Protocol, operationRequest);
@@ -37,26 +42,31 @@ namespace Warsmiths.Server.Handlers.Auction
                 return response;
             }
 
-            var peer = (MasterClientPeer) peerBase;
+            var peer = (MasterClientPeer)peerBase;
 
             var lot = _auction.GetLotByEquipmentId(request.EquipmentId);
             if (lot == null)
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.OperationFailed,
-                    DebugMessage = "Lot not found!"
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage = "Lot not found!"
+                        };
             }
             else
             {
                 if (lot.OwnerId == peer.UserId)
                 {
-                    response = new OperationResponse(operationRequest.OperationCode)
-                    {
-                        ReturnCode = (short) ErrorCode.OperationFailed,
-                        DebugMessage = "You can not buy your own lot"
-                    };
+                    response =
+                        new OperationResponse(operationRequest.OperationCode)
+                            {
+                                ReturnCode =
+                                    (short)ErrorCode.OperationFailed,
+                                DebugMessage =
+                                    "You can not buy your own lot"
+                            };
                 }
                 else
                 {
@@ -65,21 +75,28 @@ namespace Warsmiths.Server.Handlers.Auction
                     if (oldOwnerPlayer == null)
                     {
                         return new OperationResponse(operationRequest.OperationCode)
-                        {
-                            ReturnCode = (short) ErrorCode.OperationFailed,
-                            DebugMessage = $"Can't find old owner by id {oldOwnerId}!"
-                        };
+                                   {
+                                       ReturnCode =
+                                           (short)ErrorCode
+                                               .OperationFailed,
+                                       DebugMessage =
+                                           $"Can't find old owner by id {oldOwnerId}!"
+                                   };
                     }
 
                     var currentPlayer = peer.GetCurrentPlayer();
 
-                    if (lot.CheckGoldEnough(currentPlayer) == false) // TODO: review this and change if needed
+                    if (lot.CheckGoldEnough(currentPlayer) == false)
                     {
-                        response = new OperationResponse(operationRequest.OperationCode)
-                        {
-                            ReturnCode = (short) ErrorCode.OperationFailed,
-                            DebugMessage = "Not Enough Money"
-                        };
+                        // TODO: review this and change if needed
+                        response =
+                            new OperationResponse(operationRequest.OperationCode)
+                                {
+                                    ReturnCode =
+                                        (short)ErrorCode
+                                            .OperationFailed,
+                                    DebugMessage = "Not Enough Money"
+                                };
                     }
                     else
                     {
@@ -88,7 +105,7 @@ namespace Warsmiths.Server.Handlers.Auction
                         lot.Entity._id = Guid.NewGuid().ToString();
 
                         // devide to 2
-                        var eq = (BaseEquipment) lot.Entity;
+                        var eq = (BaseEquipment)lot.Entity;
                         var sh = (float)eq.Sharpening / 2;
                         var r = (int)Math.Round(sh, MidpointRounding.ToEven);
                         eq.Sharpening -= r;
@@ -102,22 +119,28 @@ namespace Warsmiths.Server.Handlers.Auction
                             _playerRepository.Update(oldOwnerPlayer);
                             _playerRepository.Update(currentPlayer);
 
-                            response = new OperationResponse(operationRequest.OperationCode)
-                            {
-                                ReturnCode = (short)ErrorCode.Ok,
-                                DebugMessage = "ok. sold."
-                            };
+                            response =
+                                new OperationResponse(operationRequest.OperationCode)
+                                    {
+                                        ReturnCode =
+                                            (short)ErrorCode.Ok,
+                                        DebugMessage = "ok. sold."
+                                    };
 
                             peer.SendUpdatePlayerInventoryEvent();
                             _auction.SendUpdateAuctionDataToSubscribers();
                         }
                         else
                         {
-                            response = new OperationResponse(operationRequest.OperationCode)
-                            {
-                                ReturnCode = (short)ErrorCode.OperationFailed,
-                                DebugMessage = "Can't add to inventory"
-                            };
+                            response =
+                                new OperationResponse(operationRequest.OperationCode)
+                                    {
+                                        ReturnCode =
+                                            (short)ErrorCode
+                                                .OperationFailed,
+                                        DebugMessage =
+                                            "Can't add to inventory"
+                                    };
                         }
                     }
                 }

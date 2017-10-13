@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using ExitGames.Logging;
-using MongoDB.Bson;
+
 using Photon.SocketServer;
+
 using Warsmiths.Client;
 using Warsmiths.Common;
 using Warsmiths.Common.Domain;
@@ -10,9 +12,9 @@ using Warsmiths.Common.Domain.Enums;
 using Warsmiths.Common.Domain.Equipment;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Framework.Handlers;
-using Warsmiths.Server.Handlers.Craft;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Operations.Request.Auth;
+
 using PlayerFactory = Warsmiths.Server.Factories.PlayerFactory;
 
 namespace Warsmiths.Server.Handlers.Auth
@@ -27,9 +29,10 @@ namespace Warsmiths.Server.Handlers.Auth
 
         public override OperationCode ControlCode => OperationCode.Registration;
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters
-            , PeerBase peer)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peer)
         {
             OperationResponse response;
 
@@ -63,8 +66,13 @@ namespace Warsmiths.Server.Handlers.Auth
                 equipmentSet.AddRange(MasterApplication.DomainConfiguration.GetAll<BaseWeapon>());
                 equipmentSet.AddRange(MasterApplication.DomainConfiguration.GetAll<BaseModule>());
 
-                var newPlayer = PlayerFactory.CreateDefaultPlayerAccount(request.LoginReg, request.Md5Password,
-                    request.UserFirstName, request.UserLastName, request.Email, equipmentSet);
+                var newPlayer = PlayerFactory.CreateDefaultPlayerAccount(
+                    request.LoginReg,
+                    request.Md5Password,
+                    request.UserFirstName,
+                    request.UserLastName,
+                    request.Email,
+                    equipmentSet);
 
                 var newTaskList = MasterApplication.TaskList.DeepClone();
                 newTaskList[0].Status = TaskStatusTypesE.Finished;
@@ -72,20 +80,24 @@ namespace Warsmiths.Server.Handlers.Auth
                 newPlayer.FirstTaskList.AddRange(newTaskList);
 
                 _playerRepository.Create(newPlayer);
-                 
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                    DebugMessage = "Registration done"
-                };
+
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode = (short)ErrorCode.Ok,
+                            DebugMessage = "Registration done"
+                        };
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.OperationFailed,
-                    DebugMessage = "Registration failed. Already created."
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.OperationFailed,
+                            DebugMessage =
+                                "Registration failed. Already created."
+                        };
             }
 
             return response;

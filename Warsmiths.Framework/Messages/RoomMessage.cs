@@ -14,6 +14,7 @@ namespace Warsmiths.Server.Framework.Messages
         }
 
         public object Message { get; }
+
         public byte Action { get; }
     }
 }

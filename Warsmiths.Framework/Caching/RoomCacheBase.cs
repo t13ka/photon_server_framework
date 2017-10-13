@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Server.Framework.Diagnostics.OperationLogging;
 
 namespace Warsmiths.Server.Framework.Caching
@@ -10,7 +13,9 @@ namespace Warsmiths.Server.Framework.Caching
     public abstract class RoomCacheBase
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
         protected readonly Dictionary<string, RoomInstance> RoomInstances = new Dictionary<string, RoomInstance>();
+
         protected readonly object SyncRoot = new object();
 
         public bool TryGetRoomWithoutReference(string roomId, out Room room)
@@ -72,7 +77,10 @@ namespace Warsmiths.Server.Framework.Caching
             }
         }
 
-        public bool TryCreateRoom(string roomName, PeerBase ownerPeer, out RoomReference roomReference,
+        public bool TryCreateRoom(
+            string roomName,
+            PeerBase ownerPeer,
+            out RoomReference roomReference,
             params object[] args)
         {
             lock (SyncRoot)
@@ -193,7 +201,9 @@ namespace Warsmiths.Server.Framework.Caching
         protected class RoomInstance
         {
             private readonly LogQueue _logQueue;
+
             private readonly Dictionary<Guid, RoomReference> _references;
+
             private readonly RoomCacheBase _roomFactory;
 
             public RoomInstance(RoomCacheBase roomFactory, Room room)
@@ -206,7 +216,10 @@ namespace Warsmiths.Server.Framework.Caching
 
             public int ReferenceCount
             {
-                get { return _references.Count; }
+                get
+                {
+                    return _references.Count;
+                }
             }
 
             public Room Room { get; }
@@ -270,7 +283,9 @@ namespace Warsmiths.Server.Framework.Caching
                 sb.AppendFormat("RoomInstance for Room {0}: {1} References", Room.Name, ReferenceCount).AppendLine();
                 foreach (var reference in _references)
                 {
-                    sb.AppendFormat("- Reference ID {0}, hold by Peer {1}", reference.Value.Id,
+                    sb.AppendFormat(
+                        "- Reference ID {0}, hold by Peer {1}",
+                        reference.Value.Id,
                         reference.Value.OwnerPeer);
                     sb.AppendLine();
                 }

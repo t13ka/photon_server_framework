@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using Warsmiths.Common;
 using Warsmiths.Common.Domain.VictoryPrizes;
 using Warsmiths.DatabaseService.Repositories;
@@ -8,9 +11,9 @@ using Warsmiths.Server.Events;
 using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Operations.Request.Victory;
+
 // ReSharper disable ForCanBeConvertedToForeach
 // ReSharper disable SwitchStatementMissingSomeCases
-
 namespace Warsmiths.Server.Handlers.Victory
 {
     public class SelectVictoryPrizesHandler : BaseHandler
@@ -18,10 +21,13 @@ namespace Warsmiths.Server.Handlers.Victory
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();
 
         public override OperationCode ControlCode => OperationCode.SelectVictoryPrizes;
+
         private readonly PlayerRepository _playerRepository = new PlayerRepository();
 
-        public override OperationResponse Handle(OperationRequest operationRequest,
-            SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
 
@@ -33,10 +39,7 @@ namespace Warsmiths.Server.Handlers.Victory
                 return response;
             }
 
-            response = new OperationResponse(operationRequest.OperationCode)
-            {
-                ReturnCode = (short)ErrorCode.Ok,
-            };
+            response = new OperationResponse(operationRequest.OperationCode) { ReturnCode = (short)ErrorCode.Ok, };
 
             var player = peer.GetCurrentPlayer();
             player.Gold += request.Money;
@@ -47,12 +50,14 @@ namespace Warsmiths.Server.Handlers.Victory
                 for (var i = 0; i < peer.LastVictoryPrizesResult.Items.Count; i++)
                 {
                     if (!request.Ids.Contains(peer.LastVictoryPrizesResult.Items[i].PrizeId)) continue;
-                    _log.Info(peer.LastVictoryPrizesResult.Items[i].Type + " " + peer.LastVictoryPrizesResult.Items[i].PrizeId);
+                    _log.Info(
+                        peer.LastVictoryPrizesResult.Items[i].Type + " "
+                        + peer.LastVictoryPrizesResult.Items[i].PrizeId);
                     switch (peer.LastVictoryPrizesResult.Items[i].Type)
                     {
                         case VictoryPrizeTypeE.Equipment:
                             var b = player.TryAddToInventory(peer.LastVictoryPrizesResult.Items[i].Item);
-                            _log.Info($"Added item: {b}; "+ peer.LastVictoryPrizesResult.Items[i].Item.Name);
+                            _log.Info($"Added item: {b}; " + peer.LastVictoryPrizesResult.Items[i].Item.Name);
                             break;
                         case VictoryPrizeTypeE.Crystals:
                             player.Crystals += peer.LastVictoryPrizesResult.Items[i].CrystalAmout;
@@ -62,14 +67,15 @@ namespace Warsmiths.Server.Handlers.Victory
                             break;
                     }
                 }
+
                 peer.LastVictoryPrizesResult.Items.Clear();
             }
+
             peer.LastVictoryPrizesResult = null;
             _playerRepository.Update(player);
             peer.SendUpdatePlayerProfileEvent();
             peer.SendUpdatePlayerInventoryEvent();
 
-            
             return response;
         }
     }

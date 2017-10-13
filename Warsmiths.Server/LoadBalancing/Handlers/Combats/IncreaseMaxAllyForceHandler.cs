@@ -1,6 +1,8 @@
 ﻿using ExitGames.Logging;
+
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
+
 using Warsmiths.Common;
 using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Framework.Handlers;
@@ -16,7 +18,10 @@ namespace Warsmiths.Server.Handlers.Combats
 
         public override OperationCode ControlCode => OperationCode.IncreaseMaxAllyForce;
 
-        public override OperationResponse Handle(OperationRequest operationRequest, SendParameters sendParameters, PeerBase peerBase)
+        public override OperationResponse Handle(
+            OperationRequest operationRequest,
+            SendParameters sendParameters,
+            PeerBase peerBase)
         {
             OperationResponse response;
             var peer = (MasterClientPeer)peerBase;
@@ -33,9 +38,10 @@ namespace Warsmiths.Server.Handlers.Combats
             if (character == null)
             {
                 return new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.CharacterNotSelect,
-                };
+                           {
+                               ReturnCode = (short)ErrorCode
+                                   .CharacterNotSelect,
+                           };
             }
 
             if (character.MaxAllyForce < 9)
@@ -44,18 +50,18 @@ namespace Warsmiths.Server.Handlers.Combats
                 character.Update();
                 _playerRepository.Update(currentPlayer);
 
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.Ok,
-                };
+                response = new OperationResponse(operationRequest.OperationCode) { ReturnCode = (short)ErrorCode.Ok, };
             }
             else
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short)ErrorCode.MaxAllyForceReached,
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode = (short)ErrorCode
+                                .MaxAllyForceReached,
+                        };
             }
+
             return response;
         }
     }

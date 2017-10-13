@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+
 using Photon.SocketServer.Rpc;
 
 namespace Warsmiths.Server.Framework.Operations
@@ -8,10 +9,10 @@ namespace Warsmiths.Server.Framework.Operations
         #region Properties
 
         [DataMember(Code = (byte)ParameterKey.ActorProperties, IsOptional = true)]
-        public Hashtable ActorProperties ;
+        public Hashtable ActorProperties;
 
         [DataMember(Code = (byte)ParameterKey.GameProperties, IsOptional = true)]
-        public Hashtable GameProperties ;
+        public Hashtable GameProperties;
 
         #endregion
     }
