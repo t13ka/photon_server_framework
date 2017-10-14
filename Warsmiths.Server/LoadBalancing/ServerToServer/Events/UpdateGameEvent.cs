@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
-using Warsmiths.Server.Framework.Operations;
+
 using Warsmiths.Server.Operations;
 
 namespace Warsmiths.Server.ServerToServer.Events
 {
+    using YourGame.Server.Framework.Operations;
+
     public class UpdateGameEvent : DataContract
     {
         #region Constructors and Destructors

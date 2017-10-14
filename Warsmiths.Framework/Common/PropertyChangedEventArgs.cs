@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Server.Framework.Common
+﻿namespace YourGame.Server.Framework.Common
 {
+    using System;
+
     public class PropertyChangedEventArgs<TKey> : EventArgs
     {
         public PropertyChangedEventArgs(TKey key, object value)

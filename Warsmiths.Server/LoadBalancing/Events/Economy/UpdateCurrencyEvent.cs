@@ -3,18 +3,20 @@ using Warsmiths.Server.Operations;
 
 namespace Warsmiths.Server.Events.Economy
 {
+    using YourGame.Common;
+
     public class UpdateCurrencyEvent : DataContract
     {
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.CurrencyGold)]
+        [DataMember(Code = (byte)ParameterCode.CurrencyGold)]
         public int Gold;
 
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.CurrencyCrystals)]
+        [DataMember(Code = (byte)ParameterCode.CurrencyCrystals)]
         public int Crystal;
 
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.CurrencyKeys)]
+        [DataMember(Code = (byte)ParameterCode.CurrencyKeys)]
         public int Keys;
 
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.CurrenctyHealBox)]
+        [DataMember(Code = (byte)ParameterCode.CurrenctyHealBox)]
         public int HealBox;
     }
 }

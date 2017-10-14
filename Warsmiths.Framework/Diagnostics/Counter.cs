@@ -1,8 +1,8 @@
-﻿using ExitGames.Diagnostics.Counter;
-using ExitGames.Diagnostics.Monitoring;
-
-namespace Warsmiths.Server.Framework.Diagnostics
+﻿namespace YourGame.Server.Framework.Diagnostics
 {
+    using ExitGames.Diagnostics.Counter;
+    using ExitGames.Diagnostics.Monitoring;
+
     public static class Counter
     {
         [PublishCounter("Games")]

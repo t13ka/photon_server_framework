@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Common.Attributes
+﻿namespace YourGame.Common.Attributes
 {
+    using System;
+
     public class CustomDisplayAttribute : Attribute
     {
         public string DisplayName { get; private set; }

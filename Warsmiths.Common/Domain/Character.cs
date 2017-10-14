@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Warsmiths.Common.Domain.CommonCharacterProfile.Others;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Results;
+﻿
 // ReSharper disable ForCanBeConvertedToForeach
 // ReSharper disable LoopCanBeConvertedToQuery
 
-namespace Warsmiths.Common.Domain
+namespace YourGame.Common.Domain
 {
+    using System;
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.CommonCharacterProfile.Others;
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Results;
+
     public class Character : IEntity
     {
         #region Fields

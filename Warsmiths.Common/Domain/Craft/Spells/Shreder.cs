@@ -1,12 +1,11 @@
-﻿
-using System;
-using System.Collections.Generic;
-using Warsmiths.Common.Domain.Craft.Grid;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Craft.Spells
+﻿namespace YourGame.Common.Domain.Craft.Spells
 {
-    
+    using System;
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Craft.Grid;
+    using YourGame.Common.Domain.Enums;
+
     public class Shreder : CraftSpell
     {
         public Action<ElementController> OnExecuteElement;

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-
-using Warsmiths.Common.Domain;
-
-namespace Warsmiths.Server.Framework.DataBaseService
+﻿namespace YourGame.Server.Framework.DataBaseService
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+
+    using YourGame.Common.Domain;
+
     /// <summary>
     /// 
     /// </summary>

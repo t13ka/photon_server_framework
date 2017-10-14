@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Skills.Secondary.Others
+﻿namespace YourGame.Common.Domain.Skills.Secondary.Others
 {
+    using YourGame.Common.Domain.Enums;
+
     public class TotalDurability : BaseSkill
     {
         public TotalDurability()

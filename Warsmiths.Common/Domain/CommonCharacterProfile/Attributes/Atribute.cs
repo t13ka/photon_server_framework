@@ -1,7 +1,7 @@
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Attributes
+namespace YourGame.Common.Domain.CommonCharacterProfile.Attributes
 {
+    using YourGame.Common.Domain.Enums;
+
     public class Atribute<T>
     {
         public string Name;

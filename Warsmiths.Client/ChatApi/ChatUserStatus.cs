@@ -3,7 +3,7 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
     /// <summary>Contains commonly used status values for SetOnlineStatus. You can define your own.</summary>
     /// <remarks>

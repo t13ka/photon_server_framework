@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Common.Utils
+﻿namespace YourGame.Common.Utils
 {
+    using System;
+
     public class NetworkUtils
     {
         public static string GetServerConnectionHost(ServerHosts serverHost)

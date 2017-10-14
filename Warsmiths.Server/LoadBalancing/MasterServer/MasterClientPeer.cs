@@ -5,17 +5,19 @@ using System.Threading;
 using ExitGames.Logging;
 using Photon.SocketServer;
 using PhotonHostRuntimeInterfaces;
-using Warsmiths.Common;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.VictoryPrizes;
-using Warsmiths.DatabaseService.Repositories;
-using Warsmiths.Server.Framework.Handlers;
-using Warsmiths.Server.Framework.Services;
+
 using Warsmiths.Server.Handlers.Auth;
 using Warsmiths.Server.MasterServer.Lobby;
 
 namespace Warsmiths.Server.MasterServer
 {
+    using YourGame.Common;
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.VictoryPrizes;
+    using YourGame.DatabaseService.Repositories;
+    using YourGame.Server.Framework.Handlers;
+    using YourGame.Server.Framework.Services;
+
     public sealed class MasterClientPeer : PeerBase, ILobbyPeer
     {
         private readonly PlayerRepository _playerRepository;

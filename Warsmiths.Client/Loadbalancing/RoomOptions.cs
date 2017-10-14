@@ -1,7 +1,7 @@
-using ExitGames.Client.Photon;
-
-namespace Warsmiths.Client.Loadbalancing
+namespace YourGame.Client.Loadbalancing
 {
+    using ExitGames.Client.Photon;
+
     /// <summary>
     /// Wraps up common room properties needed when you create rooms. Read the individual entries for more details.
     /// </summary>

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.VictoryPrizes;
-
-namespace Warsmiths.Common.Domain.Craft.Quest
+﻿namespace YourGame.Common.Domain.Craft.Quest
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.VictoryPrizes;
+
     public class BaseQuest : BaseReciept
     {
         public List<string> QuestTyps ;

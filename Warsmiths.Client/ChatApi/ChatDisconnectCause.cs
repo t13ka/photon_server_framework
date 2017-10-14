@@ -3,7 +3,7 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
     /// <summary>Enumaration of causes for Disconnects (used in LoadBalancingClient.DisconnectedCause).</summary>
     /// <remarks>Read the individual descriptions to find out what to do about this type of disconnect.</remarks>

@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Enums.ItemGeneration
+﻿namespace YourGame.Common.Domain.Enums.ItemGeneration
 {
     public enum ItemGenerationLuckTypes
     {

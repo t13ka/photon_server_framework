@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Elements;
-using Warsmiths.DatabaseService.Repositories;
 
 namespace Warsmiths.Server.Services.Economic
 {
+    using YourGame.Common.Domain;
+    using YourGame.DatabaseService.Repositories;
+
     public class SaleElementStatement : ElementStatement
     {
         private readonly PlayerRepository _playerRepository = new PlayerRepository();

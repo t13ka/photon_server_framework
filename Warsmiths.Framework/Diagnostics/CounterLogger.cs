@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading;
-
-using ExitGames.Logging;
-
-using Photon.SocketServer.Diagnostics;
-
-namespace Warsmiths.Server.Framework.Diagnostics
+﻿namespace YourGame.Server.Framework.Diagnostics
 {
+    using System;
+    using System.Threading;
+
+    using ExitGames.Logging;
+
+    using Photon.SocketServer.Diagnostics;
+
     public class CounterLogger : IDisposable
     {
         private const int LogIntervalMs = 5000;

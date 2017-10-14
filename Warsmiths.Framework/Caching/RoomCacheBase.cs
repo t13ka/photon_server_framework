@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using ExitGames.Logging;
-
-using Photon.SocketServer;
-
-using Warsmiths.Server.Framework.Diagnostics.OperationLogging;
-
-namespace Warsmiths.Server.Framework.Caching
+﻿namespace YourGame.Server.Framework.Caching
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using ExitGames.Logging;
+
+    using Photon.SocketServer;
+
+    using YourGame.Server.Framework.Diagnostics.OperationLogging;
+
     public abstract class RoomCacheBase
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();

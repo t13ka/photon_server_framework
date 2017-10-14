@@ -3,6 +3,8 @@ using Photon.SocketServer.Rpc;
 
 namespace Warsmiths.Server.Operations.Request.Auth
 {
+    using YourGame.Common;
+
     public class LoginRequest : Operation
     {
         public LoginRequest(IRpcProtocol protocol, OperationRequest operationRequest)
@@ -10,10 +12,10 @@ namespace Warsmiths.Server.Operations.Request.Auth
         {
         }
 
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.LoginReg, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.LoginReg, IsOptional = false)]
         public string LoginReg ;
 
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.Password, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.Password, IsOptional = false)]
         public string Password ;
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using ExitGames.Logging;
 using Photon.SocketServer;
-using Warsmiths.Common;
+
 using Warsmiths.Server.Events;
 using Warsmiths.Server.MasterServer.GameServer;
 using Warsmiths.Server.Operations;
@@ -13,6 +13,8 @@ using Warsmiths.Server.ServerToServer.Events;
 
 namespace Warsmiths.Server.MasterServer.Lobby
 {
+    using YourGame.Common;
+
     public class GameList : IGameList
     {
         #region Constructors and Destructors

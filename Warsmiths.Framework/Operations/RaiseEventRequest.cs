@@ -1,8 +1,8 @@
-using Photon.SocketServer;
-using Photon.SocketServer.Rpc;
-
-namespace Warsmiths.Server.Framework.Operations
+namespace YourGame.Server.Framework.Operations
 {
+    using Photon.SocketServer;
+    using Photon.SocketServer.Rpc;
+
     public class RaiseEventRequest : Operation
     {
         #region Constructors and Destructors

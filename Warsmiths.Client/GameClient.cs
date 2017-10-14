@@ -1,31 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-
-using ExitGames.Client.Photon;
-
-using Warsmiths.Client.Loadbalancing;
-using Warsmiths.Client.Loadbalancing.Codes;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Craft;
-using Warsmiths.Common.Domain.Craft.Quest;
-using Warsmiths.Common.Domain.Craft.SharedClasses;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.Common.Domain.VictoryPrizes;
-using Warsmiths.Common.ListContainer;
-using Warsmiths.Common.Results;
-using Player = Warsmiths.Client.Loadbalancing.Player;
-
-namespace Warsmiths.Client
+﻿namespace YourGame.Client
 {
-    using GameEvent = Common.EventCode;
-    using GameParameters = Common.ParameterCode;
-    using GameOpCode = Common.OperationCode;
-    using GameErrorCode = Common.ErrorCode;
+    using System;
+    using System.Collections.Generic;
 
-    public delegate void ServerCharacterProfileDelegate(Common.Domain.Player profile);
+    using ExitGames.Client.Photon;
 
-    public delegate void ServerCharacterCharacteristicsDelegate(Common.Domain.Characteristics.CharacteristicsBase characteristics);
+    using YourGame.Client.Loadbalancing;
+    using YourGame.Client.Loadbalancing.Codes;
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.Characteristics;
+    using YourGame.Common.Domain.Craft;
+    using YourGame.Common.Domain.Craft.Quest;
+    using YourGame.Common.Domain.Craft.SharedClasses;
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+    using YourGame.Common.Domain.VictoryPrizes;
+    using YourGame.Common.ListContainer;
+    using YourGame.Common.Results;
+
+    using GameEvent = YourGame.Common.EventCode;
+    using GameParameters = YourGame.Common.ParameterCode;
+    using GameOpCode = YourGame.Common.OperationCode;
+    using GameErrorCode = YourGame.Common.ErrorCode;
+    using Player = YourGame.Client.Loadbalancing.Player;
+
+    public delegate void ServerCharacterProfileDelegate(YourGame.Common.Domain.Player profile);
+
+    public delegate void ServerCharacterCharacteristicsDelegate(CharacteristicsBase characteristics);
 
     public delegate void ServerNotificationDelegate(byte[] data);
 
@@ -238,7 +239,7 @@ namespace Warsmiths.Client
             {
                 case GameEvent.PlayerProfile:
                     var bsonProfileData = (byte[]) photonEvent.Parameters[(byte) GameParameters.ProfileData];
-                    var profile = bsonProfileData.FromBson<Common.Domain.Player>();
+                    var profile = bsonProfileData.FromBson<YourGame.Common.Domain.Player>();
                     OnPlayerProfileEvent(profile);
                     break;
 
@@ -320,7 +321,7 @@ namespace Warsmiths.Client
 
                 case GameEvent.UpdateCommonCharacterProfile:
                     var commonCharacterProfile = (byte[])photonEvent.Parameters[(byte)GameParameters.CommonCharacterProfile];
-                    var characteristic = commonCharacterProfile.FromBson<Common.Domain.Characteristics.CharacteristicsBase>();
+                    var characteristic = commonCharacterProfile.FromBson<CharacteristicsBase>();
                     OnCharacerCharacteristicsChangeEvent(characteristic);
                     break;
             }

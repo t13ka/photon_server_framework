@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Server.Framework.Caching
+﻿namespace YourGame.Server.Framework.Caching
 {
     public class RoomGameCache : RoomCacheBase
     {

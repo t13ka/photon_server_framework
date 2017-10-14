@@ -1,5 +1,5 @@
 ﻿
-namespace Warsmiths.Common.Domain.Craft.Quest
+namespace YourGame.Common.Domain.Craft.Quest
 {
     public class RecieptBackground
     {

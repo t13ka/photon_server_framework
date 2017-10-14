@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain;
-
-namespace Warsmiths.Common
+﻿namespace YourGame.Common
 {
+    using YourGame.Common.Domain;
+
     public class RelationObjectResult
     {
         public IEntity Parent { get; private set; }

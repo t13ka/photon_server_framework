@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Warsmiths.Server.GameServer {
+namespace YourGame.Server.GameServer {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
     public sealed partial class GameServerSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static GameServerSettings defaultInstance = ((GameServerSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new GameServerSettings())));

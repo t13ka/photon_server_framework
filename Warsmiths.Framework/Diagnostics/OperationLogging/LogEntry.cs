@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Server.Framework.Diagnostics.OperationLogging
+﻿namespace YourGame.Server.Framework.Diagnostics.OperationLogging
 {
+    using System;
+
     public class LogEntry
     {
         public LogEntry(DateTime utcCreated, string action, string message)

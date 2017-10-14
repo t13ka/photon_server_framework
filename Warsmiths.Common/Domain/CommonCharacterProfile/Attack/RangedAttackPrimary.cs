@@ -1,9 +1,10 @@
-using System;
-using Warsmiths.Common.Domain.CommonCharacterProfile.Attributes;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Attack
+namespace YourGame.Common.Domain.CommonCharacterProfile.Attack
 {
+    using System;
+
+    using YourGame.Common.Domain.CommonCharacterProfile.Attributes;
+    using YourGame.Common.Domain.Enums;
+
     public class RangedAttackPrimary
     {
         public Atribute<float> Value;

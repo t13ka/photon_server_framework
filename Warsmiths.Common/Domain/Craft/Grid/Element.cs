@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Craft.Grid
+﻿namespace YourGame.Common.Domain.Craft.Grid
 {
+    using YourGame.Common.Domain.Enums;
+
     public class Element : BaseCell
     {
         public string ID;

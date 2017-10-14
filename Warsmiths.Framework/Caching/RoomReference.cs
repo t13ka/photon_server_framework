@@ -1,9 +1,9 @@
-﻿using System;
-
-using Photon.SocketServer;
-
-namespace Warsmiths.Server.Framework.Caching
+﻿namespace YourGame.Server.Framework.Caching
 {
+    using System;
+
+    using Photon.SocketServer;
+
     public class RoomReference : IDisposable
     {
         private readonly RoomCacheBase _roomCache;

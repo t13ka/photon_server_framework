@@ -1,11 +1,11 @@
-using System.Collections;
-
-using Photon.SocketServer.Rpc;
-
-using Warsmiths.Server.Framework.Operations;
-
-namespace Warsmiths.Server.Framework.Events
+namespace YourGame.Server.Framework.Events
 {
+    using System.Collections;
+
+    using Photon.SocketServer.Rpc;
+
+    using YourGame.Server.Framework.Operations;
+
     public class JoinEvent : RoomEventBase
     {
         public JoinEvent(int actorNr, int[] actors)

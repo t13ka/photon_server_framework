@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.CommonCharacterProfile
+﻿namespace YourGame.Common.Domain.CommonCharacterProfile
 {
     public class Characteristic
     {

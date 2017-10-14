@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Common.Utils
+﻿namespace YourGame.Common.Utils
 {
+    using System;
+
     public static class MathfUtils
     {
         public static int CeilToInt(this float arg)

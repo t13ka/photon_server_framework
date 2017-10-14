@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Skills.Secondary.DPS
+﻿namespace YourGame.Common.Domain.Skills.Secondary.DPS
 {
+    using YourGame.Common.Domain.Enums;
+
     public class DamagePotentialMelee : BaseSkill
     {
         public DamagePotentialMelee()

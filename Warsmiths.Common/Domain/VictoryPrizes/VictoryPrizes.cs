@@ -1,8 +1,9 @@
-using System.Collections.Generic;
-using Warsmiths.Common.Domain.Enums.ItemGeneration;
-
-namespace Warsmiths.Common.Domain.VictoryPrizes
+namespace YourGame.Common.Domain.VictoryPrizes
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Enums.ItemGeneration;
+
     public enum VictoryPrizeTypeE
     {
         Equipment = 0,

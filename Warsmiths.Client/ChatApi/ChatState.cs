@@ -3,7 +3,7 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
     /// <summary>Possible states for a LoadBalancingClient.</summary>
     public enum ChatState

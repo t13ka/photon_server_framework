@@ -2,11 +2,13 @@
 
 namespace Warsmiths.Server.Events
 {
+    using YourGame.Common;
+
     public class UpdateDomainConfigurationEvent : DataContract
     {
         /// <summary>
         /// </summary>
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.DomainConfiguration, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.DomainConfiguration, IsOptional = false)]
         public byte[] DomainConfiguration ;
     }
 }

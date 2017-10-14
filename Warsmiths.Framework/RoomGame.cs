@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Photon.SocketServer;
-
-using Warsmiths.Server.Framework.Caching;
-using Warsmiths.Server.Framework.Diagnostics.OperationLogging;
-using Warsmiths.Server.Framework.Events;
-using Warsmiths.Server.Framework.Messages;
-using Warsmiths.Server.Framework.Operations;
-
-namespace Warsmiths.Server.Framework
+﻿namespace YourGame.Server.Framework
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Photon.SocketServer;
+
+    using YourGame.Server.Framework.Caching;
+    using YourGame.Server.Framework.Diagnostics.OperationLogging;
+    using YourGame.Server.Framework.Events;
+    using YourGame.Server.Framework.Messages;
+    using YourGame.Server.Framework.Operations;
+
     public class RoomGame : Room
     {
         #region Ctor

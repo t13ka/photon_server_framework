@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections;
 using Photon.SocketServer;
-using Warsmiths.Common;
+
 using Warsmiths.Server.MasterServer.GameServer;
 using Warsmiths.Server.Operations;
 using Warsmiths.Server.ServerToServer.Events;
 
 namespace Warsmiths.Server.MasterServer.Lobby
 {
+    using YourGame.Common;
+
     public interface IGameList
     {
         int Count { get; }

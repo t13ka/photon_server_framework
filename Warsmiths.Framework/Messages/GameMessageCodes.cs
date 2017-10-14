@@ -1,4 +1,4 @@
-namespace Warsmiths.Server.Framework.Messages
+namespace YourGame.Server.Framework.Messages
 {
     public enum GameMessageCodes : byte
     {

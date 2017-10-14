@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Equipment.Purchase
+﻿namespace YourGame.Common.Domain.Equipment.Purchase
 {
     public class BasePurchaseItem : BaseItem
     {

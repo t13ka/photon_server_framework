@@ -1,7 +1,7 @@
-using Warsmiths.Client.Loadbalancing.Enums;
-
-namespace Warsmiths.Client.Loadbalancing
+namespace YourGame.Client.Loadbalancing
 {
+    using YourGame.Client.Loadbalancing.Enums;
+
     /// <summary>
     /// Container for user authentication in Photon. Set AuthValues before you connect - all else is handled.
     /// </summary>

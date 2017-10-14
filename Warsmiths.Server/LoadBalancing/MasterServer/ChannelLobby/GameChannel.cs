@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ExitGames.Logging;
 using Photon.SocketServer;
-using Warsmiths.Common;
+
 using Warsmiths.Server.Common;
 using Warsmiths.Server.Events;
 using Warsmiths.Server.MasterServer.Lobby;
@@ -11,6 +11,8 @@ using Warsmiths.Server.Operations;
 
 namespace Warsmiths.Server.MasterServer.ChannelLobby
 {
+    using YourGame.Common;
+
     public class GameChannel
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();

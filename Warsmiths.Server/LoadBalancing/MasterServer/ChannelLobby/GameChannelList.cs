@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Logging;
 using Photon.SocketServer;
-using Warsmiths.Common;
+
 using Warsmiths.Server.MasterServer.GameServer;
 using Warsmiths.Server.MasterServer.Lobby;
 using Warsmiths.Server.Operations;
@@ -11,6 +11,8 @@ using Warsmiths.Server.ServerToServer.Events;
 
 namespace Warsmiths.Server.MasterServer.ChannelLobby
 {
+    using YourGame.Common;
+
     public class GameChannelList : IGameList
     {
         #region Constructors and Destructors

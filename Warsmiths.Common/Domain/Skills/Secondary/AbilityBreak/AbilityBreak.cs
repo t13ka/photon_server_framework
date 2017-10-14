@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Skills.Secondary.AbilityBreak
+﻿namespace YourGame.Common.Domain.Skills.Secondary.AbilityBreak
 {
+    using YourGame.Common.Domain.Enums;
+
     public class AbilityBreak : BaseSkill
     {
         public AbilityBreak()

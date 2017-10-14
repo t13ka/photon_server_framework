@@ -1,8 +1,8 @@
-﻿using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
-
-namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+
     public class BasePerk : BaseItem
     {
         public string Number;

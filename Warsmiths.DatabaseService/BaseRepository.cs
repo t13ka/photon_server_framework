@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-
-using MongoDB.Bson;
-using MongoDB.Driver;
-
-using Warsmiths.Common.Domain;
-using Warsmiths.Server.Framework.DataBaseService;
-
-namespace Warsmiths.DatabaseService
+﻿namespace YourGame.DatabaseService
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+
+    using MongoDB.Bson;
+    using MongoDB.Driver;
+
+    using YourGame.Common.Domain;
+    using YourGame.Server.Framework.DataBaseService;
+
     public class BaseRepository<T> : IRepository<T>
         where T : IEntity
     {

@@ -1,11 +1,14 @@
-﻿using System;
-using System.Linq;
-using Warsmiths.Common.Attributes;
+﻿
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable ForCanBeConvertedToForeach
 
-namespace Warsmiths.Common.Utils
+namespace YourGame.Common.Utils
 {
+    using System;
+    using System.Linq;
+
+    using YourGame.Common.Attributes;
+
     public static class EnumsExtensions
     {
         public static string GetDescription(this Enum value)

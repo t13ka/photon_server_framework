@@ -1,7 +1,5 @@
 ﻿
-using Warsmiths.Common.Domain;
-
-namespace Warsmiths.Common.Utils
+namespace YourGame.Common.Utils
 {
     public static class HandyFunctional
     {

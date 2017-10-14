@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-using Warsmiths.Server.Framework.Events;
-using Warsmiths.Server.Framework.Operations;
-
-namespace Warsmiths.Server.Framework.Caching
+﻿namespace YourGame.Server.Framework.Caching
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
+    using YourGame.Server.Framework.Events;
+    using YourGame.Server.Framework.Operations;
+
     [Serializable]
     public class RoomEventCache : IEnumerable<CustomEvent>
     {

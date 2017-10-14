@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using ExitGames.Concurrency.Fibers;
 using ExitGames.Logging;
 using Photon.SocketServer;
-using Warsmiths.Common;
+
 using Warsmiths.Server.MasterServer.Lobby;
 using Warsmiths.Server.Operations.Request.Social;
 using Warsmiths.Server.Operations.Response;
 
 namespace Warsmiths.Server.MasterServer
 {
+    using YourGame.Common;
+
     public class PlayerCache : IDisposable
     {
         /// <summary>

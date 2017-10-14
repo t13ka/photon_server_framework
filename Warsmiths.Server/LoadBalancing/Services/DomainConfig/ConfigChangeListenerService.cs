@@ -6,13 +6,14 @@ using ExitGames.Logging;
 
 using Photon.SocketServer;
 
-using Warsmiths.Common.Domain;
-using Warsmiths.DatabaseService.Repositories;
-using Warsmiths.Server.Framework.Services;
 using Warsmiths.Server.MasterServer;
 
 namespace Warsmiths.Server.Services.DomainConfig
 {
+    using YourGame.Common.Domain;
+    using YourGame.DatabaseService.Repositories;
+    using YourGame.Server.Framework.Services;
+
     public class ConfigChangeListenerService : IRuntimeService, IDisposable
     {
         private static TimeSpan RefreshTimeSpan => new TimeSpan(0, 0, 0, 5, 0);

@@ -1,7 +1,7 @@
-using System;
-
-namespace Warsmiths.Client.Loadbalancing.Enums
+namespace YourGame.Client.Loadbalancing.Enums
 {
+    using System;
+
     /// <summary>
     /// Flags for "types of properties", being used as filter in OpGetProperties.
     /// </summary>

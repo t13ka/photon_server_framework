@@ -1,10 +1,10 @@
-﻿using MongoDB.Bson.Serialization;
-
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Craft.Quest;
-
-namespace Warsmiths.DatabaseService
+﻿namespace YourGame.DatabaseService
 {
+    using MongoDB.Bson.Serialization;
+
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.Craft.Quest;
+
     /// <summary>
     /// </summary>
     public static class BsonMappingConfigurator

@@ -4,19 +4,20 @@ using System.Runtime.InteropServices;
 using ExitGames.Logging;
 using MongoDB.Bson;
 using Photon.SocketServer;
-using Warsmiths.Client;
-using Warsmiths.Common;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Elements;
-using Warsmiths.Common.Domain.VictoryPrizes;
-using Warsmiths.Common.ListContainer;
+
 using Warsmiths.Server.Events.Economy;
-using Warsmiths.Server.Framework.Services;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Services.Economic;
 
 namespace Warsmiths.Server.Events
 {
+    using YourGame.Common;
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.Elements;
+    using YourGame.Common.Domain.VictoryPrizes;
+    using YourGame.Common.ListContainer;
+    using YourGame.Server.Framework.Services;
+
     public static class EventsHelper
     {
 

@@ -1,9 +1,10 @@
-﻿using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-
-namespace Warsmiths.Client
+﻿namespace YourGame.Client
 {
+    using System.IO;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Bson;
+
     public static class Serialization
     {
         public static T DeepClone<T>(this T obj)

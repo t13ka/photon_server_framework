@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Enums.ItemGeneration;
-using Warsmiths.Common.Utils;
+﻿
 // ReSharper disable SwitchStatementMissingSomeCases
 
-namespace Warsmiths.Common.Domain.Equipment
+namespace YourGame.Common.Domain.Equipment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Enums.ItemGeneration;
+    using YourGame.Common.Utils;
+
     public enum ModuleInsertToE
     {
         Hands = 0,

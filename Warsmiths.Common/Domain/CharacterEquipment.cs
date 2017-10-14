@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.Common.Results;
+﻿
 // ReSharper disable UseNullPropagation
 // ReSharper disable ForCanBeConvertedToForeach
 // ReSharper disable LoopCanBeConvertedToQuery
 
-namespace Warsmiths.Common.Domain
+namespace YourGame.Common.Domain
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+    using YourGame.Common.Results;
+
     public class CharacterEquipment
     {
         public BaseArmor Armor;

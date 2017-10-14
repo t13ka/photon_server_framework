@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Results
+﻿namespace YourGame.Common.Results
 {
     public class EnchantInfoResult
     {

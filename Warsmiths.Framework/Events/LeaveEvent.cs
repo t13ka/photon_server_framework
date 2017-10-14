@@ -1,9 +1,9 @@
-using Photon.SocketServer.Rpc;
-
-using Warsmiths.Server.Framework.Operations;
-
-namespace Warsmiths.Server.Framework.Events
+namespace YourGame.Server.Framework.Events
 {
+    using Photon.SocketServer.Rpc;
+
+    using YourGame.Server.Framework.Operations;
+
     public class LeaveEvent : RoomEventBase
     {
         public LeaveEvent(int actorNr, int[] actors)

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Warsmiths.Common.Domain.Craft.Spells;
-
-namespace Warsmiths.Common.Domain.Craft.Grid
+﻿namespace YourGame.Common.Domain.Craft.Grid
 {
+    using System;
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Craft.Spells;
+
     public class GridController : BaseController
     {
         public BaseController Cell;

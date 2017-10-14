@@ -14,14 +14,17 @@ using Photon.SocketServer;
 using Photon.SocketServer.Diagnostics;
 using Photon.SocketServer.ServerToServer;
 using Warsmiths.Server.Common;
-using Warsmiths.Server.Framework;
-using Warsmiths.Server.Framework.Messages;
 using Warsmiths.Server.LoadShedding;
 using Warsmiths.Server.LoadShedding.Diagnostics;
 using LogManager = ExitGames.Logging.LogManager;
 
 namespace Warsmiths.Server.GameServer
 {
+    using YourGame.Server.Common;
+    using YourGame.Server.Framework;
+    using YourGame.Server.Framework.Messages;
+    using YourGame.Server.GameServer;
+
     public class GameApplication : ApplicationBase
     {
         #region Constructors and Destructors
@@ -334,7 +337,7 @@ namespace Warsmiths.Server.GameServer
             }
 
             CounterPublisher.DefaultInstance.AddStaticCounterClass(
-                typeof (Framework.Diagnostics.Counter), ApplicationName);
+                typeof (YourGame.Server.Framework.Diagnostics.Counter), ApplicationName);
             CounterPublisher.DefaultInstance.AddStaticCounterClass(typeof (Counter), ApplicationName);
 
             _executionFiber = new PoolFiber();

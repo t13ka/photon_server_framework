@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
+    using System;
+    using System.Collections.Generic;
+
     public class PlayerInventory : Dictionary<string, IEntity>
     {
         private const int MaximumItems = 300;

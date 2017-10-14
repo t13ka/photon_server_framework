@@ -2,14 +2,15 @@
 
 using Photon.SocketServer;
 
-using Warsmiths.Common;
-using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Operations.Request.Auth;
 using Warsmiths.Server.Operations.Response;
 
 namespace Warsmiths.Server.Handlers.Auth
 {
+    using YourGame.Common;
+    using YourGame.Server.Framework.Handlers;
+
     public class AuthenticateHandler : BaseHandler
     {
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();

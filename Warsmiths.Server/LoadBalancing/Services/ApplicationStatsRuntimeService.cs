@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using ExitGames.Concurrency.Fibers;
 using Photon.SocketServer;
-using Warsmiths.Common;
+
 using Warsmiths.Server.Events;
-using Warsmiths.Server.Framework.Services;
 using Warsmiths.Server.MasterServer.GameServer;
 
 namespace Warsmiths.Server.Services
 {
+    using YourGame.Common;
+    using YourGame.Server.Framework.Services;
+
     public class ApplicationStatsRuntimeService : IRuntimeService
     {
         private readonly PoolFiber _fiber;

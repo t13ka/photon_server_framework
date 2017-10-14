@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common
+﻿namespace YourGame.Common
 {
     public class Vector3Net
     {

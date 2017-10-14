@@ -14,11 +14,7 @@ using Ninject;
 
 using Photon.SocketServer;
 
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Common;
-using Warsmiths.Server.Framework.Services;
 using Warsmiths.Server.LoadBalancer;
 using Warsmiths.Server.MasterServer.GameServer;
 using Warsmiths.Server.NinjectConfigModules;
@@ -31,6 +27,14 @@ using LogManager = ExitGames.Logging.LogManager;
 
 namespace Warsmiths.Server.MasterServer
 {
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.Equipment;
+    using YourGame.DatabaseService;
+    using YourGame.DatabaseService.Repositories;
+    using YourGame.Server.Common;
+    using YourGame.Server.Framework.Services;
+    using YourGame.Server.MasterServer;
+
     public class MasterApplication : ApplicationBase
     {
         public static DomainConfiguration DomainConfiguration;
@@ -115,7 +119,7 @@ namespace Warsmiths.Server.MasterServer
 
         protected virtual void Initialize()
         {
-            DatabaseService.BsonMappingConfigurator.Configure();
+            BsonMappingConfigurator.Configure();
             GameServers = new GameServerCollection();
             LoadBalancer =
                 new LoadBalancer<IncomingGameServerPeer>(Path.Combine(ApplicationRootPath, "LoadBalancer.config"));

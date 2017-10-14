@@ -2,9 +2,11 @@
 
 namespace Warsmiths.Server.Events 
 {
+    using YourGame.Common;
+
     public class UpdateCommonCharacterProfileEvent : DataContract
     {
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.CommonCharacterProfile, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.CommonCharacterProfile, IsOptional = false)]
         public byte[] CommonCharacterProfile ;
     }
 }

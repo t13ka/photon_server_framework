@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Warsmiths.Common.Domain;
 
 namespace Warsmiths.Server.Services.Economic
 {

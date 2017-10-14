@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing
+namespace YourGame.Client.Loadbalancing
 {
     public class TypedLobbyInfo : TypedLobby
     {

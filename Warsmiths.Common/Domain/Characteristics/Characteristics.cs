@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Characteristics
+﻿namespace YourGame.Common.Domain.Characteristics
 {
     public class CharacteristicsBase : IEntity
     {

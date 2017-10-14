@@ -1,9 +1,9 @@
-﻿using Warsmiths.Common.Domain.CommonCharacterProfile.Attributes;
-using Warsmiths.Common.Domain.CommonCharacterProfile.Groups;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Primary
+﻿namespace YourGame.Common.Domain.CommonCharacterProfile.Primary
 {
+    using YourGame.Common.Domain.CommonCharacterProfile.Attributes;
+    using YourGame.Common.Domain.CommonCharacterProfile.Groups;
+    using YourGame.Common.Domain.Enums;
+
     public class SkillPrimary
     {
         public Atribute<float> Value;

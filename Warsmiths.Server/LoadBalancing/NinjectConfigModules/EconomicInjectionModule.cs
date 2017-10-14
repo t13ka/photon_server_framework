@@ -1,11 +1,11 @@
 ﻿using Ninject.Modules;
 
-using Warsmiths.Common.Domain;
-using Warsmiths.DatabaseService.Repositories;
-using Warsmiths.Server.Framework.DataBaseService;
-
 namespace Warsmiths.Server.NinjectConfigModules
 {
+    using YourGame.Common.Domain;
+    using YourGame.DatabaseService.Repositories;
+    using YourGame.Server.Framework.DataBaseService;
+
     public class EconomicInjectionModule : NinjectModule
     {
         private readonly bool _debug;

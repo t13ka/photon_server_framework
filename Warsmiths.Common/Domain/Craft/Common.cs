@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Warsmiths.Common.Domain.Craft.Grid;
-using Warsmiths.Common.Domain.Craft.Quest;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Craft
+﻿namespace YourGame.Common.Domain.Craft
 {
+    using System;
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Craft.Grid;
+    using YourGame.Common.Domain.Craft.Quest;
+    using YourGame.Common.Domain.Enums;
+
     public class RecieptsContainer
     {
         public BaseReciept[] Reciepts;

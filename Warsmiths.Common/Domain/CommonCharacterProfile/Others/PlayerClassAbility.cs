@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Others
+﻿namespace YourGame.Common.Domain.CommonCharacterProfile.Others
 {
+    using YourGame.Common.Domain.Enums;
+
     public class PlayerClassAbility
     {
         public string Name;

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-using ExitGames.Logging;
-
-namespace Warsmiths.Server.Framework.Diagnostics.OperationLogging
+﻿namespace YourGame.Server.Framework.Diagnostics.OperationLogging
 {
+    using System.Collections.Generic;
+    using System.Text;
+
+    using ExitGames.Logging;
+
     public class LogQueue
     {
         public const int DefaultCapacity = 1000;

@@ -1,9 +1,9 @@
-﻿using Photon.SocketServer;
-
-using Warsmiths.Common;
-
-namespace Warsmiths.Server.Framework.Handlers
+﻿namespace YourGame.Server.Framework.Handlers
 {
+    using Photon.SocketServer;
+
+    using YourGame.Common;
+
     public abstract class BaseHandler
     {
         public abstract OperationCode ControlCode { get; }

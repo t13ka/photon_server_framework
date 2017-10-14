@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment.Armors;
-using Warsmiths.Common.Results;
+﻿
 // ReSharper disable UseStringInterpolation
 
-namespace Warsmiths.Common.Domain.Equipment
+namespace YourGame.Common.Domain.Equipment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment.Armors;
+    using YourGame.Common.Results;
+
     public class BaseArmor : BaseEquipment
     {
         #region Props

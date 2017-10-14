@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Enums
+﻿namespace YourGame.Common.Domain.Enums
 {
     /// <summary>
     /// Skill order types

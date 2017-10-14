@@ -3,11 +3,12 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using ExitGames.Client.Photon;
-
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
+    using System.Collections.Generic;
+
+    using ExitGames.Client.Photon;
+
     /// <summary>
     /// Provides basic operations of the Photon Chat server. This internal class is used by public ChatClient.
     /// </summary>

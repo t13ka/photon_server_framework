@@ -3,10 +3,10 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-using ExitGames.Client.Photon;
-
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
+    using ExitGames.Client.Photon;
+
     /// <summary>
     /// Callback interface for Chat client side. Contains callback methods to notify your app about updates.
     /// Must be provided to new ChatClient in constructor

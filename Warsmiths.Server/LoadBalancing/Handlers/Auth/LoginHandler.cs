@@ -5,16 +5,17 @@ using ExitGames.Logging;
 
 using Photon.SocketServer;
 
-using Warsmiths.Common;
-using Warsmiths.DatabaseService.Repositories;
 using Warsmiths.Server.Events;
-using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Operations.Request.Auth;
 
 namespace Warsmiths.Server.Handlers.Auth
 {
-    using Player = Warsmiths.Common.Domain.Player;
+    using YourGame.Common;
+    using YourGame.DatabaseService.Repositories;
+    using YourGame.Server.Framework.Handlers;
+
+    using Player = YourGame.Common.Domain.Player;
 
     public class LoginHandler : BaseHandler
     {

@@ -1,12 +1,15 @@
-﻿using System;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Results;
-using Warsmiths.Common.Utils;
+﻿
 // ReSharper disable MergeConditionalExpression
 // ReSharper disable UseStringInterpolation
 
-namespace Warsmiths.Common.Domain.Equipment
+namespace YourGame.Common.Domain.Equipment
 {
+    using System;
+
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Results;
+    using YourGame.Common.Utils;
+
     public class BaseWeapon : BaseEquipment
     {
         #region Fields

@@ -1,7 +1,7 @@
-using System;
-
-namespace Warsmiths.Client.Loadbalancing.Enums
+namespace YourGame.Client.Loadbalancing.Enums
 {
+    using System;
+
     /// <summary>
     /// Lite - OpRaiseEvent allows you to cache events and automatically send them to joining players in a room.
     /// Events are cached per event code and player: Event 100 (example!) can be stored once per player.

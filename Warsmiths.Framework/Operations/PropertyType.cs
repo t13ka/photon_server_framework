@@ -1,7 +1,7 @@
-using System;
-
-namespace Warsmiths.Server.Framework.Operations
+namespace YourGame.Server.Framework.Operations
 {
+    using System;
+
     [Flags]
     public enum PropertyType : byte
     {

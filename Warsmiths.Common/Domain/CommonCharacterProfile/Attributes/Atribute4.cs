@@ -1,7 +1,7 @@
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Attributes
+namespace YourGame.Common.Domain.CommonCharacterProfile.Attributes
 {
+    using YourGame.Common.Domain.Enums;
+
     /// <summary>
     /// Сюда записываем значения прочности, устойчивости, кол-ва модулей которые указаны 
     /// в ArmorPart (1 - которые возможны макс

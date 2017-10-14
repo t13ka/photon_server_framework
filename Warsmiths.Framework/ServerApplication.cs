@@ -1,20 +1,20 @@
-using System.IO;
-
-using ExitGames.Logging;
-using ExitGames.Logging.Log4Net;
-
-using log4net;
-using log4net.Config;
-
-using Photon.SocketServer;
-using Photon.SocketServer.Diagnostics;
-
-using Warsmiths.Server.Framework.Diagnostics;
-
-using LogManager = ExitGames.Logging.LogManager;
-
-namespace Warsmiths.Server.Framework
+namespace YourGame.Server.Framework
 {
+    using System.IO;
+
+    using ExitGames.Logging;
+    using ExitGames.Logging.Log4Net;
+
+    using log4net;
+    using log4net.Config;
+
+    using Photon.SocketServer;
+    using Photon.SocketServer.Diagnostics;
+
+    using YourGame.Server.Framework.Diagnostics;
+
+    using LogManager = ExitGames.Logging.LogManager;
+
     public class ServerApplication : ApplicationBase
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();

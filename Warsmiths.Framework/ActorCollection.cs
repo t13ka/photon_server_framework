@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Photon.SocketServer;
-
-namespace Warsmiths.Server.Framework
+﻿namespace YourGame.Server.Framework
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Photon.SocketServer;
+
     public class ActorCollection : List<Actor>
     {
         public Actor GetActorByNumber(int actorNumber)

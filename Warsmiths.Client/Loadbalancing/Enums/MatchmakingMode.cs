@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing.Enums
+namespace YourGame.Client.Loadbalancing.Enums
 {
     /// <summary>
     /// Options for matchmaking rules for OpJoinRandom.

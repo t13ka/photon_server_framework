@@ -2,11 +2,13 @@
 
 namespace Warsmiths.Server.Events
 {
+    using YourGame.Common;
+
     public class UpdateElementsOrderEvent : DataContract
     {
         /// <summary>
         /// </summary>
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.ElementsOrderData, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.ElementsOrderData, IsOptional = false)]
         public byte[] ElementsOrderData ;
     }
 }

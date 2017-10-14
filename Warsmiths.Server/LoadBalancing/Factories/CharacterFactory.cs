@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.CommonCharacterProfile;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
 using Warsmiths.Server.MasterServer;
 
 namespace Warsmiths.Server.Factories
 {
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.CommonCharacterProfile;
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+
     public class CharacterFactory
     {
         public static Character CreateDefaultCharacter()

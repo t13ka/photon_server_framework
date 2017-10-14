@@ -2,11 +2,13 @@
 
 namespace Warsmiths.Server.Events
 {
+    using YourGame.Common;
+
     public class UpdateInventoryEvent : DataContract
     {
         /// <summary>
         /// </summary>
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.InventoryData, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.InventoryData, IsOptional = false)]
         public byte[] InventoryData ;
     }
 }

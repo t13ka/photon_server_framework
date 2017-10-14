@@ -1,10 +1,10 @@
-using System.Collections;
-
-using Photon.SocketServer;
-using Photon.SocketServer.Rpc;
-
-namespace Warsmiths.Server.Framework.Operations
+namespace YourGame.Server.Framework.Operations
 {
+    using System.Collections;
+
+    using Photon.SocketServer;
+    using Photon.SocketServer.Rpc;
+
     public class JoinRequest : Operation
     {
         public JoinRequest(IRpcProtocol protocol, OperationRequest operationRequest)

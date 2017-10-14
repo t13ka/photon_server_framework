@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Warsmiths.Server.Framework.Common
+﻿namespace YourGame.Server.Framework.Common
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     [Serializable]
     public class PropertyBag<TKey>
     {

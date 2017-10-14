@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Equipment.Armors
+﻿namespace YourGame.Common.Domain.Equipment.Armors
 {
+    using System;
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Enums;
+
     public class ArmorPart
     {
         #region Props

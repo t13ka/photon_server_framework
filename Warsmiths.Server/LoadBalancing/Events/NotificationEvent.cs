@@ -2,9 +2,11 @@
 
 namespace Warsmiths.Server.Events
 {
+    using YourGame.Common;
+
     public class NotificationEvent : DataContract
     {
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.NotificationData, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.NotificationData, IsOptional = false)]
         public byte[] NotificationData ;
     }
 }

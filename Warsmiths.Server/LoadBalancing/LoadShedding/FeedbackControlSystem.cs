@@ -7,6 +7,8 @@ using Warsmiths.Server.LoadShedding.Configuration;
 
 namespace Warsmiths.Server.LoadShedding
 {
+    using YourGame.Server.GameServer;
+
     internal sealed class FeedbackControlSystem : IFeedbackControlSystem, IDisposable
     {
         #region Constructors and Destructors

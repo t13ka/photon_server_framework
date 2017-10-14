@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Logging;
-using Warsmiths.Common.Domain;
+
 using Warsmiths.Server.LoadBalancer;
 using Warsmiths.Server.MasterServer.GameServer;
 
 namespace Warsmiths.Server.MasterServer
 {
+    using YourGame.Common.Domain;
+
     public class CraftApplication
     {
         public static CraftApplication I;

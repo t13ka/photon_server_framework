@@ -1,8 +1,8 @@
-using Warsmiths.Common.Domain.CommonCharacterProfile.Attributes;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Defense
+namespace YourGame.Common.Domain.CommonCharacterProfile.Defense
 {
+    using YourGame.Common.Domain.CommonCharacterProfile.Attributes;
+    using YourGame.Common.Domain.Enums;
+
     public class RangedDefensePrimary
     {
         public Atribute<float> Value;

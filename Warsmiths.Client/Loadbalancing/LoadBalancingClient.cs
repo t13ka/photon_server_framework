@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using ExitGames.Client.Photon;
-using Warsmiths.Client.Loadbalancing.Codes;
-using Warsmiths.Client.Loadbalancing.Enums;
-using Warsmiths.Common;
-using ErrorCode = Warsmiths.Client.Loadbalancing.Codes.ErrorCode;
-using EventCode = Warsmiths.Client.Loadbalancing.Codes.EventCode;
-using OperationCode = Warsmiths.Client.Loadbalancing.Codes.OperationCode;
-using ParameterCode = Warsmiths.Client.Loadbalancing.Codes.ParameterCode;
-
-namespace Warsmiths.Client.Loadbalancing
+﻿namespace YourGame.Client.Loadbalancing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+
+    using ExitGames.Client.Photon;
+
+    using YourGame.Client.Loadbalancing.Codes;
+    using YourGame.Client.Loadbalancing.Enums;
+
+    using ErrorCode = YourGame.Client.Loadbalancing.Codes.ErrorCode;
+    using EventCode = YourGame.Client.Loadbalancing.Codes.EventCode;
+    using OperationCode = YourGame.Client.Loadbalancing.Codes.OperationCode;
+    using ParameterCode = YourGame.Client.Loadbalancing.Codes.ParameterCode;
+
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_DASHBOARD_WIDGET || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_WII || UNITY_IPHONE || UNITY_ANDROID || UNITY_PS3 || UNITY_XBOX360 || UNITY_NACL  || UNITY_FLASH  || UNITY_BLACKBERRY || UNITY_PSP2 || UNITY_WEBGLusing 
     Hashtable = ExitGames.Client.Photon.Hashtable;
 #endif
@@ -827,7 +829,7 @@ namespace Warsmiths.Client.Loadbalancing
         /// <returns>
         ///     If the workflow was started or failed right away.
         /// </returns>
-        /// <see cref="M:Warsmiths.Client.Loadbalancing.LoadBalancingClient.OpGetRegions" />
+        /// <see cref="M:YourGame.Client.Loadbalancing.LoadBalancingClient.OpGetRegions" />
         public bool ConnectToNameServer()
         {
             IsUsingNameServer = true;

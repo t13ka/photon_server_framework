@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Common.Domain.Enums
+﻿namespace YourGame.Common.Domain.Enums
 {
+    using System;
+
     [Flags]
     public enum ElementCategoryTypes
     {

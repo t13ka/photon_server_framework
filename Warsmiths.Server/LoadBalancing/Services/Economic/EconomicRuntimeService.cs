@@ -6,20 +6,22 @@ using ExitGames.Concurrency.Fibers;
 using ExitGames.Logging;
 using MongoDB.Bson;
 using Photon.SocketServer;
-using Warsmiths.Common;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Elements;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.Common.ListContainer;
-using Warsmiths.Common.Results;
+
 using Warsmiths.Server.Events;
-using Warsmiths.Server.Framework.DataBaseService;
-using Warsmiths.Server.Framework.Services;
 using Warsmiths.Server.MasterServer;
 
 namespace Warsmiths.Server.Services.Economic
 {
+    using YourGame.Common;
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.Elements;
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+    using YourGame.Common.ListContainer;
+    using YourGame.Common.Results;
+    using YourGame.Server.Framework.DataBaseService;
+    using YourGame.Server.Framework.Services;
+
     public class EconomicRuntimeService : IRuntimeService, IDisposable
     {
         #region Ctors

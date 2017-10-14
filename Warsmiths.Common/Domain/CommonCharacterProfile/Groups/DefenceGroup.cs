@@ -1,8 +1,7 @@
-using Warsmiths.Common.Domain.CommonCharacterProfile.Defense;
-
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Groups
+namespace YourGame.Common.Domain.CommonCharacterProfile.Groups
 {
+    using YourGame.Common.Domain.CommonCharacterProfile.Defense;
+
     public class DefenceGroup
     {
         public int Summary;

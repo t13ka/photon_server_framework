@@ -1,10 +1,11 @@
-using System;
-using System.Linq;
-using Warsmiths.Common.Domain.CommonCharacterProfile.Attributes;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Defense
+namespace YourGame.Common.Domain.CommonCharacterProfile.Defense
 {
+    using System;
+    using System.Linq;
+
+    using YourGame.Common.Domain.CommonCharacterProfile.Attributes;
+    using YourGame.Common.Domain.Enums;
+
     public class MeleeDefensePrimary
     {
         public Atribute<float> Value;

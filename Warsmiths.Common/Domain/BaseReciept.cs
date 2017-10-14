@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Craft;
-using Warsmiths.Common.Domain.Craft.Spells.SavedClasses;
-using Warsmiths.Common.Domain.Equipment.Armors;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.Common.Domain.Craft.Quest;
-
-namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Craft;
+    using YourGame.Common.Domain.Craft.Quest;
+    using YourGame.Common.Domain.Craft.Spells.SavedClasses;
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+    using YourGame.Common.Domain.Equipment.Armors;
+
     public class BaseReciept : BaseItem
     {
         public string Prefix;

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Warsmiths.Common.Domain;
-
-namespace Warsmiths.Common.ListContainer
+﻿namespace YourGame.Common.ListContainer
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain;
+
     public class CharactersListContainer
     {
         public List<Character> Characters ;

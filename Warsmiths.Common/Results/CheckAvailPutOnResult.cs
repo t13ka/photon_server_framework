@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Results
+﻿namespace YourGame.Common.Results
 {
+    using YourGame.Common.Domain.Enums;
+
     public class CheckAvailPutOnResult
     {
         public bool Success ;

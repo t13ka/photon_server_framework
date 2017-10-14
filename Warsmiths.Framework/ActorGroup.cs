@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Server.Framework
+﻿namespace YourGame.Server.Framework
 {
     public class ActorGroup : ActorCollection
     {

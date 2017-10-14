@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-using ExitGames.Logging;
-
-using Photon.SocketServer;
-
-using Warsmiths.Common;
-
-namespace Warsmiths.Server.Framework.Handlers
+﻿namespace YourGame.Server.Framework.Handlers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using ExitGames.Logging;
+
+    using Photon.SocketServer;
+
+    using YourGame.Common;
+
     public class HandlerPicker
     {
         /// <summary>

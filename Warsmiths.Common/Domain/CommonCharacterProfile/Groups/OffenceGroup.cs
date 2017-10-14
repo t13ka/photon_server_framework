@@ -1,7 +1,7 @@
-using Warsmiths.Common.Domain.CommonCharacterProfile.Attack;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Groups
+namespace YourGame.Common.Domain.CommonCharacterProfile.Groups
 {
+    using YourGame.Common.Domain.CommonCharacterProfile.Attack;
+
     public class OffenceGroup
     {
         public int Summary;

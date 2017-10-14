@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Elements
+﻿namespace YourGame.Common.Domain.Elements
 {
     public class ElementPriceItemResult
     {

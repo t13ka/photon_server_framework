@@ -1,0 +1,10 @@
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\bin\log4net.config
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\bin\YourGame.Server.Framework.dll.config
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\bin\YourGame.Server.Framework.dll
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\bin\YourGame.Server.Framework.pdb
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\bin\YourGame.Common.dll
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\bin\YourGame.Common.pdb
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\obj\Debug\YourGame.Server.Framework.csprojResolveAssemblyReference.cache
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\obj\Debug\YourGame.Server.Framework.csproj.CoreCompileInputs.cache
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\obj\Debug\YourGame.Server.Framework.dll
+W:\Projects\Repos\t13ka\photon_server_framework\Warsmiths.Framework\obj\Debug\YourGame.Server.Framework.pdb

@@ -1,7 +1,7 @@
-using System;
-
-namespace Warsmiths.Client.Loadbalancing.Codes
+namespace YourGame.Client.Loadbalancing.Codes
 {
+    using System;
+
     /// <summary>
     /// Codes for parameters and events used in PhotonLoadbalancingAPI
     /// </summary>

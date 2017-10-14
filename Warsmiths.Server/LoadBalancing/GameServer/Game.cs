@@ -5,22 +5,26 @@ using ExitGames.Logging;
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
 using Photon.SocketServer.Rpc.Protocols;
-using Warsmiths.Common;
+
 using Warsmiths.Server.Common;
-using Warsmiths.Server.Framework;
-using Warsmiths.Server.Framework.Diagnostics.OperationLogging;
-using Warsmiths.Server.Framework.Messages;
-using Warsmiths.Server.Framework.Operations;
 using Warsmiths.Server.MasterServer.Lobby;
 using Warsmiths.Server.Operations;
 using Warsmiths.Server.Operations.Request;
 using Warsmiths.Server.Operations.Response;
 using Warsmiths.Server.ServerToServer.Events;
-using OperationCode = Warsmiths.Server.Framework.Operations.OperationCode;
 
 namespace Warsmiths.Server.GameServer
 {
     using Warsmiths.Server.Operations.Request.GameManagement;
+
+    using YourGame.Common;
+    using YourGame.Server.Framework;
+    using YourGame.Server.Framework.Diagnostics.OperationLogging;
+    using YourGame.Server.Framework.Messages;
+    using YourGame.Server.Framework.Operations;
+    using YourGame.Server.GameServer;
+
+    using OperationCode = YourGame.Server.Framework.Operations.OperationCode;
 
     public class Game : RoomGame
     {
@@ -401,7 +405,7 @@ namespace Warsmiths.Server.GameServer
                         break;
 
                     // Lite operation code for join is not allowed in load balanced games.
-                    case (byte) Framework.Operations.OperationCode.Join:
+                    case (byte) OperationCode.Join:
                         var response = new OperationResponse
                         {
                             OperationCode = operationRequest.OperationCode,

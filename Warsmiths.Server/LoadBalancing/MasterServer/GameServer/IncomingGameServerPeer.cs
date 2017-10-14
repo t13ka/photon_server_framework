@@ -4,17 +4,20 @@ using ExitGames.Logging;
 using Photon.SocketServer;
 using Photon.SocketServer.ServerToServer;
 using PhotonHostRuntimeInterfaces;
-using Warsmiths.Common;
+
 using Warsmiths.Server.Common;
-using Warsmiths.Server.Framework.Services;
 using Warsmiths.Server.LoadShedding;
 using Warsmiths.Server.ServerToServer.Events;
 using Warsmiths.Server.ServerToServer.Operations;
 using Warsmiths.Server.Services;
-using OperationCode = Warsmiths.Server.ServerToServer.Operations.OperationCode;
 
 namespace Warsmiths.Server.MasterServer.GameServer
 {
+    using YourGame.Common;
+    using YourGame.Server.Framework.Services;
+
+    using OperationCode = Warsmiths.Server.ServerToServer.Operations.OperationCode;
+
     public class IncomingGameServerPeer : ServerPeerBase
     {
         #region Constructors and Destructors

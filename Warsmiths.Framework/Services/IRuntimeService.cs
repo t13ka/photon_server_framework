@@ -1,7 +1,7 @@
-﻿using Photon.SocketServer;
-
-namespace Warsmiths.Server.Framework.Services
+﻿namespace YourGame.Server.Framework.Services
 {
+    using Photon.SocketServer;
+
     public interface IRuntimeService
     {
         void AddSubscriber(PeerBase peerBase);

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Warsmiths.Common.Domain.Equipment;
-
-namespace Warsmiths.Common.Results
+﻿namespace YourGame.Common.Results
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Equipment;
+
     public class WearingResult
     {
         public bool Success ;

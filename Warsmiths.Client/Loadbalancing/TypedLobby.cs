@@ -1,7 +1,7 @@
-using Warsmiths.Client.Loadbalancing.Enums;
-
-namespace Warsmiths.Client.Loadbalancing
+namespace YourGame.Client.Loadbalancing
 {
+    using YourGame.Client.Loadbalancing.Enums;
+
     /// <summary>Refers to a specific lobby (and type) on the server.</summary>
     /// <remarks>
     /// The name and type are the unique identifier for a lobby.<br/>

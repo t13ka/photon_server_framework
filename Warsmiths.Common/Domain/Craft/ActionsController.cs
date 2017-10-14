@@ -1,8 +1,9 @@
-﻿using System;
-using Warsmiths.Common.Domain.Craft.Grid;
-
-namespace Warsmiths.Common.Domain.Craft
+﻿namespace YourGame.Common.Domain.Craft
 {
+    using System;
+
+    using YourGame.Common.Domain.Craft.Grid;
+
     public static class ActionsController
     {
 

@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing.Enums
+namespace YourGame.Client.Loadbalancing.Enums
 {
     /// <summary>
     /// Options for optional "Custom Authentication" services used with Photon. Used by OpAuthenticate after connecting to Photon.

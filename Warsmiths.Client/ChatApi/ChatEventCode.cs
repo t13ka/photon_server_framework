@@ -3,7 +3,7 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
     /// <summary>
     /// Wraps up internally used constants in Photon Chat events. You don't have to use them directly usually.

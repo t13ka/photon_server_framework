@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
     public class InventoryItem
     {

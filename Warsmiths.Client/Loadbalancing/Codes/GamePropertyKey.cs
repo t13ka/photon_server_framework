@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing.Codes
+namespace YourGame.Client.Loadbalancing.Codes
 {
     /// <summary>
     /// These (byte) values are for "well known" room/game properties used in Photon Loadbalancing.

@@ -9,15 +9,16 @@ using MongoDB.Bson;
 
 using Photon.SocketServer;
 
-using Warsmiths.Common;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.ListContainer;
 using Warsmiths.Server.Events;
-using Warsmiths.Server.Framework.DataBaseService;
-using Warsmiths.Server.Framework.Services;
 
 namespace Warsmiths.Server.Services.Auction
 {
+    using YourGame.Common;
+    using YourGame.Common.Domain;
+    using YourGame.Common.ListContainer;
+    using YourGame.Server.Framework.DataBaseService;
+    using YourGame.Server.Framework.Services;
+
     public sealed class AuctionRuntimeService : IRuntimeService, IDisposable
     {
         #region Fields

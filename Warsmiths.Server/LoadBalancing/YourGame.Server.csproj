@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{918525F6-635E-4D56-A85C-7F4C5E95E822}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YourGame.Server</RootNamespace>
+    <AssemblyName>YourGame.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Photon\deploy\Warsmiths\MasterServer\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <StartAction>Program</StartAction>
+    <StartProgram>..\..\deploy\bin_Win32\PhotonSocketServer.exe</StartProgram>
+    <StartArguments>/debug LoadBalancing /config PhotonServer.LoadBalancing-Development.config</StartArguments>
+    <StartWorkingDirectory>..\..</StartWorkingDirectory>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Photon\deploy\Warsmiths\MasterServer\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugDeploy|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\Photon\deploy\Warsmiths\MasterServer\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExitGames.Logging.Log4Net, Version=1.0.1.0, Culture=neutral, PublicKeyToken=eac0edd9746a4aa0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\ExitGames.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ExitGamesLibs, Version=1.0.1.0, Culture=neutral, PublicKeyToken=eac0edd9746a4aa0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\ExitGamesLibs.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.4.0.41, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.4.0-beta1\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.4.0.41, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.4.0-beta1\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.4.0.41, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.4.0-beta1\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Photon.SocketServer, Version=3.4.28.8340, Culture=neutral, PublicKeyToken=48c2fa3b6988090e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Photon.SocketServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon3DotNet, Version=3.2.1.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Photon3DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon3Unity3D, Version=4.0.0.10, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Photon3Unity3D.dll</HintPath>
+    </Reference>
+    <Reference Include="PhotonHostRuntimeInterfaces, Version=3.56.0.0, Culture=neutral, PublicKeyToken=6cb1467adaa73020, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Libs\PhotonHostRuntimeInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CommonSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>CommonSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Common\DictionaryExtensions.cs" />
+    <Compile Include="Common\GameParameterReader.cs" />
+    <Compile Include="Common\Net\AsyncHttpRequest.cs" />
+    <Compile Include="Common\Net\AsyncHttpRequestStatus.cs" />
+    <Compile Include="Common\Net\HttpRequestQueue.cs" />
+    <Compile Include="Common\Net\HttpWebRequestExtensions.cs" />
+    <Compile Include="Common\PublicIPAddressReader.cs" />
+    <Compile Include="Common\Utilities.cs" />
+    <Compile Include="Events\Economy\UpdateCurrencyEvent.cs" />
+    <Compile Include="Events\CharacterProfileEvent.cs" />
+    <Compile Include="Events\Craft\Field\Common\CreateElementEvent.cs" />
+    <Compile Include="Events\EventsHelper.cs" />
+    <Compile Include="Events\Craft\Field\Common\MoveElementEvent.cs" />
+    <Compile Include="Events\GetRecieptEvent.cs" />
+    <Compile Include="Events\NotificationEvent.cs" />
+    <Compile Include="Events\UpdateAuctionEvent.cs" />
+    <Compile Include="Events\UpdateCharactersListEvent.cs" />
+    <Compile Include="Events\UpdateCommonCharacterProfileEvent.cs" />
+    <Compile Include="Events\UpdateDomainConfigurationEvent.cs" />
+    <Compile Include="Events\UpdateElementPricesEvent.cs" />
+    <Compile Include="Events\UpdateElementsOrderEvent.cs" />
+    <Compile Include="Events\UpdateEquipmentEvent.cs" />
+    <Compile Include="Events\UpdateInventoryEvent.cs" />
+    <Compile Include="Events\UpdateProfileEvent.cs" />
+    <Compile Include="Events\VictoryPrizesEvent.cs" />
+    <Compile Include="Factories\CharacterFactory.cs" />
+    <Compile Include="Factories\EquipmentFactory.cs" />
+    <Compile Include="Factories\PlayerFactory.cs" />
+    <Compile Include="GameServer\ApplicationStatsPublisher.cs" />
+    <Compile Include="GameServer\GameServerSettings.cs" />
+    <Compile Include="Handlers\Auth\AccountRegistrationHandler.cs" />
+    <Compile Include="Handlers\Auth\AuthenticateHandler.cs" />
+    <Compile Include="Handlers\Auth\LogoutHandler.cs" />
+    <Compile Include="Handlers\Auth\LoginHandler.cs" />
+    <Compile Include="LoadBalancer\Configuration\ConfigurationLoader.cs" />
+    <Compile Include="LoadBalancer\Configuration\DefaultConfiguration.cs" />
+    <Compile Include="LoadBalancer\Configuration\LoadBalancerSection.cs" />
+    <Compile Include="LoadBalancer\Configuration\LoadBalancerWeight.cs" />
+    <Compile Include="LoadBalancer\Configuration\LoadBalancerWeightsCollection.cs" />
+    <Compile Include="LoadBalancer\LoadBalancer.cs" />
+    <Compile Include="Events\AppStatsEvent.cs" />
+    <Compile Include="Events\GameListEvent.cs" />
+    <Compile Include="Events\GameListUpdateEvent.cs" />
+    <Compile Include="Events\GameServerOfflineEvent.cs" />
+    <Compile Include="Events\QueueEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameServer\GameMessageCodes.cs" />
+    <Compile Include="LoadShedding\Configuration\ConfigurationLoader.cs" />
+    <Compile Include="LoadShedding\Configuration\DefaultConfiguration.cs" />
+    <Compile Include="LoadShedding\Configuration\FeedbackControllerElement.cs" />
+    <Compile Include="LoadShedding\Configuration\FeedbackControllerElementCollection.cs" />
+    <Compile Include="LoadShedding\Configuration\FeedbackControlSystemSection.cs" />
+    <Compile Include="LoadShedding\Configuration\FeedbackLevelElement.cs" />
+    <Compile Include="LoadShedding\Configuration\FeedbackLevelElementCollection.cs" />
+    <Compile Include="LoadShedding\Diagnostics\Counter.cs" />
+    <Compile Include="GameServer\Game.cs" />
+    <Compile Include="GameServer\GameApplication.cs" />
+    <Compile Include="GameServer\GameCache.cs" />
+    <Compile Include="GameServer\GameClientPeer.cs" />
+    <Compile Include="GameServer\GameServerSettings.Designer.cs">
+      <DependentUpon>GameServerSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="GameServer\Global.cs" />
+    <Compile Include="GameServer\OutgoingMasterServerPeer.cs" />
+    <Compile Include="LoadShedding\LatencyPeer.cs" />
+    <Compile Include="Common\ServerState.cs" />
+    <Compile Include="MasterServer\CraftApplication.cs" />
+    <Compile Include="MasterServer\PlayerState.cs" />
+    <Compile Include="NinjectConfigModules\AuctionInjectionModule.cs" />
+    <Compile Include="NinjectConfigModules\EconomicInjectionModule.cs" />
+    <Compile Include="Operations\Request\Auth\LogoutRequest.cs" />
+    <Compile Include="Operations\Request\GameManagement\LeaveLobbyRequest.cs" />
+    <Compile Include="Operations\Response\Auction\AuctionResponse.cs" />
+    <Compile Include="Services\ApplicationStatsRuntimeService.cs" />
+    <Compile Include="MasterServer\ChannelLobby\GameChannel.cs" />
+    <Compile Include="MasterServer\ChannelLobby\GameChannelKey.cs" />
+    <Compile Include="MasterServer\ChannelLobby\GameChannelList.cs" />
+    <Compile Include="MasterServer\GameApplication.cs" />
+    <Compile Include="MasterServer\GameServer\GameServerCollection.cs" />
+    <Compile Include="MasterServer\GameServer\GameServerState.cs" />
+    <Compile Include="MasterServer\GameServer\IncomingGameServerPeer.cs" />
+    <Compile Include="MasterServer\Lobby\AppLobby.cs" />
+    <Compile Include="MasterServer\Lobby\AppLobbyType.cs" />
+    <Compile Include="MasterServer\Lobby\GameList.cs" />
+    <Compile Include="MasterServer\Lobby\GameState.cs" />
+    <Compile Include="MasterServer\Lobby\IGameList.cs" />
+    <Compile Include="MasterServer\Lobby\IGameListSubscibtion.cs" />
+    <Compile Include="MasterServer\Lobby\ILobbyPeer.cs" />
+    <Compile Include="MasterServer\Lobby\LinkedListDictionary.cs" />
+    <Compile Include="MasterServer\Lobby\LobbyFactory.cs" />
+    <Compile Include="MasterServer\Lobby\PeerState.cs" />
+    <Compile Include="MasterServer\MasterApplication.cs" />
+    <Compile Include="MasterServer\MasterClientPeer.cs" />
+    <Compile Include="MasterServer\MasterServerSettings.Designer.cs">
+      <DependentUpon>MasterServerSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MasterServer\OperationHelper.cs" />
+    <Compile Include="Common\NodesReader.cs" />
+    <Compile Include="MasterServer\PlayerCache.cs" />
+    <Compile Include="MasterServer\RedirectedClientPeer.cs" />
+    <Compile Include="Operations\Request\Auction\BuyLotRequest.cs" />
+    <Compile Include="Operations\Request\Auction\GetLotsRequest.cs" />
+    <Compile Include="Operations\Request\Auth\AccountRegistrationRequest.cs" />
+    <Compile Include="Operations\ActorParameter.cs" />
+    <Compile Include="Operations\JoinMode.cs" />
+    <Compile Include="Operations\Request\Auth\LoginRequest.cs" />
+    <Compile Include="Operations\Request\Auth\GetProfileRequest.cs" />
+    <Compile Include="Operations\Request\Auction\PublishLotRequest.cs" />
+    <Compile Include="Operations\Request\Auction\UnpublishLotRequest.cs" />
+    <Compile Include="Operations\Response\AuthenticateResponse.cs" />
+    <Compile Include="Operations\Request\GameManagement\DebugGameRequest.cs" />
+    <Compile Include="Operations\Response\DebugGameResponse.cs" />
+    <Compile Include="Operations\Response\FindFriendsResponse.cs" />
+    <Compile Include="Operations\Request\Social\FindFriendsRequest.cs" />
+    <Compile Include="Operations\Request\GameManagement\JoinLobbyRequest.cs" />
+    <Compile Include="Operations\JoinRandomType.cs" />
+    <Compile Include="Operations\Response\RedirectRepeatResponse.cs" />
+    <Compile Include="ServerToServer\Events\AuthenticateUpdateEvent.cs" />
+    <Compile Include="ServerToServer\Events\ServerParameterCode.cs" />
+    <Compile Include="ServerToServer\Events\RemoveGameEvent.cs" />
+    <Compile Include="ServerToServer\Events\ServerEventCode.cs" />
+    <Compile Include="ServerToServer\Events\UpdateAppStatsEvent.cs" />
+    <Compile Include="ServerToServer\Events\UpdateGameEvent.cs" />
+    <Compile Include="ServerToServer\Events\UpdateServerEvent.cs" />
+    <Compile Include="LoadShedding\AverageCounterReader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\FeedbackController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\FeedbackControllerCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\FeedbackControlSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\FeedbackLevel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\FeedbackLevelOrder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\FeedbackName.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\IFeedbackControlSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\ILatencyMonitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\LatencyMonitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\ValueHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoadShedding\WorkloadController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Operations\Request\Auth\AuthenticateRequest.cs" />
+    <Compile Include="Operations\Request\GameManagement\CreateGameRequest.cs" />
+    <Compile Include="Operations\Response\CreateGameResponse.cs" />
+    <Compile Include="Operations\GameParameter.cs" />
+    <Compile Include="Operations\Request\GameManagement\JoinGameRequest.cs" />
+    <Compile Include="Operations\Response\JoinGameResponse.cs" />
+    <Compile Include="Operations\Request\GameManagement\JoinRandomGameRequest.cs" />
+    <Compile Include="Operations\Response\JoinRandomGameResponse.cs" />
+    <Compile Include="LoadShedding\LatencyOperation.cs" />
+    <Compile Include="Operations\ParameterCode.cs" />
+    <Compile Include="ServerToServer\Operations\OperationCode.cs" />
+    <Compile Include="ServerToServer\Operations\RegisterGameServer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerToServer\Operations\RegisterGameServerResponse.cs" />
+    <Compile Include="Services\Auction\AuctionRuntimeService.cs" />
+    <Compile Include="Services\DomainConfig\ConfigChangeListenerService.cs" />
+    <Compile Include="Services\Economic\EconomicRuntimeService.cs" />
+    <Compile Include="Services\Economic\GlobalElementStatement.cs" />
+    <Compile Include="Services\Economic\OrderElementStatement.cs" />
+    <Compile Include="Services\Economic\ElementStatement.cs" />
+    <Compile Include="Services\Economic\SaleElementStatement.cs" />
+    <Compile Include="Services\Economic\TransactionProcessingResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Common\CommonSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>CommonSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="GameServer\GameServerSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>GameServerSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MasterServer\MasterServerSettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>MasterServerSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Warsmiths.Client\YourGame.Client.csproj">
+      <Project>{b30c074c-71fe-488a-8d17-498c8f1d92ed}</Project>
+      <Name>YourGame.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Warsmiths.Common\YourGame.Common.csproj">
+      <Project>{96be4612-c41f-499d-adcc-b113b10b2040}</Project>
+      <Name>YourGame.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Warsmiths.DatabaseService\YourGame.DatabaseService.csproj">
+      <Project>{d7785da6-652a-4541-ad68-bb8029b9f759}</Project>
+      <Name>YourGame.DatabaseService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Warsmiths.Framework\YourGame.Server.Framework.csproj">
+      <Project>{e1f918f4-f581-4280-9d91-3cf77b24c290}</Project>
+      <Name>YourGame.Server.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\PlayerFunctional\" />
+    <Folder Include="Events\Craft\Field\Custom\" />
+    <Folder Include="Events\Craft\Field\Quest\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName)==Release (
+start xcopy "$(TargetDir)YourGame.Server.dll" "C:\YourGameServer\MasterServer\bin\" /s /i /y
+)</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

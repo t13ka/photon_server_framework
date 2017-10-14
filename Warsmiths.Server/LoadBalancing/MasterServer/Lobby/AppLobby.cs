@@ -6,7 +6,7 @@ using ExitGames.Logging;
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
 using Photon.SocketServer.Rpc.Protocols;
-using Warsmiths.Common;
+
 using Warsmiths.Server.Common;
 using Warsmiths.Server.Events;
 using Warsmiths.Server.MasterServer.ChannelLobby;
@@ -19,6 +19,8 @@ using Warsmiths.Server.ServerToServer.Events;
 namespace Warsmiths.Server.MasterServer.Lobby
 {
     using Warsmiths.Server.Operations.Request.GameManagement;
+
+    using YourGame.Common;
 
     public class AppLobby
     {

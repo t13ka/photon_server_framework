@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing.Codes
+namespace YourGame.Client.Loadbalancing.Codes
 {
     /// <summary>
     /// These (byte) values define "well known" properties for an Actor / Player.

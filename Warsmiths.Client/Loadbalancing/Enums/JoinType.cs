@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing.Enums
+namespace YourGame.Client.Loadbalancing.Enums
 {
     /// <summary>Ways a room can be created or joined.</summary>
     public enum JoinType

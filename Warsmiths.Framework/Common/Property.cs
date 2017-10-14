@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Server.Framework.Common
+﻿namespace YourGame.Server.Framework.Common
 {
+    using System;
+
     [Serializable]
     public class Property<TKey>
     {

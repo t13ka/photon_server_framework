@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Others
+﻿namespace YourGame.Common.Domain.CommonCharacterProfile.Others
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Enums;
+
     public class PlayerAbilityCollection
     {
         private static Dictionary<string, PlayerClassAbility> _abilities;

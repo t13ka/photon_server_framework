@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Craft
+﻿namespace YourGame.Common.Domain.Craft
 {
     public class ElementQuantity
     {

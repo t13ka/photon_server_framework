@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Elements;
-
-namespace Warsmiths.Common.Utils
+﻿namespace YourGame.Common.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
+    using YourGame.Common.Domain;
+
     [Obsolete]
     public static class ElementsUtils
     {

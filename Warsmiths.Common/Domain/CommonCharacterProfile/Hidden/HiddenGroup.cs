@@ -1,5 +1,5 @@
 ﻿
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Hidden
+namespace YourGame.Common.Domain.CommonCharacterProfile.Hidden
 {
     public class HiddenGroup
     {

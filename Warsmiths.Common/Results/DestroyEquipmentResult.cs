@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Elements;
-
-namespace Warsmiths.Common.Results
+﻿namespace YourGame.Common.Results
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.Elements;
+
     public class DestroyEquipmentResult
     {
         public BaseElement Element ;

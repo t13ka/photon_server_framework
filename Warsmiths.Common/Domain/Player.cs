@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
-
-namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+
     public class Player : IEntity
     {
         #region Props

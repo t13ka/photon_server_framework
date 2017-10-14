@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using ExitGames.Logging;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.DatabaseService.Repositories;
+
 using Warsmiths.Server.MasterServer;
 
 namespace Warsmiths.Server.Services.Economic
 {
+    using YourGame.DatabaseService.Repositories;
+
     public class OrderElementStatement : ElementStatement
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();

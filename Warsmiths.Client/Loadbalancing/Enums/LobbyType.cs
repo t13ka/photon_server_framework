@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing.Enums
+namespace YourGame.Client.Loadbalancing.Enums
 {
     /// <summary>
     /// Options of lobby types available. Lobby types might be implemented in certain Photon versions and won't be available on older servers.

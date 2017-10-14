@@ -1,20 +1,18 @@
-﻿using ExitGames.Logging;
-
-using log4net.Core;
-
-using Photon.SocketServer;
-using Photon.SocketServer.Rpc;
-
-using PhotonHostRuntimeInterfaces;
-
-using Warsmiths.Server.Framework.Caching;
-using Warsmiths.Server.Framework.Messages;
-using Warsmiths.Server.Framework.Operations;
-
-using ILogger = ExitGames.Logging.ILogger;
-
-namespace Warsmiths.Server.Framework
+﻿namespace YourGame.Server.Framework
 {
+    using ExitGames.Logging;
+
+    using Photon.SocketServer;
+    using Photon.SocketServer.Rpc;
+
+    using PhotonHostRuntimeInterfaces;
+
+    using YourGame.Server.Framework.Caching;
+    using YourGame.Server.Framework.Messages;
+    using YourGame.Server.Framework.Operations;
+
+    using ILogger = ExitGames.Logging.ILogger;
+
     public class PlayerPeer : PeerBase
     {
         #region Constants and Fields

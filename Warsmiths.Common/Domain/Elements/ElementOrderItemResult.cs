@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Common.Domain.Elements
+﻿namespace YourGame.Common.Domain.Elements
 {
+    using System;
+
     public class ElementOrderItemResult
     {
         public string ElementId ;

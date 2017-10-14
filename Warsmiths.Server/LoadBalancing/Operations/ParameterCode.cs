@@ -1,7 +1,7 @@
-﻿using Warsmiths.Server.Framework.Operations;
-
-namespace Warsmiths.Server.Operations
+﻿namespace Warsmiths.Server.Operations
 {
+    using YourGame.Server.Framework.Operations;
+
     public enum ParameterCode : byte
     {
         // parameters inherited from framework

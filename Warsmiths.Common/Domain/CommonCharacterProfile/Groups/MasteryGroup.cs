@@ -1,10 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
-using Warsmiths.Common.Domain.CommonCharacterProfile.Primary;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile.Groups
+namespace YourGame.Common.Domain.CommonCharacterProfile.Groups
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using YourGame.Common.Domain.CommonCharacterProfile.Primary;
+    using YourGame.Common.Domain.Enums;
+
     public class MasteryGroup
     {
         public static readonly float[] ModBossPoint = {1, 1.2f, 1.3f, 1, 4f, 1, 55f, 1.7f, 2f};

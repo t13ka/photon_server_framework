@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace Warsmiths.Server.Framework.Caching
+﻿namespace YourGame.Server.Framework.Caching
 {
+    using System.Collections;
+    using System.Collections.Generic;
+
     public class EventCacheDictionary : IEnumerable<KeyValuePair<int, EventCache>>
     {
         private readonly Dictionary<int, EventCache> _dictionary = new Dictionary<int, EventCache>();

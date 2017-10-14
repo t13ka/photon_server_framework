@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Skills.Primary
+﻿namespace YourGame.Common.Domain.Skills.Primary
 {
+    using YourGame.Common.Domain.Enums;
+
     public class APenetration : BaseSkill
     {
         public APenetration()

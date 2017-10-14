@@ -3,10 +3,10 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
+    using System.Collections.Generic;
+
     /// <summary>
     ///     A channel of communication in Photon Chat, updated by ChatClient and provided as READ ONLY.
     /// </summary>

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Warsmiths.Common.Domain;
+
 using Warsmiths.Server.MasterServer;
 
 namespace Warsmiths.Server.Factories
 {
+    using YourGame.Common.Domain;
+
     public static class PlayerFactory
     {
         public static Player CreateDefaultPlayerAccount(string login, string password, string firstName, string lastName, 

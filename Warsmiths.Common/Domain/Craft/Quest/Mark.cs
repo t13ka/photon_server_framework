@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Craft.Quest
+﻿namespace YourGame.Common.Domain.Craft.Quest
 {
+    using YourGame.Common.Domain.Enums;
+
     public class Mark
     {
         public byte X;

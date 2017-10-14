@@ -3,17 +3,20 @@
 // <remarks>ChatClient is the main class of this api.</remarks>
 // ----------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using ExitGames.Client.Photon;
+
 
 #if UNITY_3_5 || UNITY_4 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_5_0
 #define UNITY
 #endif
 
-namespace Warsmiths.Client.ChatApi
+namespace YourGame.Client.ChatApi
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+
+    using ExitGames.Client.Photon;
+
     /// <summary>Central class of the Photon Chat API to connect, handle channels and messages.</summary>
     /// <remarks>
     /// This class must be instantiated with a IChatClientListener instance to get the callbacks.

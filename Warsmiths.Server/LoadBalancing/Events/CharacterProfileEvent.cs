@@ -2,12 +2,14 @@
 
 namespace Warsmiths.Server.Events
 {
+    using YourGame.Common;
+
     public class CharacterProfileEvent : DataContract
     {
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.Name, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.Name, IsOptional = false)]
         public string CharacterName ;
 
-        [DataMember(Code = (byte)Warsmiths.Common.ParameterCode.ProfileData, IsOptional = false)]
+        [DataMember(Code = (byte)ParameterCode.ProfileData, IsOptional = false)]
         public string CharacterProfileData ;
     }
 }

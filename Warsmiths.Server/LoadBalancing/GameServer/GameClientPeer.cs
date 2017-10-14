@@ -2,19 +2,22 @@
 using ExitGames.Logging;
 using Photon.SocketServer;
 using PhotonHostRuntimeInterfaces;
-using Warsmiths.Common;
-using Warsmiths.Server.Framework;
-using Warsmiths.Server.Framework.Caching;
-using Warsmiths.Server.Framework.Messages;
-using Warsmiths.Server.Framework.Operations;
-using Warsmiths.Server.Operations.Request.Auth;
 
-using OperationCode = Warsmiths.Server.Framework.Operations.OperationCode;
-using ParameterCode = Warsmiths.Server.Operations.ParameterCode;
+using Warsmiths.Server.Operations.Request.Auth;
 
 namespace Warsmiths.Server.GameServer
 {
     using Warsmiths.Server.Operations.Request.GameManagement;
+
+    using YourGame.Common;
+    using YourGame.Server.Framework;
+    using YourGame.Server.Framework.Caching;
+    using YourGame.Server.Framework.Messages;
+    using YourGame.Server.Framework.Operations;
+    using YourGame.Server.GameServer;
+
+    using OperationCode = YourGame.Server.Framework.Operations.OperationCode;
+    using ParameterCode = Warsmiths.Server.Operations.ParameterCode;
 
     public class GameClientPeer : PlayerPeer
     {
@@ -250,7 +253,7 @@ namespace Warsmiths.Server.GameServer
         {
             if (log.IsDebugEnabled)
             {
-                if (request.OperationCode != (byte) Framework.Operations.OperationCode.RaiseEvent)
+                if (request.OperationCode != (byte) OperationCode.RaiseEvent)
                 {
                     log.DebugFormat("OnOperationRequest: conId={0}, opCode={1}", ConnectionId, request.OperationCode);
                 }
@@ -274,11 +277,11 @@ namespace Warsmiths.Server.GameServer
                     HandleJoinGameOperation(request, sendParameters);
                     return;
 
-                case (byte) Framework.Operations.OperationCode.Leave:
+                case (byte) OperationCode.Leave:
                     HandleLeaveOperation(request, sendParameters);
                     return;
 
-                case (byte) Framework.Operations.OperationCode.Ping:
+                case (byte) OperationCode.Ping:
                     HandlePingOperation(request, sendParameters);
                     return;
 
@@ -286,10 +289,10 @@ namespace Warsmiths.Server.GameServer
                     HandleDebugGameOperation(request, sendParameters);
                     return;
 
-                case (byte) Framework.Operations.OperationCode.RaiseEvent:
-                case (byte) Framework.Operations.OperationCode.GetProperties:
-                case (byte) Framework.Operations.OperationCode.SetProperties:
-                case (byte) Framework.Operations.OperationCode.ChangeGroups:
+                case (byte) OperationCode.RaiseEvent:
+                case (byte) OperationCode.GetProperties:
+                case (byte) OperationCode.SetProperties:
+                case (byte) OperationCode.ChangeGroups:
                     HandleGameOperation(request, sendParameters);
                     return;
             }

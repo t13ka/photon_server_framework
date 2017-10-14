@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Warsmiths.Common.Domain.CommonCharacterProfile.Groups;
-using Warsmiths.Common.Domain.CommonCharacterProfile.Hidden;
-using Warsmiths.Common.Domain.Enums;
+﻿
 // ReSharper disable MergeConditionalExpression
 // ReSharper disable ForCanBeConvertedToForeach
 
-namespace Warsmiths.Common.Domain.CommonCharacterProfile
+namespace YourGame.Common.Domain.CommonCharacterProfile
 {
+    using System;
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.CommonCharacterProfile.Groups;
+    using YourGame.Common.Domain.CommonCharacterProfile.Hidden;
+    using YourGame.Common.Domain.Enums;
+
     public class CommonCharacterProfile
     {
         public static readonly int[] CommonAbv = { 195, 195, 234, 280, 336, 404, 485, 581, 698, 837, 1005, 1206, 1447, 1736, 2083, 2500 };

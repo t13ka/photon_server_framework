@@ -1,11 +1,13 @@
 ﻿using ExitGames.Logging;
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
-using Warsmiths.Common;
+
 using Warsmiths.Server.Operations;
 
 namespace Warsmiths.Server.MasterServer
 {
+    using YourGame.Common;
+
     /// <summary>
     ///     Provides static methods to validate operation requests and create
     ///     operation responses for invalid operation request.

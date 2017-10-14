@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain;
-
-namespace Warsmiths.Common.ListContainer
+﻿namespace YourGame.Common.ListContainer
 {
+    using YourGame.Common.Domain;
+
     public class EquipmentListContainer
     {
         public CharacterEquipment Equipments ;

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Craft.Grid
+﻿namespace YourGame.Common.Domain.Craft.Grid
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Enums;
+
     public class BaseGrid : BaseCell
     {
         public List<GridStatusTypes> Status = new List<GridStatusTypes>();

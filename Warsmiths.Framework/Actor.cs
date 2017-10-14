@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-
-using Photon.SocketServer;
-
-using Warsmiths.Server.Framework.Common;
-
-namespace Warsmiths.Server.Framework
+namespace YourGame.Server.Framework
 {
+    using System.Collections.Generic;
+
+    using Photon.SocketServer;
+
+    using YourGame.Server.Framework.Common;
+
     public class Actor
     {
         private readonly List<ActorGroup> _groups = new List<ActorGroup>();

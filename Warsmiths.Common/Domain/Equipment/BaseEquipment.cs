@@ -1,8 +1,7 @@
-﻿using System;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Equipment
+﻿namespace YourGame.Common.Domain.Equipment
 {
+    using YourGame.Common.Domain.Enums;
+
     public class BaseEquipment : IEntity
     {
         #region Props

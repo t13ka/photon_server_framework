@@ -4,12 +4,14 @@ using Photon.SocketServer;
 
 using PhotonHostRuntimeInterfaces;
 
-using Warsmiths.Common;
 using Warsmiths.Server.Common;
 using Warsmiths.Server.Operations.Response;
 
 namespace Warsmiths.Server.MasterServer
 {
+    using YourGame.Common;
+    using YourGame.Server.MasterServer;
+
     public class RedirectedClientPeer : PeerBase
     {
         #region Constructors and Destructors

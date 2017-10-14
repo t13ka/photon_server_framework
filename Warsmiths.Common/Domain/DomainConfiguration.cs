@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.Common.Domain.Equipment.Purchase;
-using Warsmiths.Common.Utils;
+﻿
 
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable ForCanBeConvertedToForeach
 
 // ReSharper disable SwitchStatementMissingSomeCases
 
-namespace Warsmiths.Common.Domain
+namespace YourGame.Common.Domain
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Domain.Equipment;
+    using YourGame.Common.Domain.Equipment.Purchase;
+    using YourGame.Common.Utils;
+
     public class DomainConfiguration : IEntity
     {
         #region Fields

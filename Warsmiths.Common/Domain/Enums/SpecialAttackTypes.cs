@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Attributes;
-
-namespace Warsmiths.Common.Domain.Enums
+﻿namespace YourGame.Common.Domain.Enums
 {
+    using YourGame.Common.Attributes;
+
     public enum SpecialAttackTypes
     {
         None = 0,

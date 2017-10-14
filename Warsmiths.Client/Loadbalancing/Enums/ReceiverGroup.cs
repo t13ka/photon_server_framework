@@ -1,4 +1,4 @@
-namespace Warsmiths.Client.Loadbalancing.Enums
+namespace YourGame.Client.Loadbalancing.Enums
 {
     /// <summary>
     /// Lite - OpRaiseEvent lets you chose which actors in the room should receive events.

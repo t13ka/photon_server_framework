@@ -1,39 +1,39 @@
-﻿namespace Warsmiths.Server.Framework.Operations
+﻿namespace YourGame.Server.Framework.Operations
 {
     public enum OperationCode : byte
     {
-        CustomOp = Warsmiths.Common.OperationCode.CustomOp,
+        CustomOp = YourGame.Common.OperationCode.CustomOp,
 
-        Join = Warsmiths.Common.OperationCode.Join,
+        Join = YourGame.Common.OperationCode.Join,
 
-        Leave = Warsmiths.Common.OperationCode.Leave,
+        Leave = YourGame.Common.OperationCode.Leave,
 
-        RaiseEvent = Warsmiths.Common.OperationCode.RaiseEvent,
+        RaiseEvent = YourGame.Common.OperationCode.RaiseEvent,
 
-        SetProperties = Warsmiths.Common.OperationCode.SetProperties,
+        SetProperties = YourGame.Common.OperationCode.SetProperties,
 
-        GetProperties = Warsmiths.Common.OperationCode.GetProperties,
+        GetProperties = YourGame.Common.OperationCode.GetProperties,
 
-        Ping = Warsmiths.Common.OperationCode.Ping,
+        Ping = YourGame.Common.OperationCode.Ping,
 
-        ChangeGroups = Warsmiths.Common.OperationCode.ChangeGroups,
+        ChangeGroups = YourGame.Common.OperationCode.ChangeGroups,
 
         // operation codes in load the balancing project
-        Authenticate = Warsmiths.Common.OperationCode.Authenticate,
+        Authenticate = YourGame.Common.OperationCode.Authenticate,
 
-        JoinLobby = Warsmiths.Common.OperationCode.JoinLobby,
+        JoinLobby = YourGame.Common.OperationCode.JoinLobby,
 
-        LeaveLobby = Warsmiths.Common.OperationCode.LeaveLobby,
+        LeaveLobby = YourGame.Common.OperationCode.LeaveLobby,
 
-        CreateGame = Warsmiths.Common.OperationCode.CreateGame,
+        CreateGame = YourGame.Common.OperationCode.CreateGame,
 
-        JoinGame = Warsmiths.Common.OperationCode.JoinGame,
+        JoinGame = YourGame.Common.OperationCode.JoinGame,
 
-        JoinRandomGame = Warsmiths.Common.OperationCode.JoinRandomGame,
+        JoinRandomGame = YourGame.Common.OperationCode.JoinRandomGame,
 
         // CancelJoinRandomGame = 224, currently not used 
-        DebugGame = Warsmiths.Common.OperationCode.DebugGame,
+        DebugGame = YourGame.Common.OperationCode.DebugGame,
 
-        FiendFriends = Warsmiths.Common.OperationCode.FiendFriends
+        FiendFriends = YourGame.Common.OperationCode.FiendFriends
     }
 }

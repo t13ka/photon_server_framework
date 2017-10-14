@@ -1,20 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using ExitGames.Concurrency.Fibers;
-using ExitGames.Logging;
-
-using Photon.SocketServer;
-
-using Warsmiths.Server.Framework.Caching;
-using Warsmiths.Server.Framework.Common;
-using Warsmiths.Server.Framework.Events;
-using Warsmiths.Server.Framework.Messages;
-
-namespace Warsmiths.Server.Framework
+namespace YourGame.Server.Framework
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using ExitGames.Concurrency.Fibers;
+    using ExitGames.Logging;
+
+    using Photon.SocketServer;
+
+    using YourGame.Server.Framework.Caching;
+    using YourGame.Server.Framework.Common;
+    using YourGame.Server.Framework.Events;
+    using YourGame.Server.Framework.Messages;
+
     public class Room : IDisposable
     {
         #region Implemented Interfaces

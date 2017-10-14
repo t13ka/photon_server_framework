@@ -1,8 +1,11 @@
-﻿using Warsmiths.Server.Framework;
-using Warsmiths.Server.Framework.Caching;
-
-namespace Warsmiths.Server.GameServer
+﻿namespace YourGame.Server.GameServer
 {
+    using Warsmiths.Server.GameServer;
+
+    using YourGame.Server.Framework;
+    using YourGame.Server.Framework.Caching;
+    using YourGame.Server.GameServer;
+
     public class GameCache : RoomCacheBase
     {
         public static readonly GameCache Instance = new GameCache();

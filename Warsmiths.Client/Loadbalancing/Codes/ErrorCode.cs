@@ -1,7 +1,7 @@
-using System;
-
-namespace Warsmiths.Client.Loadbalancing.Codes
+namespace YourGame.Client.Loadbalancing.Codes
 {
+    using System;
+
     /// <summary>
     /// ErrorCode defines the default codes associated with Photon client/server communication.
     /// </summary>

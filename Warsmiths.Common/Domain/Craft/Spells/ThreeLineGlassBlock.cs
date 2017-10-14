@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Warsmiths.Common.Domain.Craft.Grid;
-
-namespace Warsmiths.Common.Domain.Craft.Spells
+﻿namespace YourGame.Common.Domain.Craft.Spells
 {
+    using YourGame.Common.Domain.Craft.Grid;
+
     public class ThreeLineGlassBlock : CraftSpell
     {
         public bool Died;

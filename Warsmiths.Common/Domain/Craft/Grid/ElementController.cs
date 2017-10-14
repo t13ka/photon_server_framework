@@ -1,9 +1,9 @@
-﻿using System;
-
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Craft.Grid
+﻿namespace YourGame.Common.Domain.Craft.Grid
 {
+    using System;
+
+    using YourGame.Common.Domain.Enums;
+
     public class ElementController : BaseController
     {
         [NonSerialized]

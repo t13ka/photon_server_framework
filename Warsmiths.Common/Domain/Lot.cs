@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
+    using System;
+
     public class Lot : IEntity
     {
         #region Ctor

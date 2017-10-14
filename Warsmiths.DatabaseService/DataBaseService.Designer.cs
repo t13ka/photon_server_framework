@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Warsmiths.DatabaseService {
+namespace YourGame.DatabaseService {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    internal sealed partial class DataBaseService : System.Configuration.ApplicationSettingsBase {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+    internal sealed partial class DataBaseService : global::System.Configuration.ApplicationSettingsBase {
         
-        private static DataBaseService defaultInstance = ((DataBaseService)(Synchronized(new DataBaseService())));
+        private static DataBaseService defaultInstance = ((DataBaseService)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new DataBaseService())));
         
         public static DataBaseService Default {
             get {

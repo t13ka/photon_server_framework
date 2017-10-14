@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
+    using System.Collections.Generic;
+
+    using YourGame.Common.Domain.Enums;
+
     public class LevelingSystem
     {
         public static void LevlUp(Domain.Player player, Character character, bool zerolevel = false)

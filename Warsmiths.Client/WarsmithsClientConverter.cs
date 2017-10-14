@@ -5,15 +5,17 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Warsmiths.Common.Domain;*/
 
-using System;
-using System.Linq;
-using System.Reflection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Warsmiths.Common.Domain;
-
-namespace Warsmiths.Client
+namespace YourGame.Client
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
+    using YourGame.Common.Domain;
+
     public class WarsmithsClientConverter : JsonConverter
     {
         private Type[] Types ;

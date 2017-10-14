@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Equipment
+﻿namespace YourGame.Common.Domain.Equipment
 {
     public class BaseCraftPart : BaseItem
     {

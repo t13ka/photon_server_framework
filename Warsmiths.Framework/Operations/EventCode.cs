@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Server.Framework.Operations
+﻿namespace YourGame.Server.Framework.Operations
 {
     internal enum EventCode : byte
     {

@@ -1,8 +1,7 @@
-﻿using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Elements;
-
-namespace Warsmiths.Server.Services.Economic
+﻿namespace Warsmiths.Server.Services.Economic
 {
+    using YourGame.Common.Domain;
+
     public class GlobalElementStatement
     {
         public BaseElement Element ;

@@ -5,7 +5,7 @@
     using Photon.SocketServer;
     using Photon.SocketServer.Rpc;
 
-    using Warsmiths.Server.Framework.Operations;
+    using YourGame.Server.Framework.Operations;
 
     public class JoinGameRequest : JoinRequest
     {

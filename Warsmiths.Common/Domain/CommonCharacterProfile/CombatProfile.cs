@@ -1,9 +1,9 @@
-﻿using Warsmiths.Common.Domain.CommonCharacterProfile.Attributes;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Utils;
-
-namespace Warsmiths.Common.Domain.CommonCharacterProfile
+﻿namespace YourGame.Common.Domain.CommonCharacterProfile
 {
+    using YourGame.Common.Domain.CommonCharacterProfile.Attributes;
+    using YourGame.Common.Domain.Enums;
+    using YourGame.Common.Utils;
+
     public class CombatMelee
     {
         public Atribute<int> Attack;

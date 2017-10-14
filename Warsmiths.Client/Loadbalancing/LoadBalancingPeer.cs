@@ -1,11 +1,13 @@
-using System;
-using System.Collections.Generic;
-using ExitGames.Client.Photon;
-using Warsmiths.Client.Loadbalancing.Codes;
-using Warsmiths.Client.Loadbalancing.Enums;
-
-namespace Warsmiths.Client.Loadbalancing
+namespace YourGame.Client.Loadbalancing
 {
+    using System;
+    using System.Collections.Generic;
+
+    using ExitGames.Client.Photon;
+
+    using YourGame.Client.Loadbalancing.Codes;
+    using YourGame.Client.Loadbalancing.Enums;
+
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_DASHBOARD_WIDGET || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_WII || UNITY_IPHONE || UNITY_ANDROID || UNITY_PS3 || UNITY_XBOX360 || UNITY_NACL  || UNITY_FLASH  || UNITY_BLACKBERRY || UNITY_PSP2 || UNITY_WEBGL
 #endif
 

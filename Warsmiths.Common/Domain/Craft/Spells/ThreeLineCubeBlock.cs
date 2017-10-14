@@ -1,10 +1,12 @@
-﻿using Warsmiths.Common.Domain.Craft.Grid;
-using Warsmiths.Common.Domain.Enums;
+﻿
 // ReSharper disable DelegateSubtraction
 
 
-namespace Warsmiths.Common.Domain.Craft.Spells
+namespace YourGame.Common.Domain.Craft.Spells
 {
+    using YourGame.Common.Domain.Craft.Grid;
+    using YourGame.Common.Domain.Enums;
+
     public class ThreeLineCubeBlock : CraftSpell
     {
         public bool Died;

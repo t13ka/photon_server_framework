@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain.Craft.Spells.SavedClasses
+﻿namespace YourGame.Common.Domain.Craft.Spells.SavedClasses
 {
+    using YourGame.Common.Domain.Enums;
+
     public  class CraftSpellSaved
     {
         public CraftSpellTypes SpellType;

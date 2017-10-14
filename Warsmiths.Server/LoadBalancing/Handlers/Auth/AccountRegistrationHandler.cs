@@ -5,13 +5,6 @@ using ExitGames.Logging;
 
 using Photon.SocketServer;
 
-using Warsmiths.Client;
-using Warsmiths.Common;
-using Warsmiths.Common.Domain;
-using Warsmiths.Common.Domain.Enums;
-using Warsmiths.Common.Domain.Equipment;
-using Warsmiths.DatabaseService.Repositories;
-using Warsmiths.Server.Framework.Handlers;
 using Warsmiths.Server.MasterServer;
 using Warsmiths.Server.Operations.Request.Auth;
 
@@ -19,6 +12,12 @@ using PlayerFactory = Warsmiths.Server.Factories.PlayerFactory;
 
 namespace Warsmiths.Server.Handlers.Auth
 {
+    using YourGame.Common;
+    using YourGame.Common.Domain;
+    using YourGame.Common.Domain.Equipment;
+    using YourGame.DatabaseService.Repositories;
+    using YourGame.Server.Framework.Handlers;
+
     public class AccountRegistrationHandler : BaseHandler
     {
         private readonly ILogger _log = LogManager.GetCurrentClassLogger();

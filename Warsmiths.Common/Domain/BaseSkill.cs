@@ -1,7 +1,7 @@
-﻿using Warsmiths.Common.Domain.Enums;
-
-namespace Warsmiths.Common.Domain
+﻿namespace YourGame.Common.Domain
 {
+    using YourGame.Common.Domain.Enums;
+
     public class BaseSkill : IEntity
     {
         #region Props

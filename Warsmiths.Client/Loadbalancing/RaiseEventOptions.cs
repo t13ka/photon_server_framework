@@ -1,7 +1,7 @@
-using Warsmiths.Client.Loadbalancing.Enums;
-
-namespace Warsmiths.Client.Loadbalancing
+namespace YourGame.Client.Loadbalancing
 {
+    using YourGame.Client.Loadbalancing.Enums;
+
     /// <summary>
     /// Aggregates several less-often used options for operation RaiseEvent. 
     /// See field descriptions for usage details.

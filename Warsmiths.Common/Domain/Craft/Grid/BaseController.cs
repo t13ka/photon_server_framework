@@ -1,4 +1,4 @@
-﻿namespace Warsmiths.Common.Domain.Craft.Grid
+﻿namespace YourGame.Common.Domain.Craft.Grid
 {
     public class BaseController : IEntity
     {

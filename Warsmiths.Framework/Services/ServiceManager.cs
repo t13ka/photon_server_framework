@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-using ExitGames.Logging;
-
-namespace Warsmiths.Server.Framework.Services
+﻿namespace YourGame.Server.Framework.Services
 {
+    using System;
+    using System.Collections.Generic;
+
+    using ExitGames.Logging;
+
     public class ServiceManager
     {
         /// <summary>

@@ -11,6 +11,8 @@ using Warsmiths.Server.LoadShedding.Diagnostics;
 
 namespace Warsmiths.Server.LoadShedding
 {
+    using YourGame.Server.GameServer;
+
     public class WorkloadController
     {
         #region Constructors and Destructors

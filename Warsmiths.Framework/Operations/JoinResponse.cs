@@ -1,9 +1,9 @@
-﻿using System.Collections;
-
-using Photon.SocketServer.Rpc;
-
-namespace Warsmiths.Server.Framework.Operations
+﻿namespace YourGame.Server.Framework.Operations
 {
+    using System.Collections;
+
+    using Photon.SocketServer.Rpc;
+
     public class JoinResponse
     {
         #region Properties

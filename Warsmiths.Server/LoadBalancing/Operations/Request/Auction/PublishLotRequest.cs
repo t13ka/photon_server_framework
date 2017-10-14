@@ -3,6 +3,8 @@ using Photon.SocketServer.Rpc;
 
 namespace Warsmiths.Server.Operations.Request.Auction
 {
+    using YourGame.Common;
+
     public class PublishLotRequest : Operation
     {
         public PublishLotRequest(IRpcProtocol protocol, OperationRequest operationRequest)
@@ -10,10 +12,10 @@ namespace Warsmiths.Server.Operations.Request.Auction
         {
         }
        
-        [DataMember(Code = (byte) Warsmiths.Common.ParameterCode.EquipmentId, IsOptional = false)]
+        [DataMember(Code = (byte) ParameterCode.EquipmentId, IsOptional = false)]
         public string EquipmentId ;
 
-        [DataMember(Code = (byte) Warsmiths.Common.ParameterCode.Money, IsOptional = false)]
+        [DataMember(Code = (byte) ParameterCode.Money, IsOptional = false)]
         public int Money ;
     }
 }
