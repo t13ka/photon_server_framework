@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{29871B7D-08A0-40B1-92F1-474865FB4484}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{733DC573-F659-459A-B07A-0CCEAF68305B}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\ExitGames.Logging.Log4Net.dll = Libs\ExitGames.Logging.Log4Net.dll
+		Libs\ExitGamesLibs.dll = Libs\ExitGamesLibs.dll
+		Libs\log4net.dll = Libs\log4net.dll
+		Libs\nunit.framework.dll = Libs\nunit.framework.dll
+		Libs\Photon.SocketServer.dll = Libs\Photon.SocketServer.dll
+		Libs\Photon3DotNet.dll = Libs\Photon3DotNet.dll
+		Libs\Photon3Unity3D.dll = Libs\Photon3Unity3D.dll
+		Libs\PhotonHostRuntimeInterfaces.dll = Libs\PhotonHostRuntimeInterfaces.dll
+		Libs\PhotonLoadbalancingApi.dll = Libs\PhotonLoadbalancingApi.dll
+		Libs\UnityEditor.dll = Libs\UnityEditor.dll
+		Libs\UnityEngine.dll = Libs\UnityEngine.dll
+		Libs\YourGame.Common.dll = Libs\YourGame.Common.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YourGame.Server", "LoadBalancing\YourGame.Server.csproj", "{918525F6-635E-4D56-A85C-7F4C5E95E822}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{430DCB93-FADB-43BF-97EF-F7E8BE6A1CA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientUnity3d", "ClientUnity3d", "{9F034806-EF1F-4BBA-9F79-69D306DB2577}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D75A002F-C6B0-4D72-A492-B3958A772D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YourGame.Common", "..\YourGame.Common\YourGame.Common.csproj", "{96BE4612-C41F-499D-ADCC-B113B10B2040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YourGame.DatabaseService", "..\YourGame.DatabaseService\YourGame.DatabaseService.csproj", "{D7785DA6-652A-4541-AD68-BB8029B9F759}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YourGame.Server.Framework", "..\YourGame.Framework\YourGame.Server.Framework.csproj", "{E1F918F4-F581-4280-9D91-3CF77B24C290}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YourGame.Client", "..\YourGame.Client\YourGame.Client.csproj", "{B30C074C-71FE-488A-8D17-498C8F1D92ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{918525F6-635E-4D56-A85C-7F4C5E95E822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918525F6-635E-4D56-A85C-7F4C5E95E822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918525F6-635E-4D56-A85C-7F4C5E95E822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918525F6-635E-4D56-A85C-7F4C5E95E822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96BE4612-C41F-499D-ADCC-B113B10B2040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96BE4612-C41F-499D-ADCC-B113B10B2040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96BE4612-C41F-499D-ADCC-B113B10B2040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96BE4612-C41F-499D-ADCC-B113B10B2040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7785DA6-652A-4541-AD68-BB8029B9F759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7785DA6-652A-4541-AD68-BB8029B9F759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7785DA6-652A-4541-AD68-BB8029B9F759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7785DA6-652A-4541-AD68-BB8029B9F759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1F918F4-F581-4280-9D91-3CF77B24C290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1F918F4-F581-4280-9D91-3CF77B24C290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1F918F4-F581-4280-9D91-3CF77B24C290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1F918F4-F581-4280-9D91-3CF77B24C290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B30C074C-71FE-488A-8D17-498C8F1D92ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B30C074C-71FE-488A-8D17-498C8F1D92ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B30C074C-71FE-488A-8D17-498C8F1D92ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B30C074C-71FE-488A-8D17-498C8F1D92ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{918525F6-635E-4D56-A85C-7F4C5E95E822} = {29871B7D-08A0-40B1-92F1-474865FB4484}
+		{96BE4612-C41F-499D-ADCC-B113B10B2040} = {D75A002F-C6B0-4D72-A492-B3958A772D33}
+		{D7785DA6-652A-4541-AD68-BB8029B9F759} = {430DCB93-FADB-43BF-97EF-F7E8BE6A1CA2}
+		{E1F918F4-F581-4280-9D91-3CF77B24C290} = {29871B7D-08A0-40B1-92F1-474865FB4484}
+		{B30C074C-71FE-488A-8D17-498C8F1D92ED} = {9F034806-EF1F-4BBA-9F79-69D306DB2577}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93E3DA9B-2D0C-48A1-A377-BBABF0820A22}
+	EndGlobalSection
+EndGlobal

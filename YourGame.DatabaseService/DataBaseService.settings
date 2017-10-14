@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="YourGame.DatabaseService" GeneratedClassName="DataBaseService">
+  <Profiles />
+  <Settings>
+    <Setting Name="DatabaseConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mongodb://localhost:27017</Value>
+    </Setting>
+    <Setting Name="DataBaseInternalName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">YourGame</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

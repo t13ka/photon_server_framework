@@ -1,0 +1,8 @@
+W:\Projects\Repos\t13ka\Photon\deploy\YourGame\MasterServer\bin\log4net.config
+W:\Projects\Repos\t13ka\Photon\deploy\YourGame\MasterServer\bin\YourGame.Server.dll.config
+W:\Projects\Repos\t13ka\Photon\deploy\YourGame\MasterServer\bin\YourGame.Server.dll
+W:\Projects\Repos\t13ka\Photon\deploy\YourGame\MasterServer\bin\YourGame.Server.pdb
+W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Server\LoadBalancing\obj\Debug\YourGame.Server.csprojResolveAssemblyReference.cache
+W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Server\LoadBalancing\obj\Debug\YourGame.Server.csproj.CoreCompileInputs.cache
+W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Server\LoadBalancing\obj\Debug\YourGame.Server.dll
+W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Server\LoadBalancing\obj\Debug\YourGame.Server.pdb
