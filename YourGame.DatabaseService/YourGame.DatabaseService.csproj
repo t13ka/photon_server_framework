@@ -91,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository.cs" />
-    <Compile Include="Repositories\DomainConfigRepository.cs" />
     <Compile Include="Repositories\PlayerRepository.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="BsonMappingConfigurator.cs" />
