@@ -17,10 +17,6 @@ namespace YourGame.Server.Framework
 
     public class Room : IDisposable
     {
-        #region Implemented Interfaces
-
-        #region IDisposable
-
         /// <summary>
         ///     Releases resources used by this instance.
         /// </summary>
@@ -30,12 +26,6 @@ namespace YourGame.Server.Framework
             GC.SuppressFinalize(this);
         }
 
-        #endregion
-
-        #endregion
-
-        #region Constants and Fields
-
         protected static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         private IDisposable _removeTimer;
@@ -43,10 +33,6 @@ namespace YourGame.Server.Framework
         private readonly RoomCacheBase _roomCache;
 
         private int _emptyRoomLiveTime;
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public Room(string name, RoomCacheBase roomCache = null, int emptyRoomLiveTime = 0)
             : this(name, new PoolFiber(), roomCache, emptyRoomLiveTime)
@@ -68,10 +54,6 @@ namespace YourGame.Server.Framework
         {
             Dispose(false);
         }
-
-        #endregion
-
-        #region Properties
 
         public PoolFiber ExecutionFiber { get; }
 
@@ -97,10 +79,6 @@ namespace YourGame.Server.Framework
         public PropertyBag<object> Properties { get; }
 
         protected ActorCollection Actors { get; }
-
-        #endregion
-
-        #region Public Methods
 
         public override string ToString()
         {
@@ -147,10 +125,6 @@ namespace YourGame.Server.Framework
         {
             return ExecutionFiber.Schedule(() => ProcessMessage(message), timeMs);
         }
-
-        #endregion
-
-        #region Methods
 
         protected virtual void Dispose(bool dispose)
         {
@@ -222,7 +196,5 @@ namespace YourGame.Server.Framework
                 Log.DebugFormat("Tried to remove room: roomName={0}, removed={1}", Name, removed);
             }
         }
-
-        #endregion
     }
 }

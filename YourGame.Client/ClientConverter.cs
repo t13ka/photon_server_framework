@@ -11,12 +11,14 @@
 
     public class ClientConverter : JsonConverter
     {
-        private Type[] Types;
+        private readonly Type[] Types;
 
         public ClientConverter()
         {
             Types = Assembly.Load("YourGame.Common").GetTypes();
         }
+
+        public override bool CanWrite => false;
 
         public override bool CanConvert(Type objectType)
         {
@@ -62,14 +64,6 @@
             }
 
             return null;
-        }
-
-        public override bool CanWrite
-        {
-            get
-            {
-                return false;
-            }
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

@@ -1,4 +1,4 @@
-﻿namespace YourGame.Server.Framework.DataBaseService
+﻿namespace YourGame.DatabaseService
 {
     using System;
     using System.Collections.Generic;

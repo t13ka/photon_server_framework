@@ -9,7 +9,6 @@
     using MongoDB.Driver;
 
     using YourGame.Common.Domain;
-    using YourGame.Server.Framework.DataBaseService;
 
     public class BaseRepository<T> : IRepository<T>
         where T : IEntity

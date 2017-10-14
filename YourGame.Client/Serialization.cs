@@ -23,6 +23,12 @@
             return serializer.Deserialize<T>(reader);
         }
 
+        public static T FromJson<T>(this string data)
+        {
+            var serializer = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            return JsonConvert.DeserializeObject<T>(data, serializer);
+        }
+
         public static byte[] ToBson(this object t)
         {
             var stream = new MemoryStream();
@@ -31,12 +37,6 @@
             var writer = new BsonWriter(stream);
             serializer.Serialize(writer, t);
             return stream.ToArray();
-        }
-
-        public static T FromJson<T>(this string data)
-        {
-            var serializer = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            return JsonConvert.DeserializeObject<T>(data, serializer);
         }
 
         public static string ToJson(this object t)

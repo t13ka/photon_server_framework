@@ -33,7 +33,6 @@ namespace YourGame.Client.ChatApi
         /// </summary>
         public readonly List<string> Senders = new List<string>();
 
-
         /// <summary>
         ///     Used internally to create new channels. This does NOT create a channel on the server! Use
         ///     ChatClient.Subscribe.
@@ -47,10 +46,7 @@ namespace YourGame.Client.ChatApi
         public bool IsPrivate { get; protected internal set; }
 
         /// <summary>Count of messages this client still buffers/knows for this channel.</summary>
-        public int MessageCount
-        {
-            get { return Messages.Count; }
-        }
+        public int MessageCount => Messages.Count;
 
         /// <summary>Used internally to add messages to this channel.</summary>
         public void Add(string sender, object message)

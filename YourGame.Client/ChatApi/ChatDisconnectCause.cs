@@ -15,31 +15,55 @@ namespace YourGame.Client.ChatApi
         /// <summary>OnStatusChanged: The CCUs count of your Photon Server License is exausted (temporarily).</summary>
         DisconnectByServerUserLimit,
 
-        /// <summary>OnStatusChanged: The server is not available or the address is wrong. Make sure the port is provided and the server is up.</summary>
+        /// <summary>
+        ///     OnStatusChanged: The server is not available or the address is wrong. Make sure the port is provided and the
+        ///     server is up.
+        /// </summary>
         ExceptionOnConnect,
 
-        /// <summary>OnStatusChanged: The server disconnected this client. Most likely the server's send buffer is full (receiving too much from other clients).</summary>
+        /// <summary>
+        ///     OnStatusChanged: The server disconnected this client. Most likely the server's send buffer is full (receiving
+        ///     too much from other clients).
+        /// </summary>
         DisconnectByServer,
 
-        /// <summary>OnStatusChanged: This client detected that the server's responses are not received in due time. Maybe you send / receive too much?</summary>
+        /// <summary>
+        ///     OnStatusChanged: This client detected that the server's responses are not received in due time. Maybe you send
+        ///     / receive too much?
+        /// </summary>
         TimeoutDisconnect,
 
         /// <summary>OnStatusChanged: Some internal exception caused the socket code to fail. Contact Exit Games.</summary>
         Exception,
 
-        /// <summary>OnOperationResponse: Authenticate in the Photon Cloud with invalid AppId. Update your subscription or contact Exit Games.</summary>
+        /// <summary>
+        ///     OnOperationResponse: Authenticate in the Photon Cloud with invalid AppId. Update your subscription or contact
+        ///     Exit Games.
+        /// </summary>
         InvalidAuthentication,
 
-        /// <summary>OnOperationResponse: Authenticate (temporarily) failed when using a Photon Cloud subscription without CCU Burst. Update your subscription.</summary>
+        /// <summary>
+        ///     OnOperationResponse: Authenticate (temporarily) failed when using a Photon Cloud subscription without CCU
+        ///     Burst. Update your subscription.
+        /// </summary>
         MaxCcuReached,
 
-        /// <summary>OnOperationResponse: Authenticate when the app's Photon Cloud subscription is locked to some (other) region(s). Update your subscription or master server address.</summary>
+        /// <summary>
+        ///     OnOperationResponse: Authenticate when the app's Photon Cloud subscription is locked to some (other)
+        ///     region(s). Update your subscription or master server address.
+        /// </summary>
         InvalidRegion,
 
-        /// <summary>OnOperationResponse: Operation that's (currently) not available for this client (not authorized usually). Only tracked for op Authenticate.</summary>
+        /// <summary>
+        ///     OnOperationResponse: Operation that's (currently) not available for this client (not authorized usually). Only
+        ///     tracked for op Authenticate.
+        /// </summary>
         OperationNotAllowedInCurrentState,
 
-        /// <summary>OnOperationResponse: Authenticate in the Photon Cloud with invalid client values or custom authentication setup in Cloud Dashboard.</summary>
-        CustomAuthenticationFailed,
+        /// <summary>
+        ///     OnOperationResponse: Authenticate in the Photon Cloud with invalid client values or custom authentication
+        ///     setup in Cloud Dashboard.
+        /// </summary>
+        CustomAuthenticationFailed
     }
 }

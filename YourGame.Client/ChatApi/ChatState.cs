@@ -42,6 +42,6 @@ namespace YourGame.Client.ChatApi
         Disconnecting,
 
         /// <summary>The client is no longer connected (to any server). Connect to master to go on.</summary>
-        Disconnected,
+        Disconnected
     }
 }

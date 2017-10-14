@@ -7,55 +7,45 @@
 
     public class Player : IEntity
     {
-        #region Props
+        public short Age;
 
-        public string Login;
+        public bool Banned;
 
-        public string Password;
+        public int Crystals;
 
         public string Email;
 
         public string FirstName;
 
-        public string LastName;
-
-        public DateTime RegistrationDateTime;
-
-        public DateTime LastEnterDateTime;
-
-        public DateTime LastExitDateTime;
-
-        public string LastSessionIpAddress;
+        public List<IEntity> FirstTaskList = new List<IEntity>();
 
         public GenderTypes GenderType;
 
         public int Gold;
 
-        public int Crystals;
+        public int HealBox;
 
         public int Keys;
 
-        public int HealBox;
+        public DateTime LastEnterDateTime;
 
-        public bool Banned;
+        public DateTime LastExitDateTime;
 
-        public bool Donater;
+        public string LastName;
 
-        public short Age;
+        public string LastSessionIpAddress;
 
-        public RankTypes RankInClan;
-
-        public bool Online;
+        public string Login;
 
         public List<IEntity> NoneInventoryItems;
 
-        public List<IEntity> FirstTaskList = new List<IEntity>();
+        public bool Online;
 
-        public List<LvlRewardFeaturesTypes> LevelFeatures;
+        public string Password;
 
-        #endregion
+        public RankTypes RankInClan;
 
-        #region Ctor
+        public DateTime RegistrationDateTime;
 
         public Player(string login, string password, IEnumerable<IEntity> equipments)
         {
@@ -64,7 +54,6 @@
             Password = password;
             RegistrationDateTime = DateTime.UtcNow;
             NoneInventoryItems = new List<IEntity>();
-            LevelFeatures = new List<LvlRewardFeaturesTypes>();
             Banned = false;
             Crystals = 1000;
             Gold = 100000;
@@ -87,7 +76,6 @@
             Password = password;
             RegistrationDateTime = DateTime.UtcNow;
             NoneInventoryItems = new List<IEntity>();
-            LevelFeatures = new List<LvlRewardFeaturesTypes>();
             Banned = false;
             FirstName = firstname;
             LastName = lastname;
@@ -102,7 +90,5 @@
         {
             NoneInventoryItems = new List<IEntity>();
         }
-
-        #endregion
     }
 }

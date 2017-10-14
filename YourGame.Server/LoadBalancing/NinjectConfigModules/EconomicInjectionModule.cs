@@ -3,8 +3,8 @@
 namespace YourGame.Server.NinjectConfigModules
 {
     using YourGame.Common.Domain;
+    using YourGame.DatabaseService;
     using YourGame.DatabaseService.Repositories;
-    using YourGame.Server.Framework.DataBaseService;
 
     public class EconomicInjectionModule : NinjectModule
     {

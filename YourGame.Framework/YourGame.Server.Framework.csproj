@@ -106,7 +106,6 @@
     <Compile Include="Common\Property.cs" />
     <Compile Include="Common\PropertyBag.cs" />
     <Compile Include="Common\PropertyChangedEventArgs.cs" />
-    <Compile Include="DataBaseService\IRepository.cs" />
     <Compile Include="Diagnostics\OperationLogging\LogEntry.cs" />
     <Compile Include="Diagnostics\OperationLogging\LogQueue.cs" />
     <Compile Include="Events\PropertiesChangedEvent.cs" />

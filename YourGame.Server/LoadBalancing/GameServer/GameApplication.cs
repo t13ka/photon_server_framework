@@ -30,8 +30,6 @@ namespace YourGame.Server.GameServer
 
     public class GameApplication : ApplicationBase
     {
-        #region Constructors and Destructors
-
         public GameApplication()
         {
             UpdateMasterEndPoint();
@@ -45,15 +43,7 @@ namespace YourGame.Server.GameServer
             _reader = new NodesReader(ApplicationRootPath, CommonSettings.Default.NodesFileName);
         }
 
-        #endregion
-
-        #region Properties
-
         protected int ConnectRetryIntervalSeconds;
-
-        #endregion
-
-        #region Constants and Fields
 
         public static readonly Guid ServerId = Guid.NewGuid();
 
@@ -70,8 +60,6 @@ namespace YourGame.Server.GameServer
         private byte _isReconnecting;
 
         private Timer _masterConnectRetryTimer;
-
-        #endregion
 
         #region Public Properties
 
@@ -116,8 +104,6 @@ namespace YourGame.Server.GameServer
         public WorkloadController WorkloadController { get; protected set; }
 
         #endregion
-
-        #region Public Methods
 
         public void ConnectToMaster(IPEndPoint endPoint)
         {
@@ -165,10 +151,6 @@ namespace YourGame.Server.GameServer
             Thread.VolatileWrite(ref _isReconnecting, 1);
             _masterConnectRetryTimer = new Timer(o => ConnectToMaster(), null, ConnectRetryIntervalSeconds * 1000, 0);
         }
-
-        #endregion
-
-        #region Methods
 
         private void UpdateMasterEndPoint()
         {
@@ -365,7 +347,7 @@ namespace YourGame.Server.GameServer
             }
 
             CounterPublisher.DefaultInstance.AddStaticCounterClass(
-                typeof(YourGame.Server.Framework.Diagnostics.Counter),
+                typeof(Framework.Diagnostics.Counter),
                 ApplicationName);
             CounterPublisher.DefaultInstance.AddStaticCounterClass(typeof(Counter), ApplicationName);
 
@@ -516,7 +498,5 @@ namespace YourGame.Server.GameServer
 
             return latencyEndpointUdp;
         }
-
-        #endregion
     }
 }
