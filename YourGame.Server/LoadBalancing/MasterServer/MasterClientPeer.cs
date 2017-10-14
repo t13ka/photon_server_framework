@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using PhotonHostRuntimeInterfaces;
 
 using YourGame.Server.Handlers.Auth;
@@ -13,7 +15,6 @@ namespace YourGame.Server.MasterServer
 {
     using YourGame.Common;
     using YourGame.Common.Domain;
-    using YourGame.Common.Domain.VictoryPrizes;
     using YourGame.DatabaseService.Repositories;
     using YourGame.Server.Framework.Handlers;
     using YourGame.Server.Framework.Services;
@@ -21,6 +22,7 @@ namespace YourGame.Server.MasterServer
     public sealed class MasterClientPeer : PeerBase, ILobbyPeer
     {
         private readonly PlayerRepository _playerRepository;
+
         #region Constructors and Destructors
 
         public MasterClientPeer(InitRequest initRequest, GameApplication application)
@@ -32,6 +34,7 @@ namespace YourGame.Server.MasterServer
             {
                 runtimeService.Value.AddSubscriber(this);
             }
+
             _playerRepository = new PlayerRepository();
         }
 
@@ -53,40 +56,25 @@ namespace YourGame.Server.MasterServer
         /// </summary>
         private GameApplication _application;
 
-        private Character _currentCharacter;
-
-        public VictoryPrizesResult LastVictoryPrizesResult;
         #endregion
 
         #region Properties
 
         public string UserId { get; set; }
 
-        //public Player CurrentPlayer
-        //{
-        //    get
-        //    {
-        //        if (CurrentPlayerId == null)
-        //        {
-        //            return null;
-        //        }
-        //        else
-        //        {
-        //            return _playerRepository.GetById(CurrentPlayerId);
-        //        }
-        //    }
-        //}
-
         public Player GetCurrentPlayer()
         {
             return _playerRepository.GetById(CurrentPlayerId);
         }
 
-        public string CurrentPlayerId ;
+        public string CurrentPlayerId;
 
         public GameApplication Application
         {
-            get { return _application; }
+            get
+            {
+                return _application;
+            }
 
             protected set
             {
@@ -103,11 +91,15 @@ namespace YourGame.Server.MasterServer
             }
         }
 
-        public AppLobby AppLobby ;
+        public AppLobby AppLobby;
 
         public IGameListSubscibtion GameChannelSubscription
         {
-            get { return _gameChannelSubscription; }
+            get
+            {
+                return _gameChannelSubscription;
+            }
+
             set
             {
                 var oldsubscription = Interlocked.Exchange(ref _gameChannelSubscription, value);
@@ -150,27 +142,31 @@ namespace YourGame.Server.MasterServer
             }
         }
 
-        protected override void OnOperationRequest(OperationRequest operationRequest,
-            SendParameters sendParameters)
+        protected override void OnOperationRequest(OperationRequest operationRequest, SendParameters sendParameters)
         {
             var handler = HandlerPicker.GetHandler(operationRequest);
             if (handler == null)
             {
-                Log.DebugFormat(@"OnOperationRequest - can't pickup handler: pid={0}, op={1}", ConnectionId, operationRequest.OperationCode);
+                Log.DebugFormat(
+                    @"OnOperationRequest - can't pickup handler: pid={0}, op={1}",
+                    ConnectionId,
+                    operationRequest.OperationCode);
                 return;
             }
 
             if (Log.IsDebugEnabled)
             {
-                Log.DebugFormat(@"OnOperationRequest: pid={0}, op={1}, control_code={2}", 
-                    ConnectionId, operationRequest.OperationCode, handler.ControlCode);
+                Log.DebugFormat(
+                    @"OnOperationRequest: pid={0}, op={1}, control_code={2}",
+                    ConnectionId,
+                    operationRequest.OperationCode,
+                    handler.ControlCode);
             }
 
             OperationResponse response;
             try
             {
-                if (handler.ControlCode == OperationCode.Login 
-                    || handler.ControlCode == OperationCode.Authenticate
+                if (handler.ControlCode == OperationCode.Login || handler.ControlCode == OperationCode.Authenticate
                     || handler.ControlCode == OperationCode.JoinLobby
                     || handler.ControlCode == OperationCode.Registration)
                 {
@@ -187,11 +183,15 @@ namespace YourGame.Server.MasterServer
             }
             catch (Exception exception)
             {
-                response = new OperationResponse(operationRequest.OperationCode)
-                {
-                    ReturnCode = (short) ErrorCode.InternalServerError,
-                    DebugMessage = $"handler:{handler.GetType().Name}, error:" + exception.Message
-                };
+                response =
+                    new OperationResponse(operationRequest.OperationCode)
+                        {
+                            ReturnCode =
+                                (short)ErrorCode.InternalServerError,
+                            DebugMessage =
+                                $"handler:{handler.GetType().Name}, error:"
+                                + exception.Message
+                        };
 
                 Log.Error("handling error:", exception);
             }
@@ -202,6 +202,7 @@ namespace YourGame.Server.MasterServer
                 {
                     response.Parameters = new Dictionary<byte, object>();
                 }
+
                 response.Parameters.Add((byte)ParameterCode.ControlCode, handler.ControlCode);
                 SendOperationResponse(response, sendParameters);
             }

@@ -4,7 +4,8 @@
 
     public class CheckAvailPutOnResult
     {
-        public bool Success ;
-        public EquipmentPlaceTypes Place ;
+        public bool Success;
+
+        public EquipmentPlaceTypes Place;
     }
 }

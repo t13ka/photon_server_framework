@@ -8,15 +8,8 @@
     using YourGame.Client.Loadbalancing;
     using YourGame.Client.Loadbalancing.Codes;
     using YourGame.Common.Domain;
-    using YourGame.Common.Domain.Characteristics;
-    using YourGame.Common.Domain.Craft;
-    using YourGame.Common.Domain.Craft.Quest;
-    using YourGame.Common.Domain.Craft.SharedClasses;
     using YourGame.Common.Domain.Enums;
-    using YourGame.Common.Domain.Equipment;
-    using YourGame.Common.Domain.VictoryPrizes;
     using YourGame.Common.ListContainer;
-    using YourGame.Common.Results;
 
     using GameEvent = YourGame.Common.EventCode;
     using GameParameters = YourGame.Common.ParameterCode;
@@ -26,23 +19,9 @@
 
     public delegate void ServerCharacterProfileDelegate(YourGame.Common.Domain.Player profile);
 
-    public delegate void ServerCharacterCharacteristicsDelegate(CharacteristicsBase characteristics);
-
     public delegate void ServerNotificationDelegate(byte[] data);
 
-    public delegate void ServerUpdateCharacterListDelegate(CharactersListContainer charsList);
-
-    public delegate void ServerUpdateInventoryDelegate(PlayerInventory inventory);
-
-    public delegate void ServerUpdateEquipmentDelegate(CharacterEquipment eq);
-
-    public delegate void ServerUpdateAuctionDelegate(LotsListContainer lotsLost);
-
-    public delegate void ServerUpdateElementsOrderDelegate(ElementOrderListContainer orders);
-
     public delegate void ErrorAction(GameErrorCode errorCode);
-
-    public delegate void ServerUpdateElementPricesDelegate(ElementsPricesContainer data);
 
     public delegate void ServerUpdateDomainConfigurationDelegate(DomainConfiguration data);
 
@@ -73,7 +52,6 @@
         public Action OnAddedToInventory = () => { };
         public Action OnRemovedFromInventory = () => { };
         public Action OnProfileSaved = () => { };
-        public Action<DestroyEquipmentResult> OnDestroyEquipmentResult = result => {};
         public Action<string, string> OnArmorCreated = (equpmentId, recieptId) => { };
         public Action OnEnchantSuccess = () => { };
         public Action OnSellElementResult = () => { };
@@ -90,18 +68,9 @@
         public Action OnReciveSavedReciepts = () => { };
         public Action OnReciveRecieptsInfo = () => { };
         public Action OnReciveRecieptStage = () => { };
-        public Action<VictoryPrizesResult> OnVictoryPrizesEvent = result => { };
-
-        public Action<LotsListContainer> OnUpdateAuctionEvent = lots => { };
         public Action<DebugLevel, string> OnDebugReturn = (level, message) => { };
-        public Action<BaseReciept> OnGetRecieptResult = (reciept) => { };
-        public Action<BaseReciept> OnGetNextQuest = (reciept) => { };
-        public Action<BaseReciept[]> OnGetRecieptsResult = (reciept) => { };
-        public Action<CraftResoult> OnEndCraft = (resoult) => { };
-        public Action<BaseReciept> OnStartCraft = (reciept) => { };
+      
         public Action OnQuestReceptCompeled = () => { };
-        public Action<BaseQuestStage> OnGetQuestStage = (queststage) => { };
-        public Action<BaseReciept> OnRecieptCreated = (reciept) => { };
 
 
         public ErrorAction OnLoggedFailed = code => { };
@@ -139,15 +108,8 @@
         public ErrorAction OnSetExperienceFailResult = code => { };
 
         public ServerCharacterProfileDelegate OnPlayerProfileEvent = profile => { };
-        public ServerCharacterCharacteristicsDelegate OnCharacerCharacteristicsChangeEvent = characteristics => { };
 
         public ServerNotificationDelegate OnNotificationEvent = data => { };
-        public ServerUpdateCharacterListDelegate OnUpdateCharacterListEvent = list => { };
-        public ServerUpdateInventoryDelegate OnUpdateInventoryEvent = inventory => { };
-        public ServerUpdateEquipmentDelegate OnUpdateEquipmentEvent = eq => { };
-        //public ServerUpdateAuctionDelegate OnUpdateAuctionEvent = lots => { };
-        public ServerUpdateElementsOrderDelegate OnUpdateElementsOrderEvent = orders => { };
-        public ServerUpdateElementPricesDelegate OnUpdateElementPricesEvent = data => { };
         public ServerUpdateDomainConfigurationDelegate OnUpdateDomainConfigurationEvent = data => { };
         public ServerCharacterProfileDelegate ServerCharacterCharacteristicsDelegate = characteristics => { };
 
@@ -260,48 +222,10 @@
                         OnNotificationEvent(craftData);
                         break;
 
-                case GameEvent.UpdateCharacterList:
-                    var bsonCharList = (byte[]) photonEvent.Parameters[(byte) GameParameters.CharactersListData];
-                    OnUpdateCharacterListEvent(bsonCharList.FromBson<CharactersListContainer>());
-                    break;
-
-                case GameEvent.UpdateInventory:
-                    var bsonInv = (byte[]) photonEvent.Parameters[(byte) GameParameters.InventoryData];
-                    OnUpdateInventoryEvent(bsonInv.FromBson<PlayerInventory>());
-                    break;
-
-                case GameEvent.UpdateEquipment:
-                    var bsonEq = (byte[]) photonEvent.Parameters[(byte) GameParameters.EquipmentData];
-
-                    var result = bsonEq.FromBson<EquipmentListContainer>(); 
-                    OnUpdateEquipmentEvent(result.Equipments);
-                    break;
-
-                case GameEvent.UpdateAuction:
-                    var bsonAuc = (byte[]) photonEvent.Parameters[(byte) GameParameters.AuctionData];
-                    OnUpdateAuctionEvent(bsonAuc.FromBson<LotsListContainer>());
-                    break;
-
-                case GameEvent.UpdateElementsOrder:
-                    var bsonElOrder = (byte[]) photonEvent.Parameters[(byte) GameParameters.ElementsOrderData];
-                    OnUpdateElementsOrderEvent(bsonElOrder.FromBson<ElementOrderListContainer>());
-                    break;
-
-                case GameEvent.UpdateElementPrices:
-                    var bsonPrices = (byte[]) photonEvent.Parameters[(byte) GameParameters.ElementsPrices];
-                    OnUpdateElementPricesEvent(bsonPrices.FromBson<ElementsPricesContainer>());
-                    break;
-
                 case GameEvent.UpdateDomainConfiguration:
                     var configData = (byte[]) photonEvent.Parameters[(byte) GameParameters.DomainConfiguration];
                     var domainConfiguration = configData.FromBson<DomainConfiguration>();
                     OnUpdateDomainConfigurationEvent(domainConfiguration);
-                    break;
-
-                case GameEvent.VictoryPrizes:
-                    var prizesData = (byte[])photonEvent.Parameters[(byte)GameParameters.VictoryPrizes];
-                    var prizes = prizesData.FromBson<VictoryPrizesResult>();
-                    OnVictoryPrizesEvent(prizes);
                     break;
 
                 case GameEvent.GameList:
@@ -319,11 +243,6 @@
                 case GameEvent.GameServerOffline:
                     break;
 
-                case GameEvent.UpdateCommonCharacterProfile:
-                    var commonCharacterProfile = (byte[])photonEvent.Parameters[(byte)GameParameters.CommonCharacterProfile];
-                    var characteristic = commonCharacterProfile.FromBson<CharacteristicsBase>();
-                    OnCharacerCharacteristicsChangeEvent(characteristic);
-                    break;
             }
         }
 
@@ -570,19 +489,7 @@
                         OnRemovedFromInventoryFailed(code);
                     }
                     break;
-
-                case GameOpCode.DestroyEquipment:
-                    if (code == GameErrorCode.Ok)
-                    {
-                        var dataBytes = (byte[]) operationResponse.Parameters[(byte) GameParameters.DestroyedEquipmentDataResult];
-                        OnDestroyEquipmentResult(dataBytes.FromBson<DestroyEquipmentResult>());
-                    }
-                    else
-                    {
-                        OnDestroyEquipmentResultFailed(code);
-                    }
-                    break;
-
+               
                 case GameOpCode.CreateArmor:
                     if (code == GameErrorCode.Ok)
                     {
@@ -726,89 +633,6 @@
                     else
                     {
                         OnGetRecieptFailed(code);
-                    }
-                    break;
-                case GameOpCode.GetReciepts:
-
-                    if (code == GameErrorCode.Ok)
-                    {
-                        var dataBytes = (byte[])operationResponse.Parameters[(byte)GameParameters.RecieptsData];
-                        var reciepts = dataBytes.FromBson<RecieptsContainer>();
-                        OnGetRecieptsResult(reciepts.Reciepts);
-                    }
-                    else
-                    {
-                        OnGetRecieptFailed(code);
-                    }
-                    break;
-                case GameOpCode.StartReciept:
-
-                    if (code == GameErrorCode.Ok)
-                    {
-                        try
-                        {
-                            var dataBytes = (byte[]) operationResponse.Parameters[(byte) GameParameters.StartReciept];
-                            var rec = dataBytes.FromBson<BaseReciept>();
-                            OnStartCraft(rec);
-                        }
-                        catch (Exception e)
-                        {
-                            throw new Exception(e.Message + "\n"+ operationResponse.Parameters.ToJson());
-                        }
-                    }
-                    else
-                    {
-                        OnGetRecieptFailed(code);
-                    }
-                    break;
-               
-                case GameOpCode.EndReciept:
-
-                    if (code == GameErrorCode.Ok)
-                    {
-                        var dataBytes = (byte[])operationResponse.Parameters[(byte)GameParameters.EndReciept];
-                        var resoult = dataBytes.FromBson<CraftResoult>();
-                        OnEndCraft(resoult);
-                    }
-                    else
-                    {
-                        OnGetRecieptFailed(code);
-                    }
-                    break;
-                case GameOpCode.CraftQuestNext:
-                    if (code == GameErrorCode.Ok)
-                    {
-                        var dataBytes = (byte[])operationResponse.Parameters[(byte)GameParameters.NextCraftQuest];
-                        var reciept = dataBytes.FromBson<BaseReciept>();
-                        OnGetNextQuest(reciept);
-                    }
-                    else
-                    {
-                        OnGetRecieptFailed(code);
-                    }
-                    break;
-                case GameOpCode.GetReciept:
-                    if (code == GameErrorCode.Ok)
-                    {
-                        var dataBytes = (byte[])operationResponse.Parameters[(byte)GameParameters.RecieptData];
-                        var reciept = dataBytes.FromBson<BaseReciept>();
-                        OnGetRecieptResult(reciept);
-                    }
-                    else
-                    {
-                        OnGetRecieptFailed(code);
-                    }
-                    break;
-                case GameOpCode.SaveReciept:
-                    if (code == GameErrorCode.Ok)
-                    {
-                        var dataBytes = (byte[])operationResponse.Parameters[(byte)GameParameters.RecieptData];
-                        var reciept = dataBytes.FromBson<BaseReciept>();
-                        OnRecieptCreated(reciept);
-                    }
-                    else
-                    {
-                        OnRecieptCreatedFailed(code);
                     }
                     break;
 
@@ -1002,40 +826,6 @@
 
         #region Auction
 
-        public void SendPublishLot(BaseEquipment item, float price)
-        {
-            peer.OpCustom((byte) GameOpCode.CustomOp, new Dictionary<byte, object>
-            {
-                {
-                    (byte) GameParameters.ControlCode, GameOpCode.PublishLot
-                },
-                {(byte) GameParameters.EquipmentId, item._id},
-                {(byte) GameParameters.Money, price},
-            }, true);
-        }
-
-        public void SendUnpublishLot(Lot item)
-        {
-            peer.OpCustom((byte) GameOpCode.CustomOp, new Dictionary<byte, object>
-            {
-                {
-                    (byte) GameParameters.ControlCode, GameOpCode.UnpublishLot
-                },
-                {(byte) GameParameters.LotId, item._id},
-            }, true);
-        }
-
-        public void SendBuyLot(Lot lot)
-        {
-            peer.OpCustom((byte) GameOpCode.CustomOp, new Dictionary<byte, object>
-            {
-                {
-                    (byte) GameParameters.ControlCode, GameOpCode.TryBuyLot
-                },
-                {(byte) GameParameters.EquipmentId, lot._id},
-            }, true);
-        }
-
         public void SendGetAuction()
         {
             peer.OpCustom((byte) GameOpCode.CustomOp, new Dictionary<byte, object>
@@ -1063,45 +853,7 @@
         #endregion
 
         #region Craft
-
-        public void SendCreateArmor(BaseReciept reciept)
-        {
-            if (reciept.PartsPosition == null)
-            {
-                throw new Exception("ArmorParts is null!");
-            }
-
-            var data = reciept.ToBson();
-            
-            peer.OpCustom((byte) GameOpCode.CustomOp, new Dictionary<byte, object>
-            {
-                {
-                    (byte) GameParameters.ControlCode, GameOpCode.CreateArmor
-                },
-                {
-                    (byte) GameParameters.RecieptData, data
-                }
-            }, true);
-        }
-
-
-        public void SendSaveReciept(BaseReciept reciept)
-        {
-            if (reciept == null)
-            {
-                throw new Exception("reciept is null! failed");
-            }
-
-            peer.OpCustom((byte)GameOpCode.CustomOp, new Dictionary<byte, object>
-            {
-                {
-                    (byte) GameParameters.ControlCode, GameOpCode.SaveReciept
-                },
-                {
-                    (byte) GameParameters.RecieptJson, reciept.ToJson()
-                }
-            }, true);
-        }
+       
         public void SendGetTaskComplete(string taskName, TaskTypesE taskType)
         {
             
@@ -1192,36 +944,6 @@
                 {
                     (byte) GameParameters.NextCraftQuest, currentQuest
                 }
-            }, true);
-        }
-        public void SendStartReciept(BaseReciept reciept)
-        {
-            peer.OpCustom((byte)GameOpCode.CustomOp, new Dictionary<byte, object>
-            {
-                {
-                    (byte) GameParameters.ControlCode, GameOpCode.StartReciept
-                },
-                {
-                    (byte) GameParameters.StartReciept, reciept.ToBson()
-                }
-            }, true);
-        }
-        public void SendEndReciept(BaseReciept reciept, int recivedDamage, int stage)
-        {
-            peer.OpCustom((byte)GameOpCode.CustomOp, new Dictionary<byte, object>
-            {
-                {
-                    (byte) GameParameters.ControlCode, GameOpCode.EndReciept
-                },
-                {
-                    (byte) GameParameters.RecieptData, reciept.ToBson()
-                },
-                {
-                    (byte) GameParameters.RecivedDamage, recivedDamage
-                },
-                {
-                    (byte) GameParameters.Stage, stage
-                },
             }, true);
         }
         public void SendGetReciepts(int page, ReceptTypes type)

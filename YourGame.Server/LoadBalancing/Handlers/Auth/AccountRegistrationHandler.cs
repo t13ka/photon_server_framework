@@ -14,7 +14,6 @@ namespace YourGame.Server.Handlers.Auth
 {
     using YourGame.Common;
     using YourGame.Common.Domain;
-    using YourGame.Common.Domain.Equipment;
     using YourGame.DatabaseService.Repositories;
     using YourGame.Server.Framework.Handlers;
 
@@ -45,33 +44,13 @@ namespace YourGame.Server.Handlers.Auth
 
             if (players.SingleOrDefault() == null)
             {
-                var equipmentSet = new List<IEntity>();
-
-                // equip a player
-                var armors = MasterApplication.DomainConfiguration.GetAll<BaseArmor>().ToList();
-                foreach (var armor in armors)
-                {
-                    armor.InitializeDefaultArmorParts();
-                }
-
-                var elemlist = new List<BaseElement>(MasterApplication.DomainConfiguration.Elements);
-                foreach (var element in elemlist)
-                {
-                    element.Quantity = 100;
-                }
-
-                equipmentSet.AddRange(elemlist);
-                equipmentSet.AddRange(armors);
-                equipmentSet.AddRange(MasterApplication.DomainConfiguration.GetAll<BaseWeapon>());
-                equipmentSet.AddRange(MasterApplication.DomainConfiguration.GetAll<BaseModule>());
-
                 var newPlayer = PlayerFactory.CreateDefaultPlayerAccount(
                     request.LoginReg,
                     request.Md5Password,
                     request.UserFirstName,
                     request.UserLastName,
                     request.Email,
-                    equipmentSet);
+                    new List<IEntity>());
 
                 _playerRepository.Create(newPlayer);
 

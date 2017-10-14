@@ -14,12 +14,10 @@ using Ninject;
 
 using Photon.SocketServer;
 
-using YourGame.Server.Common;
 using YourGame.Server.LoadBalancer;
 using YourGame.Server.MasterServer.GameServer;
 using YourGame.Server.NinjectConfigModules;
 using YourGame.Server.Services;
-using YourGame.Server.Services.Auction;
 using YourGame.Server.Services.DomainConfig;
 using YourGame.Server.Services.Economic;
 
@@ -28,18 +26,13 @@ using LogManager = ExitGames.Logging.LogManager;
 namespace YourGame.Server.MasterServer
 {
     using YourGame.Common.Domain;
-    using YourGame.Common.Domain.Equipment;
     using YourGame.DatabaseService;
-    using YourGame.DatabaseService.Repositories;
     using YourGame.Server.Common;
     using YourGame.Server.Framework.Services;
-    using YourGame.Server.MasterServer;
 
     public class MasterApplication : ApplicationBase
     {
         public static DomainConfiguration DomainConfiguration;
-
-        public static List<BaseItem> Items = new List<BaseItem>();
 
         #region Constants and Fields
 
@@ -138,16 +131,6 @@ namespace YourGame.Server.MasterServer
             ServiceManager.InstallService(kernel.Get<ApplicationStatsRuntimeService>());
             Log.Info("App stat started");
             ServiceManager.InstallService(kernel.Get<EconomicRuntimeService>());
-            Log.Info("Economic started");
-
-            kernel = new StandardKernel(new AuctionInjectionModule());
-            Log.Info("Auction inject started");
-
-            /*var dd = kernel.Get<AuctionRuntimeService>();
-                        Log.Info(dd);*/
-            var dd = new AuctionRuntimeService(new LotRepository());
-            ServiceManager.InstallService(dd);
-            Log.Info("Auction started");
 
             if (MasterServerSettings.Default.AppStatsPublishInterval > 0)
             {

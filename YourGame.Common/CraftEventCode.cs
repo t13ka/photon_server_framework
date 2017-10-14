@@ -2,12 +2,16 @@
 {
     public enum CraftEventCode : byte
     {
-      CreateReciept,
-      StartReciept,
-      EndReciepts,
-      GetReciepts,
-      CreateElement,
-      MoveElement
+        CreateReciept,
 
+        StartReciept,
+
+        EndReciepts,
+
+        GetReciepts,
+
+        CreateElement,
+
+        MoveElement
     }
 }

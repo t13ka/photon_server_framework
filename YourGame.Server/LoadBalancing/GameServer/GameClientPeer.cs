@@ -1,20 +1,21 @@
 ﻿using System;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
+
 using PhotonHostRuntimeInterfaces;
 
 using YourGame.Server.Operations.Request.Auth;
 
 namespace YourGame.Server.GameServer
 {
-    using YourGame.Server.Operations.Request.GameManagement;
-
     using YourGame.Common;
     using YourGame.Server.Framework;
     using YourGame.Server.Framework.Caching;
     using YourGame.Server.Framework.Messages;
     using YourGame.Server.Framework.Operations;
-    using YourGame.Server.GameServer;
+    using YourGame.Server.Operations.Request.GameManagement;
 
     using OperationCode = YourGame.Server.Framework.Operations.OperationCode;
     using ParameterCode = YourGame.Server.Operations.ParameterCode;
@@ -88,7 +89,8 @@ namespace YourGame.Server.GameServer
             throw new NotSupportedException("Use TryGetRoomReference or TryCreateRoomReference instead.");
         }
 
-        protected virtual void HandleCreateGameOperation(OperationRequest operationRequest,
+        protected virtual void HandleCreateGameOperation(
+            OperationRequest operationRequest,
             SendParameters sendParameters)
         {
             // The JoinRequest from the Lite application is also used for create game operations to support all feaures 
@@ -110,11 +112,11 @@ namespace YourGame.Server.GameServer
             if (TryCreateRoom(createRequest.GameId, out gameReference) == false)
             {
                 var response = new OperationResponse
-                {
-                    OperationCode = (byte) OperationCode.CreateGame,
-                    ReturnCode = (short) ErrorCode.GameIdAlreadyExists,
-                    DebugMessage = "Game already exists"
-                };
+                                   {
+                                       OperationCode = (byte)OperationCode.CreateGame,
+                                       ReturnCode = (short)ErrorCode.GameIdAlreadyExists,
+                                       DebugMessage = "Game already exists"
+                                   };
 
                 SendOperationResponse(response, sendParameters);
                 return;
@@ -163,11 +165,11 @@ namespace YourGame.Server.GameServer
                     OnRoomNotFound(joinRequest.GameId);
 
                     var response = new OperationResponse
-                    {
-                        OperationCode = (byte) OperationCode.JoinGame,
-                        ReturnCode = (short) ErrorCode.GameIdNotExists,
-                        DebugMessage = "Game does not exists"
-                    };
+                                       {
+                                           OperationCode = (byte)OperationCode.JoinGame,
+                                           ReturnCode = (short)ErrorCode.GameIdNotExists,
+                                           DebugMessage = "Game does not exists"
+                                       };
 
                     SendOperationResponse(response, sendParameters);
                     return;
@@ -181,7 +183,9 @@ namespace YourGame.Server.GameServer
             gameReference.Room.EnqueueOperation(this, operationRequest, sendParameters);
         }
 
-        protected virtual void HandleDebugGameOperation(OperationRequest operationRequest, SendParameters sendParameters)
+        protected virtual void HandleDebugGameOperation(
+            OperationRequest operationRequest,
+            SendParameters sendParameters)
         {
             var debugRequest = new DebugGameRequest(Protocol, operationRequest);
             if (ValidateOperation(debugRequest, sendParameters) == false)
@@ -189,24 +193,25 @@ namespace YourGame.Server.GameServer
                 return;
             }
 
-            var debug = string.Format("DebugGame called from PID {0}. {1}", ConnectionId,
+            var debug = string.Format(
+                "DebugGame called from PID {0}. {1}",
+                ConnectionId,
                 GetRoomCacheDebugString(debugRequest.GameId));
-            operationRequest.Parameters.Add((byte) ParameterCode.Info, debug);
-
+            operationRequest.Parameters.Add((byte)ParameterCode.Info, debug);
 
             if (RoomReference == null)
             {
                 Room room;
+
                 // get a room without obtaining a reference:
                 if (!TryGetRoomWithoutReference(debugRequest.GameId, out room))
                 {
                     var response = new OperationResponse
-                    {
-                        OperationCode = (byte) OperationCode.DebugGame,
-                        ReturnCode = (short) ErrorCode.GameIdNotExists,
-                        DebugMessage = "Game does not exist in RoomCache"
-                    };
-
+                                       {
+                                           OperationCode = (byte)OperationCode.DebugGame,
+                                           ReturnCode = (short)ErrorCode.GameIdNotExists,
+                                           DebugMessage = "Game does not exist in RoomCache"
+                                       };
 
                     SendOperationResponse(response, sendParameters);
                     return;
@@ -229,7 +234,10 @@ namespace YourGame.Server.GameServer
         {
             if (log.IsDebugEnabled)
             {
-                log.DebugFormat("OnDisconnect: conId={0}, reason={1}, detail={2}", ConnectionId, reasonCode,
+                log.DebugFormat(
+                    "OnDisconnect: conId={0}, reason={1}, detail={2}",
+                    ConnectionId,
+                    reasonCode,
                     reasonDetail);
             }
 
@@ -243,7 +251,7 @@ namespace YourGame.Server.GameServer
                 return;
             }
 
-            var message = new RoomMessage((byte) GameMessageCodes.RemovePeerFromGame, this);
+            var message = new RoomMessage((byte)GameMessageCodes.RemovePeerFromGame, this);
             RoomReference.Room.EnqueueMessage(message);
             RoomReference.Dispose();
             RoomReference = null;
@@ -253,7 +261,7 @@ namespace YourGame.Server.GameServer
         {
             if (log.IsDebugEnabled)
             {
-                if (request.OperationCode != (byte) OperationCode.RaiseEvent)
+                if (request.OperationCode != (byte)OperationCode.RaiseEvent)
                 {
                     log.DebugFormat("OnOperationRequest: conId={0}, opCode={1}", ConnectionId, request.OperationCode);
                 }
@@ -262,48 +270,47 @@ namespace YourGame.Server.GameServer
             LastActivity = DateTime.UtcNow;
             LastOperation = request.OperationCode;
 
-
             switch (request.OperationCode)
             {
-                case (byte) OperationCode.Authenticate:
+                case (byte)OperationCode.Authenticate:
                     HandleAuthenticateOperation(request, sendParameters);
                     return;
 
-                case (byte) OperationCode.CreateGame:
+                case (byte)OperationCode.CreateGame:
                     HandleCreateGameOperation(request, sendParameters);
                     return;
 
-                case (byte) OperationCode.JoinGame:
+                case (byte)OperationCode.JoinGame:
                     HandleJoinGameOperation(request, sendParameters);
                     return;
 
-                case (byte) OperationCode.Leave:
+                case (byte)OperationCode.Leave:
                     HandleLeaveOperation(request, sendParameters);
                     return;
 
-                case (byte) OperationCode.Ping:
+                case (byte)OperationCode.Ping:
                     HandlePingOperation(request, sendParameters);
                     return;
 
-                case (byte) OperationCode.DebugGame:
+                case (byte)OperationCode.DebugGame:
                     HandleDebugGameOperation(request, sendParameters);
                     return;
 
-                case (byte) OperationCode.RaiseEvent:
-                case (byte) OperationCode.GetProperties:
-                case (byte) OperationCode.SetProperties:
-                case (byte) OperationCode.ChangeGroups:
+                case (byte)OperationCode.RaiseEvent:
+                case (byte)OperationCode.GetProperties:
+                case (byte)OperationCode.SetProperties:
+                case (byte)OperationCode.ChangeGroups:
                     HandleGameOperation(request, sendParameters);
                     return;
             }
 
             var message = $"Unknown operation code {request.OperationCode}";
             var response = new OperationResponse
-            {
-                ReturnCode = (short) ErrorCode.OperationDenied,
-                DebugMessage = message,
-                OperationCode = request.OperationCode
-            };
+                               {
+                                   ReturnCode = (short)ErrorCode.OperationDenied,
+                                   DebugMessage = message,
+                                   OperationCode = request.OperationCode
+                               };
             SendOperationResponse(response, sendParameters);
         }
 
@@ -332,7 +339,8 @@ namespace YourGame.Server.GameServer
             return GameCache.Instance.GetDebugString(gameId);
         }
 
-        protected virtual void HandleAuthenticateOperation(OperationRequest operationRequest,
+        protected virtual void HandleAuthenticateOperation(
+            OperationRequest operationRequest,
             SendParameters sendParameters)
         {
             var request = new AuthenticateRequest(Protocol, operationRequest);
@@ -346,7 +354,7 @@ namespace YourGame.Server.GameServer
                 PeerId = request.UserId;
             }
 
-            var response = new OperationResponse {OperationCode = operationRequest.OperationCode};
+            var response = new OperationResponse { OperationCode = operationRequest.OperationCode };
             SendOperationResponse(response, sendParameters);
         }
 

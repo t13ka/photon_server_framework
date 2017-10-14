@@ -12,10 +12,10 @@
                     return @"localhost:5055";
 
                 case ServerHosts.Production:
-                    return @"desc-dev.cloudapp.net:5055";
+                    return @"localhost:5055";
 
                 case ServerHosts.NewDevelop:
-                    return @"138.201.152.100:5055";
+                    return @"localhost:5055";
                 default:
                     throw new ArgumentOutOfRangeException("serverHost", serverHost, null);
             }

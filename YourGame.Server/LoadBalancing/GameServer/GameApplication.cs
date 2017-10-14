@@ -4,18 +4,22 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+
 using ExitGames.Concurrency.Fibers;
 using ExitGames.Configuration;
 using ExitGames.Logging;
 using ExitGames.Logging.Log4Net;
+
 using log4net;
 using log4net.Config;
+
 using Photon.SocketServer;
 using Photon.SocketServer.Diagnostics;
 using Photon.SocketServer.ServerToServer;
-using YourGame.Server.Common;
+
 using YourGame.Server.LoadShedding;
 using YourGame.Server.LoadShedding.Diagnostics;
+
 using LogManager = ExitGames.Logging.LogManager;
 
 namespace YourGame.Server.GameServer
@@ -23,7 +27,6 @@ namespace YourGame.Server.GameServer
     using YourGame.Server.Common;
     using YourGame.Server.Framework;
     using YourGame.Server.Framework.Messages;
-    using YourGame.Server.GameServer;
 
     public class GameApplication : ApplicationBase
     {
@@ -46,19 +49,26 @@ namespace YourGame.Server.GameServer
 
         #region Properties
 
-        protected int ConnectRetryIntervalSeconds ;
+        protected int ConnectRetryIntervalSeconds;
 
         #endregion
 
         #region Constants and Fields
 
         public static readonly Guid ServerId = Guid.NewGuid();
+
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
         private static GameApplication _instance;
+
         private static OutgoingMasterServerPeer _masterPeer;
+
         private readonly NodesReader _reader;
+
         private PoolFiber _executionFiber;
+
         private byte _isReconnecting;
+
         private Timer _masterConnectRetryTimer;
 
         #endregion
@@ -67,9 +77,15 @@ namespace YourGame.Server.GameServer
 
         public new static GameApplication Instance
         {
-            get { return _instance; }
+            get
+            {
+                return _instance;
+            }
 
-            protected set { Interlocked.Exchange(ref _instance, value); }
+            protected set
+            {
+                Interlocked.Exchange(ref _instance, value);
+            }
         }
 
         public int? GamingTcpPort { get; protected set; }
@@ -84,9 +100,15 @@ namespace YourGame.Server.GameServer
 
         public OutgoingMasterServerPeer MasterPeer
         {
-            get { return _masterPeer; }
+            get
+            {
+                return _masterPeer;
+            }
 
-            protected set { Interlocked.Exchange(ref _masterPeer, value); }
+            protected set
+            {
+                Interlocked.Exchange(ref _masterPeer, value);
+            }
         }
 
         public IPAddress PublicIpAddress { get; protected set; }
@@ -141,7 +163,7 @@ namespace YourGame.Server.GameServer
             }
 
             Thread.VolatileWrite(ref _isReconnecting, 1);
-            _masterConnectRetryTimer = new Timer(o => ConnectToMaster(), null, ConnectRetryIntervalSeconds*1000, 0);
+            _masterConnectRetryTimer = new Timer(o => ConnectToMaster(), null, ConnectRetryIntervalSeconds * 1000, 0);
         }
 
         #endregion
@@ -161,14 +183,15 @@ namespace YourGame.Server.GameServer
                         + GameServerSettings.Default.MasterIPAddress);
                 }
 
-                masterAddress =
-                    hostEntry.AddressList.First(address => address.AddressFamily == AddressFamily.InterNetwork);
+                masterAddress = hostEntry.AddressList.First(
+                    address => address.AddressFamily == AddressFamily.InterNetwork);
 
                 if (masterAddress == null)
                 {
                     throw new ConfigurationException(
-                        "MasterIPAddress does not resolve to an IPv4 address! Found: "
-                        + string.Join(", ", hostEntry.AddressList.Select(a => a.ToString()).ToArray()));
+                        "MasterIPAddress does not resolve to an IPv4 address! Found: " + string.Join(
+                            ", ",
+                            hostEntry.AddressList.Select(a => a.ToString()).ToArray()));
                 }
             }
 
@@ -187,7 +210,7 @@ namespace YourGame.Server.GameServer
             {
                 Room room;
                 GameCache.Instance.TryGetRoomWithoutReference(roomName, out room);
-                room.EnqueueMessage(new RoomMessage((byte) GameMessageCodes.CheckGame));
+                room.EnqueueMessage(new RoomMessage((byte)GameMessageCodes.CheckGame));
             }
         }
 
@@ -274,12 +297,18 @@ namespace YourGame.Server.GameServer
                 if (_isReconnecting == 0)
                 {
                     Log.ErrorFormat(
-                        "Master connection failed with err {0}: {1}, serverId={2}", errorCode, errorMessage, ServerId);
+                        "Master connection failed with err {0}: {1}, serverId={2}",
+                        errorCode,
+                        errorMessage,
+                        ServerId);
                 }
                 else if (Log.IsWarnEnabled)
                 {
                     Log.WarnFormat(
-                        "Master connection failed with err {0}: {1}, serverId={2}", errorCode, errorMessage, ServerId);
+                        "Master connection failed with err {0}: {1}, serverId={2}",
+                        errorCode,
+                        errorMessage,
+                        ServerId);
                 }
 
                 ReconnectToMaster();
@@ -322,9 +351,8 @@ namespace YourGame.Server.GameServer
 
             PublicIpAddress = PublicIPAddressReader.ParsePublicIpAddress(GameServerSettings.Default.PublicIPAddress);
 
-            var isMaster =
-                PublicIPAddressReader.IsLocalIpAddress(MasterEndPoint.Address)
-                || MasterEndPoint.Address.Equals(PublicIpAddress);
+            var isMaster = PublicIPAddressReader.IsLocalIpAddress(MasterEndPoint.Address)
+                           || MasterEndPoint.Address.Equals(PublicIpAddress);
 
             Counter.IsMasterServer.RawValue = isMaster ? 1 : 0;
 
@@ -337,8 +365,9 @@ namespace YourGame.Server.GameServer
             }
 
             CounterPublisher.DefaultInstance.AddStaticCounterClass(
-                typeof (YourGame.Server.Framework.Diagnostics.Counter), ApplicationName);
-            CounterPublisher.DefaultInstance.AddStaticCounterClass(typeof (Counter), ApplicationName);
+                typeof(YourGame.Server.Framework.Diagnostics.Counter),
+                ApplicationName);
+            CounterPublisher.DefaultInstance.AddStaticCounterClass(typeof(Counter), ApplicationName);
 
             _executionFiber = new PoolFiber();
             _executionFiber.Start();
@@ -351,7 +380,13 @@ namespace YourGame.Server.GameServer
             var latencyEndpointUdp = GetLatencyEndpointUdp();
 
             WorkloadController = new WorkloadController(
-                this, PhotonInstanceName, "LatencyMonitor", latencyEndpointTcp, latencyEndpointUdp, 1, 1000);
+                this,
+                PhotonInstanceName,
+                "LatencyMonitor",
+                latencyEndpointTcp,
+                latencyEndpointUdp,
+                1,
+                1000);
 
             WorkloadController.Start();
         }
@@ -403,8 +438,8 @@ namespace YourGame.Server.GameServer
                 }
 
                 var tcpPort = GameServerSettings.Default.RelayPortTcp == 0
-                    ? GamingTcpPort
-                    : GameServerSettings.Default.RelayPortTcp + GetCurrentNodeId() - 1;
+                                  ? GamingTcpPort
+                                  : GameServerSettings.Default.RelayPortTcp + GetCurrentNodeId() - 1;
                 latencyEndpointTcp = new IPEndPoint(PublicIpAddress, tcpPort.Value);
             }
             else
@@ -458,14 +493,15 @@ namespace YourGame.Server.GameServer
                 }
 
                 var udpPort = GameServerSettings.Default.RelayPortUdp == 0
-                    ? GamingUdpPort
-                    : GameServerSettings.Default.RelayPortUdp + GetCurrentNodeId() - 1;
+                                  ? GamingUdpPort
+                                  : GameServerSettings.Default.RelayPortUdp + GetCurrentNodeId() - 1;
                 latencyEndpointUdp = new IPEndPoint(PublicIpAddress, udpPort.Value);
             }
             else
             {
                 if (Global.TryParseIpEndpoint(
-                    GameServerSettings.Default.LatencyMonitorAddressUdp, out latencyEndpointUdp) == false)
+                        GameServerSettings.Default.LatencyMonitorAddressUdp,
+                        out latencyEndpointUdp) == false)
                 {
                     if (Log.IsWarnEnabled)
                     {

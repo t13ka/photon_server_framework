@@ -4,6 +4,6 @@
 
     public class SimpleListContainer
     {
-        public List<string> List ;
+        public List<string> List;
     }
 }

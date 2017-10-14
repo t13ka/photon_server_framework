@@ -1,6 +1,9 @@
 ﻿using System;
+
 using ExitGames.Concurrency.Fibers;
+
 using Photon.SocketServer;
+
 using YourGame.Server.ServerToServer.Events;
 
 namespace YourGame.Server.GameServer
@@ -8,7 +11,9 @@ namespace YourGame.Server.GameServer
     public class ApplicationStatsPublisher
     {
         private readonly PoolFiber _fiber;
+
         private readonly int _publishIntervalMilliseconds = 1000;
+
         private IDisposable _publishStatsSchedule;
 
         public ApplicationStatsPublisher(int publishIntervalMilliseconds)
@@ -19,6 +24,7 @@ namespace YourGame.Server.GameServer
         }
 
         public int PeerCount { get; private set; }
+
         public int GameCount { get; private set; }
 
         public void IncrementPeerCount()
@@ -66,8 +72,9 @@ namespace YourGame.Server.GameServer
         private void PublishStats()
         {
             _publishStatsSchedule = null;
-            var e = new UpdateAppStatsEvent {PlayerCount = PeerCount, GameCount = GameCount};
-            GameApplication.Instance.MasterPeer.SendEvent(new EventData((byte) ServerEventCode.UpdateAppStats, e),
+            var e = new UpdateAppStatsEvent { PlayerCount = PeerCount, GameCount = GameCount };
+            GameApplication.Instance.MasterPeer.SendEvent(
+                new EventData((byte)ServerEventCode.UpdateAppStats, e),
                 new SendParameters());
         }
     }

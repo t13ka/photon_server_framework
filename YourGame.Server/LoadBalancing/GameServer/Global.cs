@@ -6,7 +6,7 @@ namespace YourGame.Server.GameServer
     public static class Global
     {
         public static readonly Dictionary<string, object> Games = new Dictionary<string, object>();
-    
+
         public static bool TryParseIpEndpoint(string value, out IPEndPoint endPoint)
         {
             endPoint = null;

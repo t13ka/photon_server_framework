@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
 using Photon.SocketServer.Rpc;
 using Photon.SocketServer.Rpc.Protocols;
@@ -15,21 +17,22 @@ using YourGame.Server.ServerToServer.Events;
 
 namespace YourGame.Server.GameServer
 {
-    using YourGame.Server.Operations.Request.GameManagement;
-
     using YourGame.Common;
     using YourGame.Server.Framework;
     using YourGame.Server.Framework.Diagnostics.OperationLogging;
     using YourGame.Server.Framework.Messages;
     using YourGame.Server.Framework.Operations;
     using YourGame.Server.GameServer;
+    using YourGame.Server.Operations.Request.GameManagement;
 
     using OperationCode = YourGame.Server.Framework.Operations.OperationCode;
 
     public class Game : RoomGame
     {
         public static readonly ILogger log = LogManager.GetCurrentClassLogger();
+
         private bool _isOpen = true;
+
         private bool _isVisible = true;
 
         /// <summary>
@@ -39,6 +42,7 @@ namespace YourGame.Server.GameServer
         private HashSet<object> _lobbyProperties;
 
         private AppLobbyType _lobbyType;
+
         private byte _maxPlayers;
 
         /// <summary>
@@ -83,7 +87,9 @@ namespace YourGame.Server.GameServer
             }
         }
 
-        protected virtual Actor HandleJoinGameOperation(PlayerPeer peer, JoinRequest joinRequest,
+        protected virtual Actor HandleJoinGameOperation(
+            PlayerPeer peer,
+            JoinRequest joinRequest,
             SendParameters sendParameters)
         {
             if (!ValidateGame(peer, joinRequest.OperationRequest, sendParameters))
@@ -98,7 +104,7 @@ namespace YourGame.Server.GameServer
                 Utilities.ConvertAs3WellKnownPropertyKeys(joinRequest.GameProperties, joinRequest.ActorProperties);
             }
 
-            var gamePeer = (GameClientPeer) peer;
+            var gamePeer = (GameClientPeer)peer;
             var actor = HandleJoinOperation(peer, joinRequest, sendParameters);
 
             if (actor == null)
@@ -113,7 +119,9 @@ namespace YourGame.Server.GameServer
             return actor;
         }
 
-        protected virtual Actor HandleCreateGameOperation(PlayerPeer peer, JoinGameRequest createRequest,
+        protected virtual Actor HandleCreateGameOperation(
+            PlayerPeer peer,
+            JoinGameRequest createRequest,
             SendParameters sendParameters)
         {
             if (!ValidateGame(peer, createRequest.OperationRequest, sendParameters))
@@ -125,10 +133,13 @@ namespace YourGame.Server.GameServer
             return null;
         }
 
-        protected virtual void HandleCreateGameOperationBody(PlayerPeer peer, JoinGameRequest
-            createRequest, SendParameters sendParameters, bool restored)
+        protected virtual void HandleCreateGameOperationBody(
+            PlayerPeer peer,
+            JoinGameRequest createRequest,
+            SendParameters sendParameters,
+            bool restored)
         {
-            var gamePeer = (GameClientPeer) peer;
+            var gamePeer = (GameClientPeer)peer;
 
             byte? newMaxPlayer;
             bool? newIsOpen;
@@ -143,8 +154,15 @@ namespace YourGame.Server.GameServer
                 createRequest.GameProperties = null;
             }
 
-            SetupGameProperties(peer, createRequest, properties,
-                ref sendParameters, out newMaxPlayer, out newIsOpen, out newIsVisible, out newLobbyProperties);
+            SetupGameProperties(
+                peer,
+                createRequest,
+                properties,
+                ref sendParameters,
+                out newMaxPlayer,
+                out newIsOpen,
+                out newIsVisible,
+                out newLobbyProperties);
 
             var actor = HandleJoinOperation(peer, createRequest, sendParameters);
             if (actor == null)
@@ -153,7 +171,7 @@ namespace YourGame.Server.GameServer
             }
 
             LobbyId = createRequest.LobbyName;
-            _lobbyType = (AppLobbyType) createRequest.LobbyType;
+            _lobbyType = (AppLobbyType)createRequest.LobbyType;
 
             if (log.IsDebugEnabled)
             {
@@ -187,9 +205,15 @@ namespace YourGame.Server.GameServer
             UpdateGameStateOnMaster(newMaxPlayer, newIsOpen, newIsVisible, newLobbyProperties, gameProperties, peerId);
         }
 
-        private void SetupGameProperties(PlayerPeer peer, JoinGameRequest createRequest,
-            Hashtable gameProperties, ref SendParameters sendParameters, out byte? newMaxPlayer, out bool? newIsOpen,
-            out bool? newIsVisible, out object[] newLobbyProperties)
+        private void SetupGameProperties(
+            PlayerPeer peer,
+            JoinGameRequest createRequest,
+            Hashtable gameProperties,
+            ref SendParameters sendParameters,
+            out byte? newMaxPlayer,
+            out bool? newIsOpen,
+            out bool? newIsVisible,
+            out object[] newLobbyProperties)
         {
             newMaxPlayer = null;
             newIsOpen = null;
@@ -208,8 +232,15 @@ namespace YourGame.Server.GameServer
             {
                 if (gameProperties != null && gameProperties.Count > 0)
                 {
-                    if (!TryParseDefaultProperties(peer, createRequest, gameProperties,
-                        sendParameters, out newMaxPlayer, out newIsOpen, out newIsVisible, out newLobbyProperties))
+                    if (!TryParseDefaultProperties(
+                            peer,
+                            createRequest,
+                            gameProperties,
+                            sendParameters,
+                            out newMaxPlayer,
+                            out newIsOpen,
+                            out newIsVisible,
+                            out newLobbyProperties))
                     {
                     }
                 }
@@ -231,7 +262,7 @@ namespace YourGame.Server.GameServer
             // RemoveGameStateOperation will be sent to the master.
             if (Actors.Count > 0)
             {
-                var gamePeer = (GameClientPeer) peer;
+                var gamePeer = (GameClientPeer)peer;
                 var peerId = gamePeer.PeerId ?? string.Empty;
                 UpdateGameStateOnMaster(null, null, null, null, null, null, peerId);
             }
@@ -239,20 +270,25 @@ namespace YourGame.Server.GameServer
             return result;
         }
 
-        protected override void HandleGetPropertiesOperation(PlayerPeer peer, GetPropertiesRequest getPropertiesRequest,
+        protected override void HandleGetPropertiesOperation(
+            PlayerPeer peer,
+            GetPropertiesRequest getPropertiesRequest,
             SendParameters sendParameters)
         {
             // special handling for game properties send by AS3/Flash (Amf3 protocol) clients or JSON clients
             if (peer.Protocol.ProtocolType == ProtocolType.Amf3V152 || peer.Protocol.ProtocolType == ProtocolType.Json)
             {
-                Utilities.ConvertAs3WellKnownPropertyKeys(getPropertiesRequest.GamePropertyKeys,
+                Utilities.ConvertAs3WellKnownPropertyKeys(
+                    getPropertiesRequest.GamePropertyKeys,
                     getPropertiesRequest.ActorPropertyKeys);
             }
 
             base.HandleGetPropertiesOperation(peer, getPropertiesRequest, sendParameters);
         }
 
-        protected override void HandleSetPropertiesOperation(PlayerPeer peer, SetPropertiesRequest request,
+        protected override void HandleSetPropertiesOperation(
+            PlayerPeer peer,
+            SetPropertiesRequest request,
             SendParameters sendParameters)
         {
             byte? newMaxPlayer = null;
@@ -261,8 +297,8 @@ namespace YourGame.Server.GameServer
             object[] newLobbyProperties = null;
 
             // try to parse build in propeties if game properties should be set (ActorNumber == 0)
-            var updateGameProperties = request.ActorNumber == 0 && request.Properties != null &&
-                                       request.Properties.Count > 0;
+            var updateGameProperties = request.ActorNumber == 0 && request.Properties != null
+                                       && request.Properties.Count > 0;
 
             // special handling for game and actor properties send by AS3/Flash (Amf3 protocol) or JSON clients
             if (peer.Protocol.ProtocolType == ProtocolType.Amf3V152 || peer.Protocol.ProtocolType == ProtocolType.Json)
@@ -279,9 +315,15 @@ namespace YourGame.Server.GameServer
 
             if (updateGameProperties)
             {
-                if (
-                    !TryParseDefaultProperties(peer, request, request.Properties, sendParameters, out newMaxPlayer,
-                        out newIsOpen, out newIsVisible, out newLobbyProperties))
+                if (!TryParseDefaultProperties(
+                        peer,
+                        request,
+                        request.Properties,
+                        sendParameters,
+                        out newMaxPlayer,
+                        out newIsOpen,
+                        out newIsVisible,
+                        out newLobbyProperties))
                 {
                     return;
                 }
@@ -334,7 +376,9 @@ namespace YourGame.Server.GameServer
             UpdateGameStateOnMaster(newMaxPlayer, newIsOpen, newIsVisible, newLobbyProperties, gameProperties);
         }
 
-        protected virtual void HandleDebugGameOperation(PlayerPeer peer, DebugGameRequest request,
+        protected virtual void HandleDebugGameOperation(
+            PlayerPeer peer,
+            DebugGameRequest request,
             SendParameters sendParameters)
         {
             // Room: Properties; # of cached events
@@ -352,13 +396,16 @@ namespace YourGame.Server.GameServer
 
             LogQueue.WriteLog();
 
-            var debugGameResponse = new DebugGameResponse {Info = debugInfo};
+            var debugGameResponse = new DebugGameResponse { Info = debugInfo };
 
             peer.SendOperationResponse(
-                new OperationResponse(request.OperationRequest.OperationCode, debugGameResponse), sendParameters);
+                new OperationResponse(request.OperationRequest.OperationCode, debugGameResponse),
+                sendParameters);
         }
 
-        protected override void ExecuteOperation(PlayerPeer peer, OperationRequest operationRequest,
+        protected override void ExecuteOperation(
+            PlayerPeer peer,
+            OperationRequest operationRequest,
             SendParameters sendParameters)
         {
             try
@@ -370,7 +417,7 @@ namespace YourGame.Server.GameServer
 
                 switch (operationRequest.OperationCode)
                 {
-                    case (byte) OperationCode.CreateGame:
+                    case (byte)OperationCode.CreateGame:
                         var createGameRequest = new JoinGameRequest(peer.Protocol, operationRequest);
                         if (peer.ValidateOperation(createGameRequest, sendParameters) == false)
                         {
@@ -381,13 +428,14 @@ namespace YourGame.Server.GameServer
                         {
                             LogQueue.Add(
                                 new LogEntry(
-                                    "ExecuteOperation: " + (OperationCode) operationRequest.OperationCode,
+                                    "ExecuteOperation: " + (OperationCode)operationRequest.OperationCode,
                                     "Peer=" + peer.ConnectionId));
                         }
+
                         HandleCreateGameOperation(peer, createGameRequest, sendParameters);
                         break;
 
-                    case (byte) OperationCode.JoinGame:
+                    case (byte)OperationCode.JoinGame:
                         var joinGameRequest = new JoinRequest(peer.Protocol, operationRequest);
                         if (peer.ValidateOperation(joinGameRequest, sendParameters) == false)
                         {
@@ -398,24 +446,26 @@ namespace YourGame.Server.GameServer
                         {
                             LogQueue.Add(
                                 new LogEntry(
-                                    "ExecuteOperation: " + (OperationCode) operationRequest.OperationCode,
+                                    "ExecuteOperation: " + (OperationCode)operationRequest.OperationCode,
                                     "Peer=" + peer.ConnectionId));
                         }
+
                         HandleJoinGameOperation(peer, joinGameRequest, sendParameters);
                         break;
 
                     // Lite operation code for join is not allowed in load balanced games.
-                    case (byte) OperationCode.Join:
-                        var response = new OperationResponse
-                        {
-                            OperationCode = operationRequest.OperationCode,
-                            ReturnCode = (short) ErrorCode.OperationDenied,
-                            DebugMessage = "Invalid operation code"
-                        };
+                    case (byte)OperationCode.Join:
+                        var response =
+                            new OperationResponse
+                                {
+                                    OperationCode = operationRequest.OperationCode,
+                                    ReturnCode = (short)ErrorCode.OperationDenied,
+                                    DebugMessage = "Invalid operation code"
+                                };
                         peer.SendOperationResponse(response, sendParameters);
                         break;
 
-                    case (byte) OperationCode.DebugGame:
+                    case (byte)OperationCode.DebugGame:
                         var debugGameRequest = new DebugGameRequest(peer.Protocol, operationRequest);
                         if (peer.ValidateOperation(debugGameRequest, sendParameters) == false)
                         {
@@ -426,7 +476,7 @@ namespace YourGame.Server.GameServer
                         {
                             LogQueue.Add(
                                 new LogEntry(
-                                    "ExecuteOperation: " + (OperationCode) operationRequest.OperationCode,
+                                    "ExecuteOperation: " + (OperationCode)operationRequest.OperationCode,
                                     "Peer=" + peer.ConnectionId));
                         }
 
@@ -451,7 +501,7 @@ namespace YourGame.Server.GameServer
             {
                 switch (message.Action)
                 {
-                    case (byte) GameMessageCodes.ReinitializeGameStateOnMaster:
+                    case (byte)GameMessageCodes.ReinitializeGameStateOnMaster:
                         if (Actors.Count == 0)
                         {
                             Log.WarnFormat("Reinitialize tried to update GameState with ActorCount = 0. " + this);
@@ -466,13 +516,20 @@ namespace YourGame.Server.GameServer
                                 _lobbyProperties.CopyTo(lobbyPropertyFilter);
                             }
 
-                            UpdateGameStateOnMaster(_maxPlayers, _isOpen, _isVisible, lobbyPropertyFilter,
-                                gameProperties, null, null, true);
+                            UpdateGameStateOnMaster(
+                                _maxPlayers,
+                                _isOpen,
+                                _isVisible,
+                                lobbyPropertyFilter,
+                                gameProperties,
+                                null,
+                                null,
+                                true);
                         }
 
                         break;
 
-                    case (byte) GameMessageCodes.CheckGame:
+                    case (byte)GameMessageCodes.CheckGame:
                         CheckGame();
                         break;
 
@@ -501,7 +558,8 @@ namespace YourGame.Server.GameServer
                 Room room;
                 if (GameCache.Instance.TryGetRoomWithoutReference(Name, out room))
                 {
-                    Log.WarnFormat("Game with 0 Actors is still in cache: {0}",
+                    Log.WarnFormat(
+                        "Game with 0 Actors is still in cache: {0}",
                         GameCache.Instance.GetDebugString(room.Name));
                 }
             }
@@ -524,20 +582,20 @@ namespace YourGame.Server.GameServer
             }
 
             var updateGameEvent = new UpdateGameEvent
-            {
-                GameId = Name,
-                ActorCount = (byte) Actors.Count,
-                Reinitialize = reinitialize,
-                MaxPlayers = newMaxPlayer,
-                IsOpen = newIsOpen,
-                IsVisible = newIsVisble,
-                PropertyFilter = lobbyPropertyFilter
-            };
+                                      {
+                                          GameId = Name,
+                                          ActorCount = (byte)Actors.Count,
+                                          Reinitialize = reinitialize,
+                                          MaxPlayers = newMaxPlayer,
+                                          IsOpen = newIsOpen,
+                                          IsVisible = newIsVisble,
+                                          PropertyFilter = lobbyPropertyFilter
+                                      };
 
             if (reinitialize)
             {
                 updateGameEvent.LobbyId = LobbyId;
-                updateGameEvent.LobbyType = (byte) _lobbyType;
+                updateGameEvent.LobbyType = (byte)_lobbyType;
             }
 
             if (gameProperties != null && gameProperties.Count > 0)
@@ -547,12 +605,12 @@ namespace YourGame.Server.GameServer
 
             if (newPeerId != null)
             {
-                updateGameEvent.NewUsers = new[] {newPeerId};
+                updateGameEvent.NewUsers = new[] { newPeerId };
             }
 
             if (removedPeerId != null)
             {
-                updateGameEvent.RemovedUsers = new[] {removedPeerId};
+                updateGameEvent.RemovedUsers = new[] { removedPeerId };
             }
 
             UpdateGameStateOnMaster(updateGameEvent);
@@ -560,7 +618,7 @@ namespace YourGame.Server.GameServer
 
         protected virtual void UpdateGameStateOnMaster(UpdateGameEvent updateEvent)
         {
-            var eventData = new EventData((byte) ServerEventCode.UpdateGameState, updateEvent);
+            var eventData = new EventData((byte)ServerEventCode.UpdateGameState, updateEvent);
             GameApplication.Instance.MasterPeer.SendEvent(eventData, new SendParameters());
         }
 
@@ -570,21 +628,31 @@ namespace YourGame.Server.GameServer
         }
 
         private static bool TryParseDefaultProperties(
-            PlayerPeer peer, Operation operation, Hashtable propertyTable, SendParameters sendParameters,
-            out byte? maxPlayer, out bool? isOpen, out bool? isVisible, out object[] properties)
+            PlayerPeer peer,
+            Operation operation,
+            Hashtable propertyTable,
+            SendParameters sendParameters,
+            out byte? maxPlayer,
+            out bool? isOpen,
+            out bool? isVisible,
+            out object[] properties)
         {
             string debugMessage;
 
-            if (
-                !GameParameterReader.TryReadDefaultParameter(propertyTable, out maxPlayer, out isOpen, out isVisible,
-                    out properties, out debugMessage))
+            if (!GameParameterReader.TryReadDefaultParameter(
+                    propertyTable,
+                    out maxPlayer,
+                    out isOpen,
+                    out isVisible,
+                    out properties,
+                    out debugMessage))
             {
                 var response = new OperationResponse
-                {
-                    OperationCode = operation.OperationRequest.OperationCode,
-                    ReturnCode = (short)ErrorCode.OperationInvalid,
-                    DebugMessage = debugMessage
-                };
+                                   {
+                                       OperationCode = operation.OperationRequest.OperationCode,
+                                       ReturnCode = (short)ErrorCode.OperationInvalid,
+                                       DebugMessage = debugMessage
+                                   };
                 peer.SendOperationResponse(response, sendParameters);
                 return false;
             }
@@ -594,17 +662,17 @@ namespace YourGame.Server.GameServer
 
         protected bool ValidateGame(PlayerPeer peer, OperationRequest operationRequest, SendParameters sendParameters)
         {
-            var gamePeer = (GameClientPeer) peer;
+            var gamePeer = (GameClientPeer)peer;
 
             // check if the game is open
             if (_isOpen == false)
             {
                 var errorResponse = new OperationResponse
-                {
-                    OperationCode = operationRequest.OperationCode,
-                    ReturnCode = (int) ErrorCode.GameClosed,
-                    DebugMessage = "Game closed"
-                };
+                                        {
+                                            OperationCode = operationRequest.OperationCode,
+                                            ReturnCode = (int)ErrorCode.GameClosed,
+                                            DebugMessage = "Game closed"
+                                        };
                 peer.SendOperationResponse(errorResponse, sendParameters);
                 gamePeer.OnJoinFailed(ErrorCode.GameClosed);
                 return false;
@@ -614,11 +682,11 @@ namespace YourGame.Server.GameServer
             if (_maxPlayers > 0 && Actors.Count >= _maxPlayers)
             {
                 var errorResponse = new OperationResponse
-                {
-                    OperationCode = operationRequest.OperationCode,
-                    ReturnCode = (int) ErrorCode.GameFull,
-                    DebugMessage = "Game full"
-                };
+                                        {
+                                            OperationCode = operationRequest.OperationCode,
+                                            ReturnCode = (int)ErrorCode.GameFull,
+                                            DebugMessage = "Game full"
+                                        };
                 peer.SendOperationResponse(errorResponse, sendParameters);
                 gamePeer.OnJoinFailed(ErrorCode.GameFull);
                 return false;
@@ -655,10 +723,10 @@ namespace YourGame.Server.GameServer
                 // if no filter is set for properties which should be listet in the lobby
                 // all properties are send
                 gameProperties = source;
-                gameProperties.Remove((byte) GameParameter.MaxPlayer);
-                gameProperties.Remove((byte) GameParameter.IsOpen);
-                gameProperties.Remove((byte) GameParameter.IsVisible);
-                gameProperties.Remove((byte) GameParameter.Properties);
+                gameProperties.Remove((byte)GameParameter.MaxPlayer);
+                gameProperties.Remove((byte)GameParameter.IsOpen);
+                gameProperties.Remove((byte)GameParameter.IsVisible);
+                gameProperties.Remove((byte)GameParameter.Properties);
             }
 
             return gameProperties;

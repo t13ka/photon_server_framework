@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+
 using ExitGames.Logging;
+
 using Photon.SocketServer;
 using Photon.SocketServer.ServerToServer;
+
 using PhotonHostRuntimeInterfaces;
 
 using YourGame.Server.Common;
@@ -29,8 +32,12 @@ namespace YourGame.Server.GameServer
             : base(protocol, nativePeer)
         {
             _application = application;
-            Log.InfoFormat("connection to master at {0}:{1} established (id={2}), serverId={3}", RemoteIP, RemotePort,
-                ConnectionId, GameApplication.ServerId);
+            Log.InfoFormat(
+                "connection to master at {0}:{1} established (id={2}), serverId={3}",
+                RemoteIP,
+                RemotePort,
+                ConnectionId,
+                GameApplication.ServerId);
             RequestFiber.Enqueue(Register);
         }
 
@@ -38,7 +45,7 @@ namespace YourGame.Server.GameServer
 
         #region Properties
 
-        protected bool IsRegistered ;
+        protected bool IsRegistered;
 
         #endregion
 
@@ -63,8 +70,8 @@ namespace YourGame.Server.GameServer
                 return;
             }
 
-            var parameter = new Dictionary<byte, object> {{(byte) ParameterCode.GameId, gameId}};
-            var eventData = new EventData {Code = (byte) ServerEventCode.RemoveGameState, Parameters = parameter};
+            var parameter = new Dictionary<byte, object> { { (byte)ParameterCode.GameId, gameId } };
+            var eventData = new EventData { Code = (byte)ServerEventCode.RemoveGameState, Parameters = parameter };
             SendEvent(eventData, new SendParameters());
         }
 
@@ -80,7 +87,7 @@ namespace YourGame.Server.GameServer
                 Room room;
                 if (GameCache.Instance.TryGetRoomWithoutReference(gameId, out room))
                 {
-                    room.EnqueueMessage(new RoomMessage((byte) GameMessageCodes.ReinitializeGameStateOnMaster));
+                    room.EnqueueMessage(new RoomMessage((byte)GameMessageCodes.ReinitializeGameStateOnMaster));
                 }
             }
         }
@@ -93,12 +100,12 @@ namespace YourGame.Server.GameServer
             }
 
             var contract = new UpdateServerEvent
-            {
-                LoadIndex = (byte) workload,
-                PeerCount = peerCount,
-                State = (int) state
-            };
-            var eventData = new EventData((byte) ServerEventCode.UpdateServer, contract);
+                               {
+                                   LoadIndex = (byte)workload,
+                                   PeerCount = peerCount,
+                                   State = (int)state
+                               };
+            var eventData = new EventData((byte)ServerEventCode.UpdateServer, contract);
             SendEvent(eventData, new SendParameters());
         }
 
@@ -124,9 +131,11 @@ namespace YourGame.Server.GameServer
             var contract = new RegisterGameServerResponse(Protocol, operationResponse);
             if (!contract.IsValid)
             {
-                if (operationResponse.ReturnCode != (short) ErrorCode.Ok)
+                if (operationResponse.ReturnCode != (short)ErrorCode.Ok)
                 {
-                    Log.ErrorFormat("RegisterGameServer returned with err {0}: {1}", operationResponse.ReturnCode,
+                    Log.ErrorFormat(
+                        "RegisterGameServer returned with err {0}: {1}",
+                        operationResponse.ReturnCode,
                         operationResponse.DebugMessage);
                 }
 
@@ -137,38 +146,44 @@ namespace YourGame.Server.GameServer
 
             switch (operationResponse.ReturnCode)
             {
-                case (short) ErrorCode.Ok:
-                {
-                    Log.InfoFormat("Successfully registered at master server: serverId={0}", GameApplication.ServerId);
-                    IsRegistered = true;
-                    UpdateAllGameStates();
-                    StartUpdateLoop();
-                    break;
-                }
+                case (short)ErrorCode.Ok:
+                    {
+                        Log.InfoFormat(
+                            "Successfully registered at master server: serverId={0}",
+                            GameApplication.ServerId);
+                        IsRegistered = true;
+                        UpdateAllGameStates();
+                        StartUpdateLoop();
+                        break;
+                    }
 
-                case (short) ErrorCode.RedirectRepeat:
-                {
-                    // TODO: decide whether to connect to internal or external address (config)
-                    // use a new peer since we otherwise might get confused with callbacks like disconnect
-                    var address = new IPAddress(contract.InternalAddress);
-                    Log.InfoFormat("Connected master server is not the leader; Reconnecting to master at IP {0}...",
-                        address);
-                    Reconnect(address); // don't use proxy for direct connections
+                case (short)ErrorCode.RedirectRepeat:
+                    {
+                        // TODO: decide whether to connect to internal or external address (config)
+                        // use a new peer since we otherwise might get confused with callbacks like disconnect
+                        var address = new IPAddress(contract.InternalAddress);
+                        Log.InfoFormat(
+                            "Connected master server is not the leader; Reconnecting to master at IP {0}...",
+                            address);
+                        Reconnect(address); // don't use proxy for direct connections
 
-                    // enable for external address connections
-                    //// var address = new IPAddress(contract.ExternalAddress);
-                    //// log.InfoFormat("Connected master server is not the leader; Reconnecting to node {0} at IP {1}...", contract.MasterNode, address);
-                    //// this.Reconnect(address, contract.MasterNode);
-                    break;
-                }
+                        // enable for external address connections
+                        //// var address = new IPAddress(contract.ExternalAddress);
+                        //// log.InfoFormat("Connected master server is not the leader; Reconnecting to node {0} at IP {1}...", contract.MasterNode, address);
+                        //// this.Reconnect(address, contract.MasterNode);
+                        break;
+                    }
 
                 default:
-                {
-                    Log.WarnFormat("Failed to register at master: err={0}, msg={1}, serverid={2}",
-                        operationResponse.ReturnCode, operationResponse.DebugMessage, GameApplication.ServerId);
-                    Disconnect();
-                    break;
-                }
+                    {
+                        Log.WarnFormat(
+                            "Failed to register at master: err={0}, msg={1}, serverid={2}",
+                            operationResponse.ReturnCode,
+                            operationResponse.DebugMessage,
+                            GameApplication.ServerId);
+                        Disconnect();
+                        break;
+                    }
             }
         }
 
@@ -182,14 +197,22 @@ namespace YourGame.Server.GameServer
             {
                 if (Log.IsDebugEnabled)
                 {
-                    Log.DebugFormat("{0} disconnected from master server: reason={1}, detail={2}, serverId={3}",
-                        ConnectionId, reasonCode, reasonDetail, GameApplication.ServerId);
+                    Log.DebugFormat(
+                        "{0} disconnected from master server: reason={1}, detail={2}, serverId={3}",
+                        ConnectionId,
+                        reasonCode,
+                        reasonDetail,
+                        GameApplication.ServerId);
                 }
             }
             else
             {
-                Log.InfoFormat("connection to master closed (id={0}, reason={1}, detail={2}), serverId={3}",
-                    ConnectionId, reasonCode, reasonDetail, GameApplication.ServerId);
+                Log.InfoFormat(
+                    "connection to master closed (id={0}, reason={1}, detail={2}), serverId={3}",
+                    ConnectionId,
+                    reasonCode,
+                    reasonDetail,
+                    GameApplication.ServerId);
                 _application.ReconnectToMaster();
             }
         }
@@ -206,33 +229,33 @@ namespace YourGame.Server.GameServer
             }
 
             var response = new OperationResponse
-            {
-                OperationCode = request.OperationCode,
-                ReturnCode = -1,
-                DebugMessage = "Unknown operation code"
-            };
+                               {
+                                   OperationCode = request.OperationCode,
+                                   ReturnCode = -1,
+                                   DebugMessage = "Unknown operation code"
+                               };
             SendOperationResponse(response, sendParameters);
         }
 
         protected override void OnOperationResponse(OperationResponse operationResponse, SendParameters sendParameters)
         {
-            switch ((OperationCode) operationResponse.OperationCode)
+            switch ((OperationCode)operationResponse.OperationCode)
             {
                 default:
-                {
-                    if (Log.IsDebugEnabled)
                     {
-                        Log.DebugFormat("Received unknown operation code {0}", operationResponse.OperationCode);
+                        if (Log.IsDebugEnabled)
+                        {
+                            Log.DebugFormat("Received unknown operation code {0}", operationResponse.OperationCode);
+                        }
+
+                        break;
                     }
 
-                    break;
-                }
-
                 case OperationCode.RegisterGameServer:
-                {
-                    HandleRegisterGameServerResponse(operationResponse);
-                    break;
-                }
+                    {
+                        HandleRegisterGameServerResponse(operationResponse);
+                        break;
+                    }
             }
         }
 
@@ -250,23 +273,27 @@ namespace YourGame.Server.GameServer
         protected virtual void Register()
         {
             var contract = new RegisterGameServer
-            {
-                GameServerAddress = GameApplication.Instance.PublicIpAddress.ToString(),
-                UdpPort =
-                    GameServerSettings.Default.RelayPortUdp == 0
-                        ? _application.GamingUdpPort
-                        : GameServerSettings.Default.RelayPortUdp + _application.GetCurrentNodeId() - 1,
-                TcpPort =
-                    GameServerSettings.Default.RelayPortTcp == 0
-                        ? _application.GamingTcpPort
-                        : GameServerSettings.Default.RelayPortTcp + _application.GetCurrentNodeId() - 1,
-                WebSocketPort =
-                    GameServerSettings.Default.RelayPortWebSocket == 0
-                        ? _application.GamingWebSocketPort
-                        : GameServerSettings.Default.RelayPortWebSocket + _application.GetCurrentNodeId() - 1,
-                ServerId = GameApplication.ServerId.ToString(),
-                ServerState = (int) _application.WorkloadController.ServerState
-            };
+                               {
+                                   GameServerAddress =
+                                       GameApplication.Instance.PublicIpAddress.ToString(),
+                                   UdpPort =
+                                       GameServerSettings.Default.RelayPortUdp == 0
+                                           ? _application.GamingUdpPort
+                                           : GameServerSettings.Default.RelayPortUdp + _application
+                                                 .GetCurrentNodeId() - 1,
+                                   TcpPort =
+                                       GameServerSettings.Default.RelayPortTcp == 0
+                                           ? _application.GamingTcpPort
+                                           : GameServerSettings.Default.RelayPortTcp + _application
+                                                 .GetCurrentNodeId() - 1,
+                                   WebSocketPort =
+                                       GameServerSettings.Default.RelayPortWebSocket == 0
+                                           ? _application.GamingWebSocketPort
+                                           : GameServerSettings.Default.RelayPortWebSocket
+                                             + _application.GetCurrentNodeId() - 1,
+                                   ServerId = GameApplication.ServerId.ToString(),
+                                   ServerState = (int)_application.WorkloadController.ServerState
+                               };
 
             if (Log.IsInfoEnabled)
             {
@@ -279,7 +306,7 @@ namespace YourGame.Server.GameServer
                     contract.ServerId);
             }
 
-            var request = new OperationRequest((byte) OperationCode.RegisterGameServer, contract);
+            var request = new OperationRequest((byte)OperationCode.RegisterGameServer, contract);
             SendOperationRequest(request, new SendParameters());
         }
 

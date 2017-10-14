@@ -2,7 +2,8 @@
 {
     public class AddClassResult
     {
-        public bool Success ;
-        public string Debug ;
+        public bool Success;
+
+        public string Debug;
     }
 }

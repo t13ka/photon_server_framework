@@ -3,3 +3,4 @@ W:\Projects\Repos\t13ka\NewClient\Assets\Plugins\ServerLibs\YourGame.Common.pdb
 W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Common\obj\Debug\YourGame.Common.csproj.CoreCompileInputs.cache
 W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Common\obj\Debug\YourGame.Common.dll
 W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Common\obj\Debug\YourGame.Common.pdb
+W:\Projects\Repos\t13ka\photon_server_framework\YourGame.Common\obj\Debug\YourGame.Common.csprojResolveAssemblyReference.cache

@@ -2,7 +2,8 @@
 {
     public class ModuleInsertRemoveOperationResult
     {
-        public bool Success ;
-        public string Message ;
+        public bool Success;
+
+        public string Message;
     }
 }

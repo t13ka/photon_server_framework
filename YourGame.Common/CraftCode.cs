@@ -2,7 +2,8 @@
 {
     public enum CraftCode : byte
     {
-      ElementID,
-      ElementPosition,
+        ElementID,
+
+        ElementPosition,
     }
 }

@@ -174,8 +174,6 @@
     <Compile Include="Events\UpdateInventoryEvent.cs" />
     <Compile Include="Events\UpdateProfileEvent.cs" />
     <Compile Include="Events\VictoryPrizesEvent.cs" />
-    <Compile Include="Factories\CharacterFactory.cs" />
-    <Compile Include="Factories\EquipmentFactory.cs" />
     <Compile Include="Factories\PlayerFactory.cs" />
     <Compile Include="GameServer\ApplicationStatsPublisher.cs" />
     <Compile Include="GameServer\GameServerSettings.cs" />
@@ -218,9 +216,7 @@
     <Compile Include="GameServer\OutgoingMasterServerPeer.cs" />
     <Compile Include="LoadShedding\LatencyPeer.cs" />
     <Compile Include="Common\ServerState.cs" />
-    <Compile Include="MasterServer\CraftApplication.cs" />
     <Compile Include="MasterServer\PlayerState.cs" />
-    <Compile Include="NinjectConfigModules\AuctionInjectionModule.cs" />
     <Compile Include="NinjectConfigModules\EconomicInjectionModule.cs" />
     <Compile Include="Operations\Request\Auth\LogoutRequest.cs" />
     <Compile Include="Operations\Request\GameManagement\LeaveLobbyRequest.cs" />
@@ -331,11 +327,6 @@
     <Compile Include="Services\Auction\AuctionRuntimeService.cs" />
     <Compile Include="Services\DomainConfig\ConfigChangeListenerService.cs" />
     <Compile Include="Services\Economic\EconomicRuntimeService.cs" />
-    <Compile Include="Services\Economic\GlobalElementStatement.cs" />
-    <Compile Include="Services\Economic\OrderElementStatement.cs" />
-    <Compile Include="Services\Economic\ElementStatement.cs" />
-    <Compile Include="Services\Economic\SaleElementStatement.cs" />
-    <Compile Include="Services\Economic\TransactionProcessingResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
